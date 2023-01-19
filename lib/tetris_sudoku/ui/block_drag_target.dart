@@ -30,13 +30,6 @@ class BlockDragTarget extends StatelessWidget {
         var game = context.read<TetrisSudoku>();
         game.clearPreview();
         game.set(data.piece, currX, currY, data.index);
-        // if (game.isGameOver()) {
-        //   await showGameOverDialog(
-        //     context,
-        //     game.score,
-        //     game.reset,
-        //   );
-        // }
       },
       builder: (context, candidateData, rejectedData) {
         return Block(itemSize: itemSize, currX: currX, currY: currY);

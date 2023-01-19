@@ -29,17 +29,14 @@ class TetrisSudoku extends ChangeNotifier {
     for (int i = 0; i < 3; i++) {
       elements.add(Piece.pieces[random.nextInt(Piece.pieces.length)]);
     }
-
     return elements;
   }
 
   bool set(Piece piece, int x, int y, int index) {
     nextPieces[index];
-    if (!nextPieces.any((element) => element != null)) {
+    if (nextPieces.any((element) => element != null)) {
       nextPieces = generateNextPieces();
     }
-
-    score += Settings.scoreForBlockSet * scoreMultiplier;
 
     _valueGrid.set(piece, x, y);
 
@@ -48,12 +45,11 @@ class TetrisSudoku extends ChangeNotifier {
 
     if (hasScoredLastInteraction && scoredLastInteraction) {
       scoreMultiplier++;
-      // TODO Display Streak
     } else {
       scoreMultiplier = 1;
     }
 
-    this.notifyListeners();
+    notifyListeners();
     return scoredLastInteraction;
   }
 
@@ -65,38 +61,11 @@ class TetrisSudoku extends ChangeNotifier {
         piece.occupations, position.x.toInt(), position.y.toInt());
     clearIfSet(editValueGrid: false);
 
-    this.notifyListeners();
+    notifyListeners();
   }
 
-  bool isGameOver() {
-    for (Piece piece in nextPieces) {
-      if (piece != null) {
-        for (int y = 0; y < Settings.gridSize; y++) {
-          for (int x = 0; x < Settings.gridSize; x++) {
-            if (_valueGrid.doesFit(piece, x, y)) return false;
-          }
-        }
-      }
-    }
-    return true;
-  }
-
+  //To clear The Columns and Rows when they've aligned
   bool clearIfSet({bool editValueGrid = true}) {
-    bool isBlockSet(int bx, int by) {
-      for (int y = 0; y < Settings.blockSize; y++) {
-        for (int x = 0; x < Settings.blockSize; x++) {
-          if (_valueGrid.isClear(
-                  bx * Settings.blockSize + x, by * Settings.blockSize + y) &&
-              (editValueGrid ||
-                  _previewGrid.isClear(bx * Settings.blockSize + x,
-                      by * Settings.blockSize + y))) {
-            return false;
-          }
-        }
-      }
-      return true;
-    }
-
     bool isRowSet(int row) {
       for (int x = 0; x < Settings.gridSize; x++) {
         if (_valueGrid.isClear(x, row) &&
@@ -120,30 +89,6 @@ class TetrisSudoku extends ChangeNotifier {
     bool wasCleared = false;
     Grid newValueGrid = Grid.copy(_valueGrid);
 
-    for (int by = 0; by < Settings.blockCount; by++) {
-      for (int bx = 0; bx < Settings.blockCount; bx++) {
-        if (isBlockSet(bx, by)) {
-          wasCleared = true;
-          _previewGrid.setValues([
-            [true, true, true],
-            [true, true, true],
-            [true, true, true]
-          ], bx * Settings.blockSize, by * Settings.blockSize,
-              GridState.COMPLETED);
-
-          if (editValueGrid) {
-            score += Settings.scoreForBlockCleared * scoreMultiplier;
-            for (int y = 0; y < Settings.blockSize; y++) {
-              for (int x = 0; x < Settings.blockSize; x++) {
-                newValueGrid.setValue(bx * Settings.blockSize + x,
-                    by * Settings.blockSize + y, GridState.CLEAR);
-                // TODO here would an animation start to show
-              }
-            }
-          }
-        }
-      }
-    }
     for (int row = 0; row < Settings.gridSize; row++) {
       if (isRowSet(row)) {
         wasCleared = true;
@@ -151,10 +96,8 @@ class TetrisSudoku extends ChangeNotifier {
           [true, true, true, true, true, true, true, true, true]
         ], 0, row, GridState.COMPLETED);
         if (editValueGrid) {
-          score += Settings.scoreForBlockCleared * scoreMultiplier;
           for (int x = 0; x < Settings.gridSize; x++) {
             newValueGrid.setValue(x, row, GridState.CLEAR);
-            // TODO here would an animation start to show
           }
         }
       }
@@ -175,10 +118,8 @@ class TetrisSudoku extends ChangeNotifier {
           [true]
         ], col, 0, GridState.COMPLETED);
         if (editValueGrid) {
-          score += Settings.scoreForBlockCleared * scoreMultiplier;
           for (int y = 0; y < Settings.gridSize; y++) {
             newValueGrid.setValue(col, y, GridState.CLEAR);
-            // TODO here would an animation start to show
           }
         }
       }
@@ -188,7 +129,7 @@ class TetrisSudoku extends ChangeNotifier {
 
     if (wasCleared && editValueGrid) {
       Timer(
-        Duration(seconds: 1),
+        const Duration(seconds: 1),
         clearPreview,
       );
     }
@@ -197,7 +138,7 @@ class TetrisSudoku extends ChangeNotifier {
 
   void clearPreview() {
     _previewGrid.clearGrid();
-    this.notifyListeners();
+    notifyListeners();
   }
 
   bool canPlaceFrom(Piece piece, int currX, int currY) {
@@ -205,9 +146,9 @@ class TetrisSudoku extends ChangeNotifier {
   }
 
   void reset() {
-    score = 0;
-    scoreMultiplier = 1;
-    scoredLastInteraction = false;
+    // score = 0;
+    // scoreMultiplier = 1;
+    // scoredLastInteraction = false;
 
     nextPieces = generateNextPieces();
     _valueGrid = Grid();

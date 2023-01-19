@@ -32,25 +32,19 @@ class Block extends StatelessWidget {
               color: game.isSet(currX, currY)
                   ? Colors.transparent
                   : (game.isPreview(currX, currY)
-                      ? Colors.transparent
+                      ? Colors.black
                       : Colors.transparent),
             ),
             child: game.isSet(currX, currY)
-                ? Container(
-                    child: const Center(
-                      child: Text("1"),
-                    ),
+                ? const Center(
+                    child: Text("1"),
                   )
                 : (game.isPreview(currX, currY)
-                    ? Container(
-                        child: const Center(
-                          child: Text("0"),
-                        ),
+                    ? const Center(
+                        child: Text("0"),
                       )
-                    : Container(
-                        child: const Center(
-                          child: Text("0"),
-                        ),
+                    : const Center(
+                        child: Text("0"),
                       )),
           ));
     });

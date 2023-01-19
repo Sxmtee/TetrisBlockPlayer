@@ -34,15 +34,11 @@ class BlockItemPreview extends StatelessWidget {
                               : Colors.transparent,
                         ),
                         child: (piece.occupations[y][x] == true)
-                            ? Container(
-                                child: const Center(
-                                  child: Text("1"),
-                                ),
+                            ? const Center(
+                                child: Text("1"),
                               )
-                            : Container(
-                                child: Center(
-                                  child: Text("0"),
-                                ),
+                            : const Center(
+                                child: Text("0"),
                               )),
                   );
                 },

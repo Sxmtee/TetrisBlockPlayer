@@ -16,6 +16,9 @@ class TetrisSudokuPage extends StatelessWidget {
               children: const [
                 // StatusBar(),
                 BlockGrid(),
+                SizedBox(
+                  height: 20,
+                ),
                 NextItemList(),
               ],
             ),

@@ -15,7 +15,7 @@ class NextItemList extends StatelessWidget {
     return Consumer<TetrisSudoku>(builder: (context, game, child) {
       return Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
-        children: List.generate(3, (index) {
+        children: List.generate(1, (index) {
           Piece piece = game.nextPieces[index];
           if (piece == null) {
             return const EmptyItemPreview();
