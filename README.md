@@ -1,16 +1,14 @@
-# somtotetris
+# TetrisBlockPlayer
 
-A new Flutter project.
+A Game where you have basic Tetris block to fill out a Sudoku grid.
+Each time you complete a Row, Column or Block, the Tetris blocks disappear to make space.
 
-## Getting Started
+You can gain Streaks by completing many Blocks on after another.
+Clearing multiple Blocks with one Piece gives extra points.
 
-This project is a starting point for a Flutter application.
+## Goals
 
-A few resources to get you started if this is your first Flutter project:
+Reach the highest Score and beat your own Highscore by completing as many blocks as possible.
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## Features
+* State Management = Provider
