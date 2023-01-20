@@ -1,4 +1,4 @@
-import 'package:somtotetris/tetris_sudoku/logic/piece.dart';
+import 'package:somtotetris/TetrisBlockGame/GameLogic/piece.dart';
 
 class DragData {
   final Piece piece;

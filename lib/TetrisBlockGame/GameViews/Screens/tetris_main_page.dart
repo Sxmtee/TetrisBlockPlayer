@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:somtotetris/tetris_sudoku/ui/block_grid.dart';
-import 'package:somtotetris/tetris_sudoku/ui/next_item_list.dart';
-import 'package:somtotetris/tetris_sudoku/ui/status_bar.dart';
+import 'package:somtotetris/TetrisBlockGame/GameViews/Widgets/main_block_grid.dart';
+import 'package:somtotetris/TetrisBlockGame/GameViews/Widgets/next_item_list.dart';
+import 'package:somtotetris/TetrisBlockGame/GameViews/Widgets/status_bar.dart';
 
 class TetrisSudokuPage extends StatelessWidget {
   const TetrisSudokuPage({super.key});
@@ -14,10 +14,13 @@ class TetrisSudokuPage extends StatelessWidget {
           child: Center(
             child: Column(
               children: const [
-                // StatusBar(),
+                StatusBar(),
+                SizedBox(
+                  height: 30,
+                ),
                 BlockGrid(),
                 SizedBox(
-                  height: 20,
+                  height: 100,
                 ),
                 NextItemList(),
               ],

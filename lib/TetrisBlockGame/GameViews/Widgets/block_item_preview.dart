@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:somtotetris/tetris_sudoku/logic/piece.dart';
+import 'package:somtotetris/TetrisBlockGame/GameLogic/piece.dart';
 
 class BlockItemPreview extends StatelessWidget {
   final Piece piece;
@@ -27,19 +27,12 @@ class BlockItemPreview extends StatelessWidget {
                     width: size,
                     height: size,
                     child: DecoratedBox(
-                        decoration: BoxDecoration(
-                          color: (piece.occupations[y][x] == true)
-                              ? Colors.transparent
-                              // Colors.brown.shade600
-                              : Colors.transparent,
-                        ),
-                        child: (piece.occupations[y][x] == true)
-                            ? const Center(
-                                child: Text("1"),
-                              )
-                            : const Center(
-                                child: Text("0"),
-                              )),
+                      decoration: BoxDecoration(
+                        color: (piece.occupations[y][x] == true)
+                            ? Colors.brown.shade600
+                            : Colors.transparent,
+                      ),
+                    ),
                   );
                 },
               ),

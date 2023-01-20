@@ -2,9 +2,9 @@ import 'dart:async';
 import 'dart:math';
 
 import 'package:flutter/material.dart';
-import 'package:somtotetris/tetris_sudoku/logic/grid.dart';
-import 'package:somtotetris/tetris_sudoku/logic/piece.dart';
-import 'package:somtotetris/tetris_sudoku/tetris_sudoku_settings.dart';
+import 'package:somtotetris/TetrisBlockGame/GameLogic/grid_model.dart';
+import 'package:somtotetris/TetrisBlockGame/GameLogic/piece.dart';
+import 'package:somtotetris/TetrisBlockGame/GameLogic/tetris_dimensions.dart';
 
 class TetrisSudoku extends ChangeNotifier {
   late Grid _valueGrid;
@@ -22,6 +22,7 @@ class TetrisSudoku extends ChangeNotifier {
     _previewGrid = Grid();
   }
 
+  //random piece generator
   List<Piece> generateNextPieces() {
     List<Piece> elements = [];
 
@@ -32,12 +33,14 @@ class TetrisSudoku extends ChangeNotifier {
     return elements;
   }
 
+  //setting the piece and score multiplier
   bool set(Piece piece, int x, int y, int index) {
     nextPieces[index];
     if (nextPieces.any((element) => element != null)) {
       nextPieces = generateNextPieces();
     }
 
+    score += Dimensions.scoreForBlockSet * scoreMultiplier;
     _valueGrid.set(piece, x, y);
 
     bool hasScoredLastInteraction = scoredLastInteraction;
@@ -53,6 +56,7 @@ class TetrisSudoku extends ChangeNotifier {
     return scoredLastInteraction;
   }
 
+  //preview before setting block tiles
   void setPreview(Piece piece, int currX, int currY) {
     _previewGrid.clearGrid();
     Point? position = _valueGrid.calculateBestPosition(piece, currX, currY);
@@ -67,7 +71,7 @@ class TetrisSudoku extends ChangeNotifier {
   //To clear The Columns and Rows when they've aligned
   bool clearIfSet({bool editValueGrid = true}) {
     bool isRowSet(int row) {
-      for (int x = 0; x < Settings.gridSize; x++) {
+      for (int x = 0; x < Dimensions.gridSize; x++) {
         if (_valueGrid.isClear(x, row) &&
             (editValueGrid || _previewGrid.isClear(x, row))) {
           return false;
@@ -77,7 +81,7 @@ class TetrisSudoku extends ChangeNotifier {
     }
 
     bool isColSet(int col) {
-      for (int y = 0; y < Settings.gridSize; y++) {
+      for (int y = 0; y < Dimensions.gridSize; y++) {
         if (_valueGrid.isClear(col, y) &&
             (editValueGrid || _previewGrid.isClear(col, y))) {
           return false;
@@ -89,21 +93,23 @@ class TetrisSudoku extends ChangeNotifier {
     bool wasCleared = false;
     Grid newValueGrid = Grid.copy(_valueGrid);
 
-    for (int row = 0; row < Settings.gridSize; row++) {
+    for (int row = 0; row < Dimensions.gridSize; row++) {
       if (isRowSet(row)) {
         wasCleared = true;
         _previewGrid.setValues([
           [true, true, true, true, true, true, true, true, true]
         ], 0, row, GridState.COMPLETED);
         if (editValueGrid) {
-          for (int x = 0; x < Settings.gridSize; x++) {
+          score += Dimensions.scoreForBlockCleared * scoreMultiplier;
+          for (int x = 0; x < Dimensions.gridSize; x++) {
             newValueGrid.setValue(x, row, GridState.CLEAR);
+            // here would an animation start to show
           }
         }
       }
     }
 
-    for (int col = 0; col < Settings.gridSize; col++) {
+    for (int col = 0; col < Dimensions.gridSize; col++) {
       if (isColSet(col)) {
         wasCleared = true;
         _previewGrid.setValues([
@@ -118,8 +124,10 @@ class TetrisSudoku extends ChangeNotifier {
           [true]
         ], col, 0, GridState.COMPLETED);
         if (editValueGrid) {
-          for (int y = 0; y < Settings.gridSize; y++) {
+          score += Dimensions.scoreForBlockCleared * scoreMultiplier;
+          for (int y = 0; y < Dimensions.gridSize; y++) {
             newValueGrid.setValue(col, y, GridState.CLEAR);
+            // here would an animation start to show
           }
         }
       }
@@ -141,14 +149,16 @@ class TetrisSudoku extends ChangeNotifier {
     notifyListeners();
   }
 
+  //calculating the best position to place the piece
   bool canPlaceFrom(Piece piece, int currX, int currY) {
     return _valueGrid.calculateBestPosition(piece, currX, currY) != null;
   }
 
+  //reset all
   void reset() {
-    // score = 0;
-    // scoreMultiplier = 1;
-    // scoredLastInteraction = false;
+    score = 0;
+    scoreMultiplier = 1;
+    scoredLastInteraction = false;
 
     nextPieces = generateNextPieces();
     _valueGrid = Grid();

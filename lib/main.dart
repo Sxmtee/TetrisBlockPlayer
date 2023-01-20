@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:somtotetris/tetris_sudoku/logic/tetris_sudoku.dart';
-import 'package:somtotetris/tetris_sudoku/ui/tetris_sudoku_page.dart';
+import 'package:somtotetris/TetrisBlockGame/GameLogic/tetris_model.dart';
+import 'package:somtotetris/TetrisBlockGame/GameViews/Screens/digital_dream.dart';
 
 void main() {
   runApp(const MyApp());
@@ -21,7 +21,7 @@ class MyApp extends StatelessWidget {
           theme: ThemeData(
             primarySwatch: Colors.brown,
           ),
-          home: const TetrisSudokuPage(),
+          home: const DigitalDreams(),
         );
       },
     );

@@ -1,7 +1,7 @@
 import 'dart:math';
 
-import 'package:somtotetris/tetris_sudoku/logic/piece.dart';
-import 'package:somtotetris/tetris_sudoku/tetris_sudoku_settings.dart';
+import 'package:somtotetris/TetrisBlockGame/GameLogic/piece.dart';
+import 'package:somtotetris/TetrisBlockGame/GameLogic/tetris_dimensions.dart';
 
 enum GridState { CLEAR, SET, COMPLETED }
 
@@ -10,11 +10,14 @@ class Grid {
 
   Grid()
       : _grid = List<GridState>.filled(
-            Settings.gridSize * Settings.gridSize, GridState.CLEAR);
+            Dimensions.gridSize * Dimensions.gridSize, GridState.CLEAR);
   Grid.copy(Grid other) : _grid = other._grid.toList();
 
   bool notInGrid(int x, int y) {
-    return x < 0 || x >= Settings.gridSize || y < 0 || y >= Settings.gridSize;
+    return x < 0 ||
+        x >= Dimensions.gridSize ||
+        y < 0 ||
+        y >= Dimensions.gridSize;
   }
 
   bool isSet(int x, int y) {
@@ -31,16 +34,17 @@ class Grid {
 
   bool _isState(int x, int y, GridState state) {
     if (notInGrid(x, y)) throw {"Index out of range ${x}x ${y}y"};
-    return _grid[x + Settings.gridSize * y] == state;
+    return _grid[x + Dimensions.gridSize * y] == state;
   }
 
   void setValue(int x, int y, GridState value) {
     if (notInGrid(x, y)) throw {"Index out of range ${x}x ${y}y"};
-    _grid[x + Settings.gridSize * y] = value;
+    _grid[x + Dimensions.gridSize * y] = value;
   }
 
   void clearGrid() {
-    _grid.fillRange(0, Settings.gridSize * Settings.gridSize, GridState.CLEAR);
+    _grid.fillRange(
+        0, Dimensions.gridSize * Dimensions.gridSize, GridState.CLEAR);
   }
 
   void set(Piece piece, int x, int y, [GridState value = GridState.SET]) {
@@ -60,7 +64,8 @@ class Grid {
             currX,
             currY,
             element ||
-                    _grid[currX + Settings.gridSize * currY] != GridState.CLEAR
+                    _grid[currX + Dimensions.gridSize * currY] !=
+                        GridState.CLEAR
                 ? value
                 : GridState.CLEAR);
         currX++;

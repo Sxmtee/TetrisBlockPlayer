@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
 import 'package:provider/provider.dart';
-import 'package:somtotetris/tetris_sudoku/logic/drag_data.dart';
-import 'package:somtotetris/tetris_sudoku/logic/tetris_sudoku.dart';
-import 'package:somtotetris/tetris_sudoku/ui/block.dart';
+import 'package:somtotetris/TetrisBlockGame/GameLogic/drag_data.dart';
+import 'package:somtotetris/TetrisBlockGame/GameLogic/tetris_model.dart';
+import 'package:somtotetris/TetrisBlockGame/GameViews/Widgets/blockpiece.dart';
 
 class BlockDragTarget extends StatelessWidget {
   final int currX;
