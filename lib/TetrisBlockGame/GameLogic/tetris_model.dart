@@ -68,6 +68,20 @@ class TetrisSudoku extends ChangeNotifier {
     notifyListeners();
   }
 
+  // game over
+  bool isGameOver() {
+    for (Piece piece in nextPieces) {
+      if (piece != null) {
+        for (int y = 0; y < Dimensions.gridSize; y++) {
+          for (int x = 0; x < Dimensions.gridSize; x++) {
+            if (_valueGrid.doesFit(piece, x, y)) return false;
+          }
+        }
+      }
+    }
+    return true;
+  }
+
   //To clear The Columns and Rows when they've aligned
   bool clearIfSet({bool editValueGrid = true}) {
     bool isRowSet(int row) {

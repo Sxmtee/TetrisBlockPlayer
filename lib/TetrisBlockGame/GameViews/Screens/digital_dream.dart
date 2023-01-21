@@ -12,8 +12,6 @@ class DigitalDreams extends StatefulWidget {
 }
 
 class _DigitalDreamsState extends State<DigitalDreams> {
-  bool isLoaded = false;
-
   @override
   void initState() {
     super.initState();
@@ -31,18 +29,16 @@ class _DigitalDreamsState extends State<DigitalDreams> {
         padding: const EdgeInsets.symmetric(horizontal: 35, vertical: 20),
         decoration: const BoxDecoration(
             gradient: LinearGradient(colors: [
-          Color(0xFF3366FF),
-          Color(0xFF00CCFF),
-          // Color(0xFF701ebd),
-          // Color(0xFF873bcc),
-          // Color(0xFFfe4a97),
-          // Color(0xFFe17763),
-          // Color(0xFF68998c)
+          Color(0xFF701ebd),
+          Color(0xFF873bcc),
+          Color(0xFFfe4a97),
+          Color(0xFFe17763),
+          Color(0xFF68998c)
         ], stops: [
-          0.5,
-          // 0.4,
-          // 0.6,
-          // 0.8,
+          0.1,
+          0.4,
+          0.6,
+          0.8,
           1
         ], begin: Alignment.topRight, end: Alignment.bottomLeft)),
         child: SafeArea(
@@ -62,6 +58,7 @@ class _DigitalDreamsState extends State<DigitalDreams> {
                   animatedTexts: [
                     WavyAnimatedText(
                       "ICT Academy",
+                      speed: const Duration(milliseconds: 200),
                       textStyle: const TextStyle(
                         color: Colors.amber,
                         fontSize: 25.0,
@@ -107,7 +104,7 @@ class _DigitalDreamsState extends State<DigitalDreams> {
                           animatedTexts: [
                             TyperAnimatedText(
                               "Web Development",
-                              speed: const Duration(milliseconds: 300),
+                              speed: const Duration(milliseconds: 100),
                               textStyle: const TextStyle(
                                 color: Colors.white,
                                 fontSize: 20.0,
@@ -140,7 +137,7 @@ class _DigitalDreamsState extends State<DigitalDreams> {
                           animatedTexts: [
                             TyperAnimatedText(
                               "Mobile App Development",
-                              speed: const Duration(milliseconds: 200),
+                              speed: const Duration(milliseconds: 100),
                               textStyle: const TextStyle(
                                 color: Colors.white,
                                 fontSize: 20.0,
@@ -173,7 +170,7 @@ class _DigitalDreamsState extends State<DigitalDreams> {
                           animatedTexts: [
                             TyperAnimatedText(
                               "Game Development",
-                              speed: const Duration(milliseconds: 300),
+                              speed: const Duration(milliseconds: 100),
                               textStyle: const TextStyle(
                                 color: Colors.white,
                                 fontSize: 20.0,
@@ -206,7 +203,7 @@ class _DigitalDreamsState extends State<DigitalDreams> {
                           animatedTexts: [
                             TyperAnimatedText(
                               "Product Design",
-                              speed: const Duration(milliseconds: 200),
+                              speed: const Duration(milliseconds: 100),
                               textStyle: const TextStyle(
                                 color: Colors.white,
                                 fontSize: 20.0,
@@ -239,7 +236,7 @@ class _DigitalDreamsState extends State<DigitalDreams> {
                           animatedTexts: [
                             TyperAnimatedText(
                               "Digital Marketing",
-                              speed: const Duration(milliseconds: 300),
+                              speed: const Duration(milliseconds: 100),
                               textStyle: const TextStyle(
                                 color: Colors.white,
                                 fontSize: 20.0,
@@ -272,7 +269,7 @@ class _DigitalDreamsState extends State<DigitalDreams> {
                           animatedTexts: [
                             TyperAnimatedText(
                               "Data Science",
-                              speed: const Duration(milliseconds: 300),
+                              speed: const Duration(milliseconds: 100),
                               textStyle: const TextStyle(
                                 color: Colors.white,
                                 fontSize: 20.0,

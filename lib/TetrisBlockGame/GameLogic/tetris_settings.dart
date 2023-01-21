@@ -1,6 +1,5 @@
 import 'dart:io';
 
-import 'package:desktop_window/desktop_window.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -12,13 +11,7 @@ class GlobalSettings extends ChangeNotifier {
   bool _vibrationOn = true;
 
   static Future<GlobalSettings> initNew() async {
-
-    if (Platform.isWindows || Platform.isLinux || Platform.isMacOS) {
-      // Not clean but only happens once at startup, exactly whats needed
-      await DesktopWindow.setWindowSize(const Size(400, 700));
-      // DesktopWindow.setMaxWindowSize(const Size(400, 700));
-      DesktopWindow.setMinWindowSize(const Size(400, 700));
-    }
+    if (Platform.isWindows || Platform.isLinux || Platform.isMacOS) {}
 
     var preferences = await SharedPreferences.getInstance();
 
@@ -40,18 +33,21 @@ class GlobalSettings extends ChangeNotifier {
   set vibrationOn(bool value) {
     _vibrationOn = value;
     notifyListeners();
-    SharedPreferences.getInstance().then((preferences) => preferences.setBool('vibrationOn', value));
+    SharedPreferences.getInstance()
+        .then((preferences) => preferences.setBool('vibrationOn', value));
   }
 
   set musicOn(bool value) {
     _musicOn = value;
     notifyListeners();
-    SharedPreferences.getInstance().then((preferences) => preferences.setBool('musicOn', value));
+    SharedPreferences.getInstance()
+        .then((preferences) => preferences.setBool('musicOn', value));
   }
 
   set soundOn(bool value) {
     _soundOn = value;
     notifyListeners();
-    SharedPreferences.getInstance().then((preferences) => preferences.setBool('soundOn', value));
+    SharedPreferences.getInstance()
+        .then((preferences) => preferences.setBool('soundOn', value));
   }
 }

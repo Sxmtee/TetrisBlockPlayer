@@ -10,21 +10,19 @@ class TetrisSudokuPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-        child: SingleChildScrollView(
-          child: Center(
-            child: Column(
-              children: const [
-                StatusBar(),
-                SizedBox(
-                  height: 30,
-                ),
-                BlockGrid(),
-                SizedBox(
-                  height: 100,
-                ),
-                NextItemList(),
-              ],
-            ),
+        child: Center(
+          child: Column(
+            children: const [
+              StatusBar(),
+              SizedBox(
+                height: 108,
+              ),
+              BlockGrid(),
+              SizedBox(
+                height: 56,
+              ),
+              NextItemList(),
+            ],
           ),
         ),
       ),

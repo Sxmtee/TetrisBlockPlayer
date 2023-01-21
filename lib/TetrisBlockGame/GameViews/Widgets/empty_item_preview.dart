@@ -6,7 +6,7 @@ class EmptyItemPreview extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      width: 100,
+      width: 120,
       height: 100,
       child: DecoratedBox(
         decoration: BoxDecoration(

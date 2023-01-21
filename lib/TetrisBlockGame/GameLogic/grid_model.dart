@@ -107,8 +107,8 @@ class Grid {
 
     //-2 to +2
 
-    for (int offY = -1; offY < sizeY + 0; offY++) {
-      for (int offX = -1; offX < sizeX + 0; offX++) {
+    for (int offY = -2; offY < sizeY + 2; offY++) {
+      for (int offX = -2; offX < sizeX + 2; offX++) {
         if (_doesFit(occupations, x + offX, y + offY)) {
           Point current = Point(x + offX, y + offY);
 

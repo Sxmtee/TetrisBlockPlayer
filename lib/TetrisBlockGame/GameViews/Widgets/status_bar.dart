@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'package:provider/provider.dart';
 import 'package:somtotetris/TetrisBlockGame/GameLogic/tetris_model.dart';
 
@@ -52,8 +53,7 @@ class StatusBar extends StatelessWidget {
                       borderRadius: BorderRadius.circular(12),
                       color: Colors.brown.shade900,
                     ),
-                    child: const Text("0"),
-                    // Text("${game.score}"),
+                    child: Text("${game.score}"),
                   );
                 }),
               ],
@@ -61,14 +61,25 @@ class StatusBar extends StatelessWidget {
           ],
         ),
         actions: [
-          CircleAvatar(
+          SpeedDial(
+            overlayOpacity: 0.0,
+            curve: Curves.easeInCirc,
+            spaceBetweenChildren: 0.0,
             backgroundColor: Colors.green,
-            radius: 28,
-            child: IconButton(
-              onPressed: () {},
-              icon: const Icon(Icons.pause),
-            ),
-          ),
+            icon: Icons.play_arrow_rounded,
+            activeIcon: Icons.pause,
+            direction: SpeedDialDirection.down,
+            children: [
+              SpeedDialChild(
+                onTap: () {},
+                child: const Icon(Icons.mic),
+              ),
+              SpeedDialChild(
+                onTap: () {},
+                child: const Icon(Icons.replay),
+              ),
+            ],
+          )
         ],
       ),
     );

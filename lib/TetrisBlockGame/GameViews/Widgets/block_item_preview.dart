@@ -9,8 +9,8 @@ class BlockItemPreview extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      width: 100,
-      height: 100,
+      width: 120,
+      height: 120,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
@@ -28,6 +28,12 @@ class BlockItemPreview extends StatelessWidget {
                     height: size,
                     child: DecoratedBox(
                       decoration: BoxDecoration(
+                        border: Border.all(
+                          color: (piece.occupations[y][x] == true)
+                              ? Colors.black
+                              : Colors.transparent,
+                          width: 1,
+                        ),
                         color: (piece.occupations[y][x] == true)
                             ? Colors.brown.shade600
                             : Colors.transparent,
