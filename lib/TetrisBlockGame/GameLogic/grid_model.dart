@@ -113,7 +113,7 @@ class Grid {
           Point current = Point(x + offX, y + offY);
 
           if (best == null ||
-              center.squaredDistanceTo(best) >
+              center.squaredDistanceTo(best) >=
                   center.squaredDistanceTo(current)) {
             best = current;
 

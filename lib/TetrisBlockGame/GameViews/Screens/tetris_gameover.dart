@@ -1,66 +1,69 @@
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
-Future<void> showGameOverDialog(
-    BuildContext context, int score, Function onRestart) async {
-  SharedPreferences prefs = await SharedPreferences.getInstance();
-  int highscore = prefs.getInt('highscore') ?? 0;
-  if (score > highscore) await prefs.setInt('highscore', score);
-
-  // show the dialog
-  showDialog(
-    context: context,
-    builder: (BuildContext context) {
-      return GameDialog(
-        onRestart: () {
-          onRestart();
-          Navigator.of(context).pop();
-        },
-        score: score,
-        highscore: highscore,
-        title: 'Game Over',
-      );
-    },
-  );
-}
-
-Future<void> showGameWonDialog(
-    BuildContext context, int score, Function onRestart) async {
-  SharedPreferences prefs = await SharedPreferences.getInstance();
-  int highscore = prefs.getInt('highscore') ?? 0;
-  if (score > highscore) await prefs.setInt('highscore', score);
-
-  // show the dialog
-  showDialog(
-    context: context,
-    builder: (BuildContext context) {
-      return GameDialog(
-        title: 'You Won!',
-        onRestart: () {
-          onRestart();
-          Navigator.of(context).pop();
-        },
-        score: score,
-        highscore: highscore,
-      );
-    },
-  );
-}
-
-class GameDialog extends StatelessWidget {
-  final Function onRestart;
+class GameOver extends StatelessWidget {
   final int score;
   final int highscore;
-  final String title;
-  const GameDialog(
-      {super.key,
-      required this.onRestart,
-      required this.score,
-      required this.highscore,
-      required this.title});
+  const GameOver({
+    super.key,
+    required this.score,
+    required this.highscore,
+  });
 
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return SingleChildScrollView(
+      child: Container(
+        padding: const EdgeInsets.all(30),
+        color: Colors.black,
+        // alignment: Alignment.center,
+        child: Column(
+          children: [
+            const SizedBox(
+              height: 100,
+            ),
+            Container(
+              color: Colors.brown,
+              child: const Text("GAME OVER"),
+            ),
+            const SizedBox(
+              height: 100,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Column(
+                  children: [
+                    const Text(
+                      "BEST",
+                      style: TextStyle(fontSize: 10),
+                    ),
+                    Text(
+                      "$highscore",
+                      style: const TextStyle(fontSize: 10),
+                    )
+                  ],
+                ),
+                const SizedBox(
+                  width: 20,
+                ),
+                Column(
+                  children: [
+                    const Text(
+                      "SCORE",
+                      style: TextStyle(fontSize: 10),
+                    ),
+                    Text(
+                      "$score",
+                      style: const TextStyle(fontSize: 10),
+                    )
+                  ],
+                ),
+              ],
+            )
+          ],
+        ),
+      ),
+    );
   }
 }

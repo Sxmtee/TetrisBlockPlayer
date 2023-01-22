@@ -25,13 +25,15 @@ class Block extends StatelessWidget {
                 color: Colors.white,
                 width: 0.1,
               ),
-              color: game.isCompleted(currX, currY)
-                  ? Colors.amber.shade500
-                  : game.isSet(currX, currY)
-                      ? Colors.brown.shade600
-                      : (game.isPreview(currX, currY)
-                          ? Colors.brown.shade400
-                          : Colors.brown.shade300)),
+              color: game.isGameOver()
+                  ? Colors.grey[800]
+                  : game.isCompleted(currX, currY)
+                      ? Colors.amber.shade500
+                      : game.isSet(currX, currY)
+                          ? Colors.brown.shade600
+                          : (game.isPreview(currX, currY)
+                              ? Colors.brown.shade400
+                              : Colors.brown.shade300)),
         ),
       );
     });

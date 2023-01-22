@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:somtotetris/TetrisBlockGame/GameLogic/drag_data.dart';
 import 'package:somtotetris/TetrisBlockGame/GameLogic/tetris_model.dart';
-import 'package:somtotetris/TetrisBlockGame/GameViews/Screens/tetris_gameover.dart';
+import 'package:somtotetris/TetrisBlockGame/GameLogic/tetris_preferences.dart';
 import 'package:somtotetris/TetrisBlockGame/GameViews/Widgets/blockpiece.dart';
 
 class BlockDragTarget extends StatelessWidget {
@@ -27,15 +27,16 @@ class BlockDragTarget extends StatelessWidget {
       onLeave: (data) {
         context.read<TetrisSudoku>().clearPreview();
       },
-      onAccept: (data) async {
+      onAccept: (data) {
         var game = context.read<TetrisSudoku>();
         game.clearPreview();
         game.set(data.piece, currX, currY, data.index);
         if (game.isGameOver()) {
-          await showGameOverDialog(
-            context,
-            game.score,
-            game.reset,
+          Future.delayed(const Duration(seconds: 6)).then(
+            (value) async {
+              await showGameOverDialog(context, game.score);
+              game.reset();
+            },
           );
         }
       },

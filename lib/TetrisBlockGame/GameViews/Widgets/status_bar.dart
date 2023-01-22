@@ -3,9 +3,14 @@ import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'package:provider/provider.dart';
 import 'package:somtotetris/TetrisBlockGame/GameLogic/tetris_model.dart';
 
-class StatusBar extends StatelessWidget {
+class StatusBar extends StatefulWidget {
   const StatusBar({super.key});
 
+  @override
+  State<StatusBar> createState() => _StatusBarState();
+}
+
+class _StatusBarState extends State<StatusBar> {
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -29,17 +34,15 @@ class StatusBar extends StatelessWidget {
                   "BEST",
                   style: TextStyle(color: Colors.brown.shade700),
                 ),
-                Consumer<TetrisSudoku>(builder: (context, game, child) {
-                  return Container(
-                    width: 70,
-                    alignment: Alignment.center,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(12),
-                      color: Colors.brown.shade900,
-                    ),
-                    child: const Text("0"),
-                  );
-                }),
+                Container(
+                  width: 70,
+                  alignment: Alignment.center,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(12),
+                    color: Colors.brown.shade900,
+                  ),
+                  child: const Text("0"),
+                ),
               ],
             ),
             Column(
