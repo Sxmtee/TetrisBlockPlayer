@@ -34,7 +34,7 @@ class BlockDragTarget extends StatelessWidget {
         if (game.isGameOver()) {
           Future.delayed(const Duration(seconds: 6)).then(
             (value) async {
-              await showGameOverDialog(context, game.score);
+              await GamePreferences.setHighScore(context, game.score);
               game.reset();
             },
           );

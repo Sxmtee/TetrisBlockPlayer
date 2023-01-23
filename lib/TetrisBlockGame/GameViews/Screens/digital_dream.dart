@@ -12,9 +12,15 @@ class DigitalDreams extends StatefulWidget {
 }
 
 class _DigitalDreamsState extends State<DigitalDreams> {
+  bool idleStateOver = false;
   @override
   void initState() {
     super.initState();
+    Timer(
+        const Duration(seconds: 1),
+        (() => setState(() {
+              idleStateOver = true;
+            })));
     Timer(const Duration(seconds: 10), (() {
       var route =
           MaterialPageRoute(builder: ((context) => const TetrisSudokuPage()));
@@ -52,22 +58,23 @@ class _DigitalDreamsState extends State<DigitalDreams> {
                         image: AssetImage("assets/images/digital_dreams.png"))),
               ),
               Container(
-                alignment: Alignment.centerRight,
-                child: AnimatedTextKit(
-                  isRepeatingAnimation: false,
-                  animatedTexts: [
-                    WavyAnimatedText(
-                      "ICT Academy",
-                      speed: const Duration(milliseconds: 200),
-                      textStyle: const TextStyle(
-                        color: Colors.amber,
-                        fontSize: 25.0,
-                        fontWeight: FontWeight.w100,
-                      ),
-                    )
-                  ],
-                ),
-              ),
+                  alignment: Alignment.centerRight,
+                  child: idleStateOver
+                      ? AnimatedTextKit(
+                          isRepeatingAnimation: false,
+                          animatedTexts: [
+                            WavyAnimatedText(
+                              "ICT Academy",
+                              speed: const Duration(milliseconds: 200),
+                              textStyle: const TextStyle(
+                                color: Colors.amber,
+                                fontSize: 25.0,
+                                fontWeight: FontWeight.w100,
+                              ),
+                            )
+                          ],
+                        )
+                      : const SizedBox.shrink()),
               const SizedBox(
                 height: 100,
               ),
@@ -99,20 +106,22 @@ class _DigitalDreamsState extends State<DigitalDreams> {
                         const SizedBox(
                           width: 20,
                         ),
-                        AnimatedTextKit(
-                          isRepeatingAnimation: false,
-                          animatedTexts: [
-                            TyperAnimatedText(
-                              "Web Development",
-                              speed: const Duration(milliseconds: 100),
-                              textStyle: const TextStyle(
-                                color: Colors.white,
-                                fontSize: 20.0,
-                                fontWeight: FontWeight.w500,
-                              ),
-                            )
-                          ],
-                        ),
+                        idleStateOver
+                            ? AnimatedTextKit(
+                                isRepeatingAnimation: false,
+                                animatedTexts: [
+                                  TyperAnimatedText(
+                                    "Web Development",
+                                    speed: const Duration(milliseconds: 100),
+                                    textStyle: const TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 20.0,
+                                      fontWeight: FontWeight.w500,
+                                    ),
+                                  )
+                                ],
+                              )
+                            : const SizedBox.shrink()
                       ],
                     ),
                   ),
@@ -132,20 +141,22 @@ class _DigitalDreamsState extends State<DigitalDreams> {
                         const SizedBox(
                           width: 20,
                         ),
-                        AnimatedTextKit(
-                          isRepeatingAnimation: false,
-                          animatedTexts: [
-                            TyperAnimatedText(
-                              "Mobile App Development",
-                              speed: const Duration(milliseconds: 100),
-                              textStyle: const TextStyle(
-                                color: Colors.white,
-                                fontSize: 20.0,
-                                fontWeight: FontWeight.w500,
-                              ),
-                            )
-                          ],
-                        ),
+                        idleStateOver
+                            ? AnimatedTextKit(
+                                isRepeatingAnimation: false,
+                                animatedTexts: [
+                                  TyperAnimatedText(
+                                    "Mobile App Development",
+                                    speed: const Duration(milliseconds: 100),
+                                    textStyle: const TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 20.0,
+                                      fontWeight: FontWeight.w500,
+                                    ),
+                                  )
+                                ],
+                              )
+                            : const SizedBox.shrink()
                       ],
                     ),
                   ),
@@ -165,20 +176,22 @@ class _DigitalDreamsState extends State<DigitalDreams> {
                         const SizedBox(
                           width: 20,
                         ),
-                        AnimatedTextKit(
-                          isRepeatingAnimation: false,
-                          animatedTexts: [
-                            TyperAnimatedText(
-                              "Game Development",
-                              speed: const Duration(milliseconds: 100),
-                              textStyle: const TextStyle(
-                                color: Colors.white,
-                                fontSize: 20.0,
-                                fontWeight: FontWeight.w500,
-                              ),
-                            )
-                          ],
-                        ),
+                        idleStateOver
+                            ? AnimatedTextKit(
+                                isRepeatingAnimation: false,
+                                animatedTexts: [
+                                  TyperAnimatedText(
+                                    "Game Development",
+                                    speed: const Duration(milliseconds: 100),
+                                    textStyle: const TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 20.0,
+                                      fontWeight: FontWeight.w500,
+                                    ),
+                                  )
+                                ],
+                              )
+                            : const SizedBox.shrink()
                       ],
                     ),
                   ),
@@ -198,20 +211,22 @@ class _DigitalDreamsState extends State<DigitalDreams> {
                         const SizedBox(
                           width: 20,
                         ),
-                        AnimatedTextKit(
-                          isRepeatingAnimation: false,
-                          animatedTexts: [
-                            TyperAnimatedText(
-                              "Product Design",
-                              speed: const Duration(milliseconds: 100),
-                              textStyle: const TextStyle(
-                                color: Colors.white,
-                                fontSize: 20.0,
-                                fontWeight: FontWeight.w500,
-                              ),
-                            )
-                          ],
-                        ),
+                        idleStateOver
+                            ? AnimatedTextKit(
+                                isRepeatingAnimation: false,
+                                animatedTexts: [
+                                  TyperAnimatedText(
+                                    "Product Design",
+                                    speed: const Duration(milliseconds: 100),
+                                    textStyle: const TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 20.0,
+                                      fontWeight: FontWeight.w500,
+                                    ),
+                                  )
+                                ],
+                              )
+                            : const SizedBox.shrink()
                       ],
                     ),
                   ),
@@ -231,20 +246,22 @@ class _DigitalDreamsState extends State<DigitalDreams> {
                         const SizedBox(
                           width: 20,
                         ),
-                        AnimatedTextKit(
-                          isRepeatingAnimation: false,
-                          animatedTexts: [
-                            TyperAnimatedText(
-                              "Digital Marketing",
-                              speed: const Duration(milliseconds: 100),
-                              textStyle: const TextStyle(
-                                color: Colors.white,
-                                fontSize: 20.0,
-                                fontWeight: FontWeight.w500,
-                              ),
-                            )
-                          ],
-                        ),
+                        idleStateOver
+                            ? AnimatedTextKit(
+                                isRepeatingAnimation: false,
+                                animatedTexts: [
+                                  TyperAnimatedText(
+                                    "Digital Marketing",
+                                    speed: const Duration(milliseconds: 100),
+                                    textStyle: const TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 20.0,
+                                      fontWeight: FontWeight.w500,
+                                    ),
+                                  )
+                                ],
+                              )
+                            : const SizedBox.shrink()
                       ],
                     ),
                   ),
@@ -264,20 +281,22 @@ class _DigitalDreamsState extends State<DigitalDreams> {
                         const SizedBox(
                           width: 20,
                         ),
-                        AnimatedTextKit(
-                          isRepeatingAnimation: false,
-                          animatedTexts: [
-                            TyperAnimatedText(
-                              "Data Science",
-                              speed: const Duration(milliseconds: 100),
-                              textStyle: const TextStyle(
-                                color: Colors.white,
-                                fontSize: 20.0,
-                                fontWeight: FontWeight.w500,
-                              ),
-                            )
-                          ],
-                        ),
+                        idleStateOver
+                            ? AnimatedTextKit(
+                                isRepeatingAnimation: false,
+                                animatedTexts: [
+                                  TyperAnimatedText(
+                                    "Data Science",
+                                    speed: const Duration(milliseconds: 100),
+                                    textStyle: const TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 20.0,
+                                      fontWeight: FontWeight.w500,
+                                    ),
+                                  )
+                                ],
+                              )
+                            : const SizedBox.shrink()
                       ],
                     ),
                   ),

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'package:provider/provider.dart';
 import 'package:somtotetris/TetrisBlockGame/GameLogic/tetris_model.dart';
+import 'package:somtotetris/TetrisBlockGame/GameLogic/tetris_preferences.dart';
 
 class StatusBar extends StatefulWidget {
   const StatusBar({super.key});
@@ -11,6 +12,14 @@ class StatusBar extends StatefulWidget {
 }
 
 class _StatusBarState extends State<StatusBar> {
+  late final bestScore;
+
+  @override
+  void initState() {
+    super.initState();
+    bestScore = GamePreferences.getHighScore();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -41,7 +50,7 @@ class _StatusBarState extends State<StatusBar> {
                     borderRadius: BorderRadius.circular(12),
                     color: Colors.brown.shade900,
                   ),
-                  child: const Text("0"),
+                  child: Text("$bestScore"),
                 ),
               ],
             ),
@@ -64,25 +73,31 @@ class _StatusBarState extends State<StatusBar> {
           ],
         ),
         actions: [
-          SpeedDial(
-            overlayOpacity: 0.0,
-            curve: Curves.easeInCirc,
-            spaceBetweenChildren: 0.0,
-            backgroundColor: Colors.green,
-            icon: Icons.play_arrow_rounded,
-            activeIcon: Icons.pause,
-            direction: SpeedDialDirection.down,
-            children: [
-              SpeedDialChild(
-                onTap: () {},
-                child: const Icon(Icons.mic),
-              ),
-              SpeedDialChild(
-                onTap: () {},
-                child: const Icon(Icons.replay),
-              ),
-            ],
-          )
+          Consumer<TetrisSudoku>(builder: (context, game, child) {
+            return SpeedDial(
+              overlayOpacity: 0.0,
+              curve: Curves.easeInCirc,
+              spaceBetweenChildren: 0.0,
+              backgroundColor: Colors.green,
+              icon: Icons.play_arrow_rounded,
+              activeIcon: Icons.pause,
+              direction: SpeedDialDirection.down,
+              children: [
+                SpeedDialChild(
+                  backgroundColor: Colors.blue,
+                  onTap: () {},
+                  child: const Icon(Icons.mic),
+                ),
+                SpeedDialChild(
+                  backgroundColor: Colors.blue,
+                  onTap: () {
+                    game.reset();
+                  },
+                  child: const Icon(Icons.replay),
+                ),
+              ],
+            );
+          })
         ],
       ),
     );

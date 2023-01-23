@@ -12,6 +12,7 @@ class TetrisSudoku extends ChangeNotifier {
 
   int score = 0;
   int scoreMultiplier = 1;
+  int bestScore = 0;
   bool scoredLastInteraction = false;
 
   late List<Piece> nextPieces;
