@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:somtotetris/TetrisBlockGame/GameViews/Screens/play_screen.dart';
 import 'package:somtotetris/TetrisBlockGame/GameViews/Screens/tetris_main_page.dart';
 import 'package:tbib_splash_screen/splash_screen_view.dart';
 
@@ -22,8 +23,7 @@ class _DigitalDreamsState extends State<DigitalDreams> {
               idleStateOver = true;
             })));
     Timer(const Duration(seconds: 10), (() {
-      var route =
-          MaterialPageRoute(builder: ((context) => const TetrisSudokuPage()));
+      var route = MaterialPageRoute(builder: ((context) => const PlayScreen()));
       Navigator.push(context, route);
     }));
   }

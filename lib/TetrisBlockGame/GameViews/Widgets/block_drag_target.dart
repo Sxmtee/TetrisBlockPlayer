@@ -32,7 +32,7 @@ class BlockDragTarget extends StatelessWidget {
         game.clearPreview();
         game.set(data.piece, currX, currY, data.index);
         if (game.isGameOver()) {
-          Future.delayed(const Duration(seconds: 6)).then(
+          Future.delayed(const Duration(seconds: 3)).then(
             (value) async {
               await GamePreferences.setHighScore(context, game.score);
               game.reset();

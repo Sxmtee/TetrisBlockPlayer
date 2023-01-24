@@ -1,6 +1,9 @@
-import 'package:flutter/material.dart';
+import 'dart:async';
 
-class GameOver extends StatelessWidget {
+import 'package:flutter/material.dart';
+import 'package:somtotetris/TetrisBlockGame/GameViews/Screens/play_screen.dart';
+
+class GameOver extends StatefulWidget {
   final int score;
   final int highscore;
   const GameOver({
@@ -10,21 +13,39 @@ class GameOver extends StatelessWidget {
   });
 
   @override
+  State<GameOver> createState() => _GameOverState();
+}
+
+class _GameOverState extends State<GameOver> {
+  @override
+  void initState() {
+    super.initState();
+    Timer(const Duration(seconds: 3), (() {
+      var route = MaterialPageRoute(
+        builder: (context) {
+          return const PlayScreen();
+        },
+      );
+      Navigator.push(context, route);
+    }));
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: Container(
+    return Scaffold(
+      body: Container(
         padding: const EdgeInsets.all(30),
-        color: Colors.black,
-        // alignment: Alignment.center,
+        decoration: const BoxDecoration(color: Colors.black),
         child: Column(
           children: [
             const SizedBox(
               height: 100,
             ),
-            Container(
-              color: Colors.brown,
-              child: const Text("GAME OVER"),
-            ),
+            Text("GAME OVER",
+                style: TextStyle(
+                    fontSize: 50,
+                    fontFamily: "Poppins",
+                    color: Colors.brown.shade400)),
             const SizedBox(
               height: 100,
             ),
@@ -34,13 +55,19 @@ class GameOver extends StatelessWidget {
               children: [
                 Column(
                   children: [
-                    const Text(
+                    Text(
                       "BEST",
-                      style: TextStyle(fontSize: 10),
+                      style: TextStyle(
+                          fontSize: 20,
+                          fontFamily: "Intel",
+                          color: Colors.brown.shade400),
                     ),
                     Text(
-                      "$highscore",
-                      style: const TextStyle(fontSize: 10),
+                      "${widget.highscore}",
+                      style: TextStyle(
+                          fontSize: 20,
+                          fontFamily: "Intel",
+                          color: Colors.brown.shade400),
                     )
                   ],
                 ),
@@ -49,13 +76,19 @@ class GameOver extends StatelessWidget {
                 ),
                 Column(
                   children: [
-                    const Text(
+                    Text(
                       "SCORE",
-                      style: TextStyle(fontSize: 10),
+                      style: TextStyle(
+                          fontSize: 20,
+                          fontFamily: "Intel",
+                          color: Colors.brown.shade400),
                     ),
                     Text(
-                      "$score",
-                      style: const TextStyle(fontSize: 10),
+                      "${widget.score}",
+                      style: TextStyle(
+                          fontSize: 20,
+                          fontFamily: "Intel",
+                          color: Colors.brown.shade400),
                     )
                   ],
                 ),

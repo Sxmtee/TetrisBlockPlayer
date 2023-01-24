@@ -3,6 +3,7 @@ import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'package:provider/provider.dart';
 import 'package:somtotetris/TetrisBlockGame/GameLogic/tetris_model.dart';
 import 'package:somtotetris/TetrisBlockGame/GameLogic/tetris_preferences.dart';
+import 'package:somtotetris/TetrisBlockGame/GameViews/Screens/play_screen.dart';
 
 class StatusBar extends StatefulWidget {
   const StatusBar({super.key});
@@ -30,7 +31,14 @@ class _StatusBarState extends State<StatusBar> {
         leading: CircleAvatar(
           backgroundColor: Colors.red,
           child: IconButton(
-            onPressed: () {},
+            onPressed: () {
+              var route = MaterialPageRoute(
+                builder: (context) {
+                  return const PlayScreen();
+                },
+              );
+              Navigator.push(context, route);
+            },
             icon: const Icon(Icons.arrow_back_ios_rounded),
           ),
         ),
@@ -50,7 +58,9 @@ class _StatusBarState extends State<StatusBar> {
                     borderRadius: BorderRadius.circular(12),
                     color: Colors.brown.shade900,
                   ),
-                  child: Text("$bestScore"),
+                  child: Text("$bestScore",
+                      style: TextStyle(
+                          fontFamily: "Poppins", color: Colors.brown.shade700)),
                 ),
               ],
             ),
@@ -65,7 +75,11 @@ class _StatusBarState extends State<StatusBar> {
                       borderRadius: BorderRadius.circular(12),
                       color: Colors.brown.shade900,
                     ),
-                    child: Text("${game.score}"),
+                    child: Text(
+                      "${game.score}",
+                      style: TextStyle(
+                          fontFamily: "Poppins", color: Colors.amber.shade400),
+                    ),
                   );
                 }),
               ],
