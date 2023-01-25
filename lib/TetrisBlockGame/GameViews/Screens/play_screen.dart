@@ -31,7 +31,7 @@ class PlayScreen extends StatelessWidget {
         child: Column(
           children: [
             Container(
-              padding: const EdgeInsets.only(top: 150, bottom: 60),
+              padding: const EdgeInsets.only(top: 145, bottom: 65),
               child: Image.asset("assets/images/TetrisLogo.png"),
             ),
             Padding(

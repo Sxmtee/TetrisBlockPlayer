@@ -23,7 +23,7 @@ class NextItemList extends StatelessWidget {
             return Draggable<DragData>(
               data: DragData(piece, index),
               childWhenDragging: const EmptyItemPreview(),
-              feedback: BlockItemPreview(piece: piece, size: 30),
+              feedback: BlockItemPreview(piece: piece, size: 32),
               child: BlockItemPreview(piece: piece, size: 15),
             );
           }

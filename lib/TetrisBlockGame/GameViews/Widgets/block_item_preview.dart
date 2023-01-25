@@ -28,6 +28,7 @@ class BlockItemPreview extends StatelessWidget {
                     height: size,
                     child: DecoratedBox(
                       decoration: BoxDecoration(
+                        //asset image for the block piece will come here
                         border: Border.all(
                           color: (piece.occupations[y][x] == true)
                               ? Colors.black
