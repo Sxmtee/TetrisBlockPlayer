@@ -2,7 +2,6 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:somtotetris/TetrisBlockGame/GameViews/Screens/play_screen.dart';
-import 'package:somtotetris/TetrisBlockGame/GameViews/Screens/tetris_main_page.dart';
 import 'package:tbib_splash_screen/splash_screen_view.dart';
 
 class DigitalDreams extends StatefulWidget {
@@ -39,11 +38,9 @@ class _DigitalDreamsState extends State<DigitalDreams> {
           Color(0xFF873bcc),
           Color(0xFFfe4a97),
           Color(0xFFe17763),
-          Color(0xFF68998c)
         ], stops: [
           0.1,
           0.4,
-          0.6,
           0.8,
           1
         ], begin: Alignment.topRight, end: Alignment.bottomLeft)),
@@ -68,7 +65,7 @@ class _DigitalDreamsState extends State<DigitalDreams> {
                               speed: const Duration(milliseconds: 200),
                               textStyle: const TextStyle(
                                 color: Colors.amber,
-                                fontSize: 25.0,
+                                fontSize: 20.0,
                                 fontWeight: FontWeight.w100,
                               ),
                             )
@@ -101,7 +98,7 @@ class _DigitalDreamsState extends State<DigitalDreams> {
                             backgroundColor: Colors.amber,
                             child: Icon(
                               Icons.webhook_outlined,
-                              color: Colors.blue,
+                              color: Color(0xFF701ebd),
                             )),
                         const SizedBox(
                           width: 20,
@@ -136,7 +133,7 @@ class _DigitalDreamsState extends State<DigitalDreams> {
                             backgroundColor: Colors.amber,
                             child: Icon(
                               Icons.mobile_friendly_rounded,
-                              color: Colors.blue,
+                              color: Color(0xFF701ebd),
                             )),
                         const SizedBox(
                           width: 20,
@@ -171,7 +168,7 @@ class _DigitalDreamsState extends State<DigitalDreams> {
                             backgroundColor: Colors.amber,
                             child: Icon(
                               Icons.gamepad_rounded,
-                              color: Colors.blue,
+                              color: Color(0xFF701ebd),
                             )),
                         const SizedBox(
                           width: 20,
@@ -206,7 +203,7 @@ class _DigitalDreamsState extends State<DigitalDreams> {
                             backgroundColor: Colors.amber,
                             child: Icon(
                               Icons.design_services_rounded,
-                              color: Colors.blue,
+                              color: Color(0xFF701ebd),
                             )),
                         const SizedBox(
                           width: 20,
@@ -241,7 +238,7 @@ class _DigitalDreamsState extends State<DigitalDreams> {
                             backgroundColor: Colors.amber,
                             child: Icon(
                               Icons.room_service_rounded,
-                              color: Colors.blue,
+                              color: Color(0xFF701ebd),
                             )),
                         const SizedBox(
                           width: 20,
@@ -276,7 +273,7 @@ class _DigitalDreamsState extends State<DigitalDreams> {
                             backgroundColor: Colors.amber,
                             child: Icon(
                               Icons.data_exploration_rounded,
-                              color: Colors.blue,
+                              color: Color(0xFF701ebd),
                             )),
                         const SizedBox(
                           width: 20,

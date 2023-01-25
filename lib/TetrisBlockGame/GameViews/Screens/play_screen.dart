@@ -23,36 +23,48 @@ class PlayScreen extends StatelessWidget {
         return false;
       },
       child: Container(
-        alignment: Alignment.bottomCenter,
         padding: const EdgeInsets.all(30),
-        decoration: const BoxDecoration(color: Colors.brown),
-        child: Padding(
-          padding: const EdgeInsets.all(15.0),
-          child: ElevatedButton.icon(
-            onPressed: () {
-              var route = MaterialPageRoute(
-                  builder: ((context) => const TetrisSudokuPage()));
-              Navigator.push(context, route);
-            },
-            icon: const Icon(
-              CupertinoIcons.play_circle_fill,
-              size: 50,
-              color: Color(0xFFFE0037),
+        decoration: const BoxDecoration(
+            image: DecorationImage(
+                fit: BoxFit.fill,
+                image: AssetImage("assets/images/TetrisBG.jpg"))),
+        child: Column(
+          children: [
+            Container(
+              padding: const EdgeInsets.only(top: 150, bottom: 60),
+              child: Image.asset("assets/images/TetrisLogo.png"),
             ),
-            label: const Text(""),
-            style: ElevatedButton.styleFrom(
-              backgroundColor: Colors.green,
-              minimumSize: const Size(double.infinity, 56),
-              shape: const RoundedRectangleBorder(
-                borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(10),
-                  topRight: Radius.circular(25),
-                  bottomRight: Radius.circular(25),
-                  bottomLeft: Radius.circular(25),
+            Padding(
+              padding: const EdgeInsets.all(15.0),
+              child: ElevatedButton.icon(
+                onPressed: () {
+                  var route = MaterialPageRoute(
+                      builder: ((context) => const TetrisSudokuPage()));
+                  Navigator.push(context, route);
+                },
+                icon: const Icon(
+                  CupertinoIcons.play_circle_fill,
+                  size: 35,
+                  color: Colors.white,
+                ),
+                label: const Text("PLAY"),
+                style: ElevatedButton.styleFrom(
+                  textStyle:
+                      const TextStyle(fontFamily: "Poppins", fontSize: 20),
+                  backgroundColor: const Color(0xFFff751a),
+                  minimumSize: const Size(double.infinity, 56),
+                  shape: const RoundedRectangleBorder(
+                    borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(10),
+                      topRight: Radius.circular(25),
+                      bottomRight: Radius.circular(10),
+                      bottomLeft: Radius.circular(25),
+                    ),
+                  ),
                 ),
               ),
             ),
-          ),
+          ],
         ),
       ),
     );

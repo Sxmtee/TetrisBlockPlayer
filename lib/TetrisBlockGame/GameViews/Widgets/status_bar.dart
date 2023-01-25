@@ -29,7 +29,7 @@ class _StatusBarState extends State<StatusBar> {
       child: AppBar(
         shape: const StadiumBorder(),
         leading: CircleAvatar(
-          backgroundColor: Colors.red,
+          backgroundColor: const Color(0XFFff751a),
           child: IconButton(
             onPressed: () {
               var route = MaterialPageRoute(
@@ -60,7 +60,7 @@ class _StatusBarState extends State<StatusBar> {
                   ),
                   child: Text("$bestScore",
                       style: TextStyle(
-                          fontFamily: "Poppins", color: Colors.brown.shade700)),
+                          fontFamily: "Poppins", color: Colors.brown.shade500)),
                 ),
               ],
             ),

@@ -14,7 +14,7 @@ class BlockGrid extends StatelessWidget {
       margin: const EdgeInsets.symmetric(horizontal: 2),
       padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 16),
       decoration: BoxDecoration(
-          color: Colors.red, borderRadius: BorderRadius.circular(15)),
+          color: Colors.brown, borderRadius: BorderRadius.circular(15)),
       height: MediaQuery.of(context).size.width,
       child: Center(
         // child: Padding(
