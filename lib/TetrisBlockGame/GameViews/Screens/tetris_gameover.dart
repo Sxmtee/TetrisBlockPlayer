@@ -23,7 +23,7 @@ class _GameOverState extends State<GameOver> {
     Timer(const Duration(seconds: 3), (() {
       var route = MaterialPageRoute(
         builder: (context) {
-          return const PlayScreen();
+          return PlayScreen();
         },
       );
       Navigator.push(context, route);
