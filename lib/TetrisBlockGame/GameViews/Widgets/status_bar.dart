@@ -13,7 +13,7 @@ class StatusBar extends StatefulWidget {
 }
 
 class _StatusBarState extends State<StatusBar> {
-  late final bestScore;
+  int? bestScore;
 
   @override
   void initState() {
@@ -98,10 +98,9 @@ class _StatusBarState extends State<StatusBar> {
               direction: SpeedDialDirection.down,
               children: [
                 SpeedDialChild(
-                  backgroundColor: Colors.blue,
-                  onTap: () {},
-                  child: const Icon(Icons.mic),
-                ),
+                    backgroundColor: Colors.blue,
+                    onTap: () {},
+                    child: const Icon(Icons.mic)),
                 SpeedDialChild(
                   backgroundColor: Colors.blue,
                   onTap: () {

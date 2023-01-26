@@ -1,10 +1,19 @@
 import 'dart:async';
 import 'dart:math';
 
+import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 import 'package:somtotetris/TetrisBlockGame/GameLogic/grid_model.dart';
 import 'package:somtotetris/TetrisBlockGame/GameLogic/piece.dart';
 import 'package:somtotetris/TetrisBlockGame/GameLogic/tetris_dimensions.dart';
+
+enum Sounds {
+  pick('Music/pick.wav'),
+  drop('Music/scatter.wav');
+
+  const Sounds(this.filename);
+  final String filename;
+}
 
 class TetrisSudoku extends ChangeNotifier {
   late Grid _valueGrid;
@@ -16,11 +25,23 @@ class TetrisSudoku extends ChangeNotifier {
   bool scoredLastInteraction = false;
 
   late List<Piece> nextPieces;
+  final cache = AudioCache();
+  final Map<String, AudioPlayer> players = {};
 
   TetrisSudoku() {
     nextPieces = generateNextPieces();
     _valueGrid = Grid();
     _previewGrid = Grid();
+    cache.loadAll(Sounds.values.map((e) => e.filename).toList());
+    Sounds.values.forEach((e) {
+      players[e.filename] = AudioPlayer();
+    });
+  }
+
+  void dispose() {
+    players.forEach((_, player) {
+      player.dispose();
+    });
   }
 
   //random piece generator
