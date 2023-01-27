@@ -8,21 +8,18 @@ class BlockGrid extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var itemSize =
-        (MediaQuery.of(context).size.width * 0.9) / Dimensions.gridSize;
+        (MediaQuery.of(context).size.width * 0.95) / Dimensions.gridSize;
 
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 2),
-      padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 16),
-      decoration: const BoxDecoration(
-          color: Colors.brown,
-          // borderRadius: BorderRadius.circular(15)
-          image: DecorationImage(
-              fit: BoxFit.cover,
+      decoration: BoxDecoration(
+          border: Border.all(color: Colors.yellow.shade900, width: 6),
+          borderRadius: BorderRadius.circular(15),
+          image: const DecorationImage(
+              fit: BoxFit.fill,
               image: AssetImage("assets/images/tetris plate_2.jpg"))),
-      height: MediaQuery.of(context).size.width,
+      height: 355,
       child: Center(
-        // child: Padding(
-        // padding: const EdgeInsets.all(8.0),
         child: Column(
           children: List.generate(
             Dimensions.blockCount,
@@ -45,7 +42,7 @@ class BlockGrid extends StatelessWidget {
                                   position: DecorationPosition.foreground,
                                   decoration: BoxDecoration(
                                     border: Border.all(
-                                      color: Colors.black,
+                                      color: Colors.black87,
                                       width: 1,
                                     ),
                                   ),

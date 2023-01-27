@@ -21,19 +21,30 @@ class Block extends StatelessWidget {
         height: itemSize,
         child: DecoratedBox(
           decoration: BoxDecoration(
-              border: Border.all(
-                color: Colors.white,
-                width: 0.1,
-              ),
-              color: game.isGameOver()
-                  ? Colors.grey[800]
-                  : game.isCompleted(currX, currY)
-                      ? Colors.amber.shade500
-                      : game.isSet(currX, currY)
-                          ? Colors.brown.shade600
-                          : (game.isPreview(currX, currY)
-                              ? Colors.brown.shade400
-                              : Colors.brown.shade300)),
+            gradient: LinearGradient(
+                colors: game.isGameOver()
+                    ? [Colors.grey.shade800, Colors.grey.shade800]
+                    : game.isCompleted(currX, currY)
+                        ? [Colors.brown.shade600, Colors.brown.shade600]
+                        : game.isSet(currX, currY)
+                            ? [
+                                const Color(0xFFff9900),
+                                const Color(0xFFffcc00),
+                              ]
+                            : game.isPreview(currX, currY)
+                                ? [
+                                    Colors.white.withOpacity(0.2),
+                                    Colors.white.withOpacity(0.2)
+                                  ]
+                                : [Colors.transparent, Colors.transparent],
+                stops: const [0.5, 1],
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight),
+            border: Border.all(
+              color: Colors.white,
+              width: 0.1,
+            ),
+          ),
         ),
       );
     });

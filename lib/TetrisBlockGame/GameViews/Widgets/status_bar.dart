@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'package:provider/provider.dart';
 import 'package:somtotetris/TetrisBlockGame/GameLogic/tetris_model.dart';
 import 'package:somtotetris/TetrisBlockGame/GameLogic/tetris_preferences.dart';
 import 'package:somtotetris/TetrisBlockGame/GameViews/Screens/play_screen.dart';
+import 'package:somtotetris/TetrisBlockGame/GameViews/Widgets/settings_dialog.dart';
 
 class StatusBar extends StatefulWidget {
   const StatusBar({super.key});
@@ -25,11 +25,10 @@ class _StatusBarState extends State<StatusBar> {
   Widget build(BuildContext context) {
     return Container(
         padding: const EdgeInsets.only(top: 60),
-        height: 180,
+        height: 170,
         width: double.infinity,
         decoration: BoxDecoration(
-            color: Colors.red,
-            border: Border.all(color: Colors.yellow.shade700, width: 6),
+            border: Border.all(color: Colors.yellow.shade900, width: 6),
             borderRadius: const BorderRadius.only(
                 bottomLeft: Radius.circular(50),
                 bottomRight: Radius.circular(50)),
@@ -119,7 +118,14 @@ class _StatusBarState extends State<StatusBar> {
               ],
             ),
             IconButton(
-              onPressed: () {},
+              onPressed: () {
+                showDialog(
+                  context: context,
+                  builder: (BuildContext context) {
+                    return const SettingsDialog();
+                  },
+                );
+              },
               iconSize: 25,
               icon: Icon(
                 Icons.settings,

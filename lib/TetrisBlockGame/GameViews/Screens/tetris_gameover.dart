@@ -41,13 +41,15 @@ class _GameOverState extends State<GameOver> {
             const SizedBox(
               height: 100,
             ),
-            Text("GAME OVER",
+            Text("GameOver",
                 style: TextStyle(
                     fontSize: 50,
                     fontFamily: "Poppins",
                     color: Colors.brown.shade400)),
-            const SizedBox(
-              height: 100,
+            Image.asset(
+              "assets/images/scoretrophy.png",
+              height: 300,
+              fit: BoxFit.cover,
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -72,7 +74,7 @@ class _GameOverState extends State<GameOver> {
                   ],
                 ),
                 const SizedBox(
-                  width: 20,
+                  width: 50,
                 ),
                 Column(
                   children: [

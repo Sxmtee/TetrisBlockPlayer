@@ -23,24 +23,24 @@ class BlockItemPreview extends StatelessWidget {
               children: List.generate(
                 piece.occupations[y].length,
                 (x) {
-                  return SizedBox(
-                    width: size,
-                    height: size,
-                    child: DecoratedBox(
-                      decoration: BoxDecoration(
-                        //asset image for the block piece will come here
-                        border: Border.all(
-                          color: (piece.occupations[y][x] == true)
-                              ? Colors.black
-                              : Colors.transparent,
-                          width: 1,
-                        ),
-                        color: (piece.occupations[y][x] == true)
-                            ? Colors.brown.shade600
-                            : Colors.transparent,
-                      ),
-                    ),
-                  );
+                  return Container(
+                      width: size,
+                      height: size,
+                      decoration: (piece.occupations[y][x] == true)
+                          ? const BoxDecoration(
+                              //asset image for the block piece will come here
+                              gradient: LinearGradient(
+                                  colors: [
+                                  Color(0xFFff9900),
+                                  Color(0xFFffcc00),
+                                ],
+                                  stops: [
+                                  0.5,
+                                  1
+                                ],
+                                  begin: Alignment.topLeft,
+                                  end: Alignment.bottomRight))
+                          : const BoxDecoration());
                 },
               ),
             );

@@ -9,23 +9,22 @@ class TetrisSudokuPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
-        decoration: const BoxDecoration(
-            image: DecorationImage(
-                fit: BoxFit.fill,
-                image: AssetImage("assets/images/TetrisBG.jpg"))),
-        child: Center(
+      body: SingleChildScrollView(
+        child: Container(
+          decoration: BoxDecoration(
+            color: Colors.brown.shade600,
+          ),
           child: Column(
             children: const [
               StatusBar(),
               SizedBox(
-                height: 50,
+                height: 40,
               ),
               BlockGrid(),
-              // SizedBox(
-              //   height: 56,
-              // ),
-              // NextItemList(),
+              SizedBox(
+                height: 40,
+              ),
+              NextItemList(),
             ],
           ),
         ),

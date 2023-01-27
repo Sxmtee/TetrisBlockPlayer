@@ -12,34 +12,43 @@ class NextItemList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<TetrisSudoku>(builder: (context, game, child) {
-      return Row(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
-        children: List.generate(3, (index) {
-          Piece piece = game.nextPieces[index];
-          if (piece == null) {
-            return const EmptyItemPreview();
-          } else {
-            return Draggable<DragData>(
-              onDragStarted: () {
-                final player = game.players[Sounds.pick.filename];
-                player!.play(AssetSource(Sounds.pick.filename));
-              },
-              data: DragData(piece, index),
-              childWhenDragging: const EmptyItemPreview(),
-              feedback: BlockItemPreview(piece: piece, size: 30),
-              child: BlockItemPreview(piece: piece, size: 15),
-              onDragCompleted: () {
-                game.players.forEach((_, player) {
-                  if (player.state == PlayerState.playing) player.stop();
-                });
-                final player = game.players[Sounds.drop.filename];
-                player!.play(AssetSource(Sounds.drop.filename));
-              },
-            );
-          }
-        }),
-      );
-    });
+    return Container(
+      height: 195,
+      decoration: BoxDecoration(
+          border:
+              Border(top: BorderSide(color: Colors.yellow.shade900, width: 6)),
+          image: const DecorationImage(
+              fit: BoxFit.fill,
+              image: AssetImage("assets/images/tetris plate_2.jpg"))),
+      child: Consumer<TetrisSudoku>(builder: (context, game, child) {
+        return Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: List.generate(3, (index) {
+            Piece piece = game.nextPieces[index];
+            if (piece == null) {
+              return const EmptyItemPreview();
+            } else {
+              return Draggable<DragData>(
+                onDragStarted: () {
+                  final player = game.players[Sounds.pick.filename];
+                  player!.play(AssetSource(Sounds.pick.filename));
+                },
+                data: DragData(piece, index),
+                childWhenDragging: const EmptyItemPreview(),
+                feedback: BlockItemPreview(piece: piece, size: 30),
+                child: BlockItemPreview(piece: piece, size: 15),
+                onDragCompleted: () {
+                  game.players.forEach((_, player) {
+                    if (player.state == PlayerState.playing) player.stop();
+                  });
+                  final player = game.players[Sounds.drop.filename];
+                  player!.play(AssetSource(Sounds.drop.filename));
+                },
+              );
+            }
+          }),
+        );
+      }),
+    );
   }
 }
