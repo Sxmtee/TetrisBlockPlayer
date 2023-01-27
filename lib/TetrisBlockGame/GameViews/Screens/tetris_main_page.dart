@@ -14,21 +14,19 @@ class TetrisSudokuPage extends StatelessWidget {
             image: DecorationImage(
                 fit: BoxFit.fill,
                 image: AssetImage("assets/images/TetrisBG.jpg"))),
-        child: SafeArea(
-          child: Center(
-            child: Column(
-              children: const [
-                StatusBar(),
-                SizedBox(
-                  height: 108,
-                ),
-                BlockGrid(),
-                SizedBox(
-                  height: 56,
-                ),
-                NextItemList(),
-              ],
-            ),
+        child: Center(
+          child: Column(
+            children: const [
+              StatusBar(),
+              SizedBox(
+                height: 50,
+              ),
+              BlockGrid(),
+              // SizedBox(
+              //   height: 56,
+              // ),
+              // NextItemList(),
+            ],
           ),
         ),
       ),

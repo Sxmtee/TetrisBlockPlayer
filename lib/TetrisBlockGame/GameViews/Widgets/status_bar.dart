@@ -24,95 +24,109 @@ class _StatusBarState extends State<StatusBar> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.all(8),
-      decoration: BoxDecoration(borderRadius: BorderRadius.circular(20)),
-      child: AppBar(
-        shape: const StadiumBorder(),
-        leading: CircleAvatar(
-          backgroundColor: const Color(0XFFff751a),
-          child: IconButton(
-            onPressed: () {
-              var route = MaterialPageRoute(
-                builder: (context) {
-                  return PlayScreen();
-                },
-              );
-              Navigator.push(context, route);
-            },
-            icon: const Icon(Icons.arrow_back_ios_rounded),
-          ),
-        ),
-        title: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        padding: const EdgeInsets.only(top: 60),
+        height: 180,
+        width: double.infinity,
+        decoration: BoxDecoration(
+            color: Colors.red,
+            border: Border.all(color: Colors.yellow.shade700, width: 6),
+            borderRadius: const BorderRadius.only(
+                bottomLeft: Radius.circular(50),
+                bottomRight: Radius.circular(50)),
+            image: const DecorationImage(
+                fit: BoxFit.cover,
+                image: AssetImage("assets/images/tetris plate_2.jpg"))),
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            IconButton(
+              onPressed: () {
+                var route = MaterialPageRoute(
+                  builder: (context) {
+                    return PlayScreen();
+                  },
+                );
+                Navigator.push(context, route);
+              },
+              iconSize: 25,
+              icon: Icon(
+                Icons.arrow_back_ios_rounded,
+                color: Colors.yellow.shade700,
+              ),
+            ),
             Column(
               children: [
                 Text(
                   "BEST",
-                  style: TextStyle(color: Colors.brown.shade700),
+                  style: TextStyle(
+                      fontFamily: "Poppins",
+                      color: Colors.yellow.shade700,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 15),
+                ),
+                const SizedBox(
+                  height: 5,
                 ),
                 Container(
                   width: 70,
+                  height: 40,
                   alignment: Alignment.center,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(12),
-                    color: Colors.brown.shade900,
+                    color: Colors.black,
                   ),
                   child: Text("$bestScore",
                       style: TextStyle(
-                          fontFamily: "Poppins", color: Colors.brown.shade500)),
+                          fontFamily: "Poppins",
+                          color: Colors.yellow.shade700)),
                 ),
               ],
             ),
+            Image.asset(
+              "assets/images/scoretrophy.png",
+              height: 100,
+              width: 100,
+              fit: BoxFit.cover,
+            ),
             Column(
               children: [
-                Text("SCORE", style: TextStyle(color: Colors.brown.shade700)),
+                Text(
+                  "SCORE",
+                  style: TextStyle(
+                      fontFamily: "Poppins",
+                      color: Colors.yellow.shade700,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 15),
+                ),
+                const SizedBox(
+                  height: 5,
+                ),
                 Consumer<TetrisSudoku>(builder: (context, game, child) {
                   return Container(
                     width: 70,
+                    height: 40,
                     alignment: Alignment.center,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(12),
-                      color: Colors.brown.shade900,
+                      color: Colors.black,
                     ),
-                    child: Text(
-                      "${game.score}",
-                      style: TextStyle(
-                          fontFamily: "Poppins", color: Colors.amber.shade400),
-                    ),
+                    child: Text("${game.score}",
+                        style: TextStyle(
+                            fontFamily: "Poppins",
+                            color: Colors.yellow.shade700)),
                   );
                 }),
               ],
             ),
+            IconButton(
+              onPressed: () {},
+              iconSize: 25,
+              icon: Icon(
+                Icons.settings,
+                color: Colors.yellow.shade700,
+              ),
+            ),
           ],
-        ),
-        actions: [
-          Consumer<TetrisSudoku>(builder: (context, game, child) {
-            return SpeedDial(
-              overlayOpacity: 0.0,
-              curve: Curves.easeInCirc,
-              spaceBetweenChildren: 0.0,
-              backgroundColor: Colors.green,
-              icon: Icons.play_arrow_rounded,
-              activeIcon: Icons.pause,
-              direction: SpeedDialDirection.down,
-              children: [
-                SpeedDialChild(
-                    backgroundColor: Colors.blue,
-                    onTap: () {},
-                    child: const Icon(Icons.mic)),
-                SpeedDialChild(
-                  backgroundColor: Colors.blue,
-                  onTap: () {
-                    game.reset();
-                  },
-                  child: const Icon(Icons.replay),
-                ),
-              ],
-            );
-          })
-        ],
-      ),
-    );
+        ));
   }
 }

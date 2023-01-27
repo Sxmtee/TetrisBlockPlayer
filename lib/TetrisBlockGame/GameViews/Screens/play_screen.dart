@@ -51,7 +51,7 @@ class PlayScreen extends StatelessWidget {
                   child: Image.asset("assets/images/TetrisLogo.png"),
                 ),
                 NiceButtons(
-                    borderColor: const Color(0xFF701ebd),
+                    borderColor: Colors.transparent,
                     startColor: const Color(0xFFff751a),
                     endColor: const Color(0xFFff751a),
                     stretch: false,

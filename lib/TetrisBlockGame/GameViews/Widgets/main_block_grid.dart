@@ -13,8 +13,12 @@ class BlockGrid extends StatelessWidget {
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 2),
       padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 16),
-      decoration: BoxDecoration(
-          color: Colors.brown, borderRadius: BorderRadius.circular(15)),
+      decoration: const BoxDecoration(
+          color: Colors.brown,
+          // borderRadius: BorderRadius.circular(15)
+          image: DecorationImage(
+              fit: BoxFit.cover,
+              image: AssetImage("assets/images/tetris plate_2.jpg"))),
       height: MediaQuery.of(context).size.width,
       child: Center(
         // child: Padding(
