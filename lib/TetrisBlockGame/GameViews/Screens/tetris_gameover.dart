@@ -20,7 +20,7 @@ class _GameOverState extends State<GameOver> {
   @override
   void initState() {
     super.initState();
-    Timer(const Duration(seconds: 3), (() {
+    Timer(const Duration(seconds: 4), (() {
       var route = MaterialPageRoute(
         builder: (context) {
           return PlayScreen();

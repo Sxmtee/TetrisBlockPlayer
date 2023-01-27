@@ -1,3 +1,4 @@
+import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 
 import 'package:provider/provider.dart';
@@ -31,8 +32,20 @@ class BlockDragTarget extends StatelessWidget {
         var game = context.read<TetrisSudoku>();
         game.clearPreview();
         game.set(data.piece, currX, currY, data.index);
+        if (game.isCompleted(currX, currY)) {
+          game.players.forEach((_, player) {
+            if (player.state == PlayerState.playing) player.stop();
+          });
+          final player = game.players[Sounds.scatter.filename];
+          player!.play(AssetSource(Sounds.scatter.filename), volume: 100);
+        }
         if (game.isGameOver()) {
-          Future.delayed(const Duration(seconds: 3)).then(
+          game.players.forEach((_, player) {
+            if (player.state == PlayerState.playing) player.stop();
+          });
+          final player = game.players[Sounds.gameover.filename];
+          player!.play(AssetSource(Sounds.gameover.filename), volume: 100);
+          Future.delayed(const Duration(seconds: 2)).then(
             (value) async {
               await GamePreferences.setHighScore(context, game.score);
               game.reset();

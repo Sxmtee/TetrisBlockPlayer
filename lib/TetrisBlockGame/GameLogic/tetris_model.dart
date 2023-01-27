@@ -9,7 +9,10 @@ import 'package:somtotetris/TetrisBlockGame/GameLogic/tetris_dimensions.dart';
 
 enum Sounds {
   pick('Music/pick.wav'),
-  drop('Music/scatter.wav');
+  scatter('Music/scatter.wav'),
+  drop("Music/drop.wav"),
+  gameover("Music/gameover.wav"),
+  neon("Music/neon.mp3");
 
   const Sounds(this.filename);
   final String filename;
