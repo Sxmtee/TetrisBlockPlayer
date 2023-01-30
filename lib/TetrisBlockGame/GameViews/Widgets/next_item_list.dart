@@ -10,6 +10,11 @@ import 'package:somtotetris/TetrisBlockGame/GameViews/Widgets/empty_item_preview
 class NextItemList extends StatelessWidget {
   const NextItemList({super.key});
 
+  Offset myPointerDragAnchorStrategy(
+      Draggable<Object> draggable, BuildContext context, Offset position) {
+    return const Offset(0, 0);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -35,6 +40,7 @@ class NextItemList extends StatelessWidget {
                 },
                 data: DragData(piece, index),
                 childWhenDragging: const EmptyItemPreview(),
+                dragAnchorStrategy: myPointerDragAnchorStrategy,
                 feedback: BlockItemPreview(piece: piece, size: 30),
                 child: BlockItemPreview(piece: piece, size: 15),
                 onDragCompleted: () {

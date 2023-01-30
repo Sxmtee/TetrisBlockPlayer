@@ -24,7 +24,6 @@ class TetrisSudoku extends ChangeNotifier {
 
   int score = 0;
   int scoreMultiplier = 1;
-  int bestScore = 0;
   bool scoredLastInteraction = false;
 
   late List<Piece> nextPieces;
@@ -36,9 +35,9 @@ class TetrisSudoku extends ChangeNotifier {
     _valueGrid = Grid();
     _previewGrid = Grid();
     cache.loadAll(Sounds.values.map((e) => e.filename).toList());
-    Sounds.values.forEach((e) {
+    for (var e in Sounds.values) {
       players[e.filename] = AudioPlayer();
-    });
+    }
   }
 
   void dispose() {
@@ -202,6 +201,8 @@ class TetrisSudoku extends ChangeNotifier {
     nextPieces = generateNextPieces();
     _valueGrid = Grid();
     _previewGrid = Grid();
+
+    // notifyListeners();
   }
 
   bool isCompleted(int x, int y) {
