@@ -1,11 +1,11 @@
 import 'dart:async';
 
-import 'package:audioplayers/audioplayers.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:nice_buttons/nice_buttons.dart';
 import 'package:provider/provider.dart';
+import 'package:somtotetris/TetrisBlockGame/Ads/banner_ad.dart';
 import 'package:somtotetris/TetrisBlockGame/GameLogic/tetris_model.dart';
 import 'package:somtotetris/TetrisBlockGame/GameViews/Screens/tetris_main_page.dart';
 
@@ -51,9 +51,12 @@ class PlayScreen extends StatelessWidget {
                   child: Image.asset("assets/images/TetrisLogo.png"),
                 ),
                 NiceButtons(
-                    borderColor: Colors.transparent,
-                    startColor: const Color(0xFFff751a),
-                    endColor: const Color(0xFFff751a),
+                    height: 80,
+                    borderColor: const Color(0xFFff751a),
+                    startColor: const Color(0xFFffcc00),
+                    endColor: const Color(0xFFffcc00),
+                    progressColor: const Color(0xFFff751a),
+                    progressSize: 30,
                     stretch: false,
                     progress: true,
                     gradientOrientation: GradientOrientation.Horizontal,
@@ -65,7 +68,16 @@ class PlayScreen extends StatelessWidget {
                         Navigator.push(context, route);
                       });
                     },
-                    child: const Icon(Icons.play_circle_fill_outlined)),
+                    child: const Icon(
+                      Icons.play_circle_fill_outlined,
+                      size: 50,
+                    )),
+                Container(
+                  alignment: Alignment.center,
+                  width: myBanner.size.width.toDouble(),
+                  height: myBanner.size.height.toDouble(),
+                  child: AdWidget(ad: myBanner),
+                )
               ],
             ),
           ),

@@ -23,9 +23,11 @@ class _StatusBarState extends State<StatusBar> {
 
   @override
   Widget build(BuildContext context) {
+    var sizeHeight = MediaQuery.of(context).size.height;
+
     return Container(
-        padding: const EdgeInsets.only(top: 60),
-        height: 170,
+        padding: EdgeInsets.only(top: sizeHeight / 13.33),
+        height: sizeHeight / 4.71,
         width: double.infinity,
         decoration: BoxDecoration(
             border: Border.all(color: Colors.yellow.shade900, width: 6),

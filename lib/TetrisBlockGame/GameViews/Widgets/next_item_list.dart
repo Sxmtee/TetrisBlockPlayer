@@ -10,15 +10,16 @@ import 'package:somtotetris/TetrisBlockGame/GameViews/Widgets/empty_item_preview
 class NextItemList extends StatelessWidget {
   const NextItemList({super.key});
 
-  Offset myPointerDragAnchorStrategy(
-      Draggable<Object> draggable, BuildContext context, Offset position) {
-    return const Offset(0, 0);
-  }
+  // Offset myPointerDragAnchorStrategy(
+  //     Draggable<Object> draggable, BuildContext context, Offset position) {
+  //   return const Offset(0, 10);
+  // }
 
   @override
   Widget build(BuildContext context) {
+    var sizeHeight = MediaQuery.of(context).size.height;
     return Container(
-      height: 195,
+      height: sizeHeight / 4.10,
       decoration: BoxDecoration(
           border:
               Border(top: BorderSide(color: Colors.yellow.shade900, width: 6)),
@@ -29,8 +30,8 @@ class NextItemList extends StatelessWidget {
         return Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: List.generate(3, (index) {
-            Piece piece = game.nextPieces[index];
-            if (piece == null) {
+            final piece = game.nextPieces[index];
+            if (piece.occupations.isEmpty) {
               return const EmptyItemPreview();
             } else {
               return Draggable<DragData>(
@@ -40,8 +41,10 @@ class NextItemList extends StatelessWidget {
                 },
                 data: DragData(piece, index),
                 childWhenDragging: const EmptyItemPreview(),
-                dragAnchorStrategy: myPointerDragAnchorStrategy,
-                feedback: BlockItemPreview(piece: piece, size: 30),
+                // dragAnchorStrategy: myPointerDragAnchorStrategy,
+                feedback: Transform.scale(
+                    scale: 1.25,
+                    child: BlockItemPreview(piece: piece, size: 30)),
                 child: BlockItemPreview(piece: piece, size: 15),
                 onDragCompleted: () {
                   game.players.forEach((_, player) {

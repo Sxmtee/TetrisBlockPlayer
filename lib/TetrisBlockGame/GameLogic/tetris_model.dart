@@ -59,8 +59,8 @@ class TetrisSudoku extends ChangeNotifier {
 
   //setting the piece and score multiplier
   bool set(Piece piece, int x, int y, int index) {
-    nextPieces[index];
-    if (nextPieces.any((element) => element != null)) {
+    nextPieces[index] = const Piece([]);
+    if (!nextPieces.any((elem) => elem.occupations.isNotEmpty)) {
       nextPieces = generateNextPieces();
     }
 
@@ -94,8 +94,8 @@ class TetrisSudoku extends ChangeNotifier {
 
   // game over
   bool isGameOver() {
-    for (Piece piece in nextPieces) {
-      if (piece != null) {
+    for (final piece in nextPieces) {
+      if (piece.occupations.isNotEmpty) {
         for (int y = 0; y < Dimensions.gridSize; y++) {
           for (int x = 0; x < Dimensions.gridSize; x++) {
             if (_valueGrid.doesFit(piece, x, y)) return false;
@@ -202,7 +202,7 @@ class TetrisSudoku extends ChangeNotifier {
     _valueGrid = Grid();
     _previewGrid = Grid();
 
-    // notifyListeners();
+    notifyListeners();
   }
 
   bool isCompleted(int x, int y) {
