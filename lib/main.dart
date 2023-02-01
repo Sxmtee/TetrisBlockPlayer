@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:provider/provider.dart';
 import 'package:somtotetris/TetrisBlockGame/GameLogic/tetris_model.dart';
 import 'package:somtotetris/TetrisBlockGame/GameLogic/tetris_preferences.dart';
@@ -8,7 +7,7 @@ import 'package:somtotetris/TetrisBlockGame/GameViews/Screens/digital_dream.dart
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   // SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersive);
-  MobileAds.instance.initialize();
+  // MobileAds.instance.initialize();
   await GamePreferences.init();
   runApp(const MyApp());
 }

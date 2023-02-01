@@ -3,6 +3,7 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:somtotetris/TetrisBlockGame/GameLogic/tetris_model.dart';
+import 'package:somtotetris/TetrisBlockGame/GameViews/Widgets/about_dialog.dart';
 
 class SettingsDialog extends StatelessWidget {
   const SettingsDialog({super.key});
@@ -57,7 +58,7 @@ class SettingsDialog extends StatelessWidget {
                   TableCell(
                     verticalAlignment: TableCellVerticalAlignment.middle,
                     child: Text(
-                      "Music",
+                      "Refresh",
                       style: TextStyle(
                           fontFamily: "Poppins",
                           color: Colors.yellow.shade700,
@@ -67,46 +68,56 @@ class SettingsDialog extends StatelessWidget {
                   ),
                   TableCell(
                     verticalAlignment: TableCellVerticalAlignment.middle,
-                    child: Switch(
-                      value: true,
-                      onChanged: (value) {},
-                      activeTrackColor: Colors.yellow.shade600,
-                      activeColor: Colors.yellow.shade900,
+                    child: IconButton(
+                      onPressed: () {
+                        game.reset();
+                        Navigator.pop(context);
+                      },
+                      icon: Icon(
+                        Icons.replay,
+                        color: Colors.yellow.shade900,
+                      ),
+                    ),
+                  ),
+                ]),
+                TableRow(children: [
+                  TableCell(
+                    verticalAlignment: TableCellVerticalAlignment.middle,
+                    child: Text(
+                      "About",
+                      style: TextStyle(
+                          fontFamily: "Poppins",
+                          color: Colors.yellow.shade700,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 15),
+                    ),
+                  ),
+                  TableCell(
+                    verticalAlignment: TableCellVerticalAlignment.middle,
+                    child: IconButton(
+                      onPressed: () {
+                        aboutGame(context);
+                      },
+                      icon: Icon(
+                        Icons.info_rounded,
+                        color: Colors.yellow.shade900,
+                      ),
                     ),
                   ),
                 ]),
               ],
             ),
             actions: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  MaterialButton(
-                    child: Text(
-                      "REFRESH",
-                      style: TextStyle(
-                          fontFamily: "Poppins",
-                          color: Colors.yellow.shade700,
-                          fontWeight: FontWeight.bold,
-                          fontSize: 15),
-                    ),
-                    onPressed: () {
-                      game.reset();
-                      Navigator.pop(context);
-                    },
-                  ),
-                  MaterialButton(
-                    child: Text(
-                      "OK",
-                      style: TextStyle(
-                          fontFamily: "Poppins",
-                          color: Colors.yellow.shade700,
-                          fontWeight: FontWeight.bold,
-                          fontSize: 15),
-                    ),
-                    onPressed: () => Navigator.pop(context),
-                  ),
-                ],
+              MaterialButton(
+                child: Text(
+                  "OK",
+                  style: TextStyle(
+                      fontFamily: "Poppins",
+                      color: Colors.yellow.shade700,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 15),
+                ),
+                onPressed: () => Navigator.pop(context),
               ),
             ],
           ));

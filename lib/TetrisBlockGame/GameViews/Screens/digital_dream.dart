@@ -22,7 +22,7 @@ class _DigitalDreamsState extends State<DigitalDreams> {
               idleStateOver = true;
             })));
     Timer(const Duration(seconds: 10), (() {
-      var route = MaterialPageRoute(builder: ((context) => PlayScreen()));
+      var route = MaterialPageRoute(builder: ((context) => const PlayScreen()));
       Navigator.push(context, route);
     }));
   }
