@@ -3,8 +3,10 @@ import 'dart:async';
 import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:nice_buttons/nice_buttons.dart';
 import 'package:provider/provider.dart';
+import 'package:somtotetris/TetrisBlockGame/Ads/banner_ad.dart';
 import 'package:somtotetris/TetrisBlockGame/GameLogic/tetris_model.dart';
 import 'package:somtotetris/TetrisBlockGame/GameViews/Screens/tetris_main_page.dart';
 
@@ -28,7 +30,9 @@ class _PlayScreenState extends State<PlayScreen> {
   playMusic() {
     var game = context.read<TetrisSudoku>();
     final player = game.players[Sounds.neon.filename];
-    player!.play(AssetSource(Sounds.neon.filename));
+    player!.play(
+      AssetSource(Sounds.neon.filename),
+    );
   }
 
   stopMusic() {
@@ -44,7 +48,16 @@ class _PlayScreenState extends State<PlayScreen> {
   }
 
   @override
+  void dispose() {
+    super.dispose();
+    var game = context.read<TetrisSudoku>();
+    final player = game.players[Sounds.neon.filename];
+    player!.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
+    final myBanner = getBanner();
     return Consumer<TetrisSudoku>(builder: (context, game, child) {
       return WillPopScope(
         onWillPop: () async {
@@ -54,7 +67,6 @@ class _PlayScreenState extends State<PlayScreen> {
         },
         child: Scaffold(
           body: Container(
-            padding: const EdgeInsets.all(30),
             decoration: const BoxDecoration(
                 image: DecorationImage(
                     fit: BoxFit.fill,
@@ -62,7 +74,7 @@ class _PlayScreenState extends State<PlayScreen> {
             child: Column(
               children: [
                 Container(
-                  padding: const EdgeInsets.only(top: 145, bottom: 65),
+                  padding: const EdgeInsets.only(top: 145, bottom: 40),
                   child: Image.asset("assets/images/TetrisLogo.png"),
                 ),
                 NiceButtons(
@@ -88,12 +100,15 @@ class _PlayScreenState extends State<PlayScreen> {
                       Icons.play_circle_fill_outlined,
                       size: 50,
                     )),
-                // Container(
-                //   alignment: Alignment.center,
-                //   width: myBanner.size.width.toDouble(),
-                //   height: myBanner.size.height.toDouble(),
-                //   child: AdWidget(ad: myBanner),
-                // )
+                const Spacer(),
+                FittedBox(
+                  child: Container(
+                    alignment: Alignment.bottomCenter,
+                    width: myBanner.size.width.toDouble(),
+                    height: myBanner.size.height.toDouble(),
+                    child: AdWidget(ad: myBanner),
+                  ),
+                )
               ],
             ),
           ),

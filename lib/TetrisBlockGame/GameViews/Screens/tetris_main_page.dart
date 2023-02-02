@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:provider/provider.dart';
-import 'package:somtotetris/TetrisBlockGame/GameLogic/tetris_dimensions.dart';
+import 'package:somtotetris/TetrisBlockGame/Ads/banner_ad.dart';
 import 'package:somtotetris/TetrisBlockGame/GameLogic/tetris_model.dart';
 import 'package:somtotetris/TetrisBlockGame/GameViews/Widgets/main_block_grid.dart';
 import 'package:somtotetris/TetrisBlockGame/GameViews/Widgets/next_item_list.dart';
@@ -12,39 +13,38 @@ class TetrisSudokuPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var sizeHeight = MediaQuery.of(context).size.height;
-    var itemSize =
-        (MediaQuery.of(context).size.width * 0.95) / Dimensions.gridSize;
-
+    final myBanner = getBanner();
     return Scaffold(
       body: Consumer<TetrisSudoku>(builder: (context, game, child) {
-        return Container(
-          height: sizeHeight,
-          decoration: BoxDecoration(
-            color: Colors.brown.shade600,
-          ),
-          child: Column(
-            children: [
-              const Flexible(child: StatusBar()),
-              SizedBox(
-                height: sizeHeight / 20,
+        return SingleChildScrollView(
+          child: Container(
+            height: sizeHeight,
+            decoration: BoxDecoration(
+              color: Colors.brown.shade600,
+            ),
+            child: Stack(children: [
+              Column(
+                children: [
+                  const Flexible(child: StatusBar()),
+                  SizedBox(
+                    height: sizeHeight / 20,
+                  ),
+                  const BlockGrid(),
+                  SizedBox(
+                    height: sizeHeight / 20,
+                  ),
+                  const FittedBox(child: NextItemList()),
+                ],
               ),
-              Stack(children: [
-                const BlockGrid(),
-                // if (game.isCompleted(x, y))
-                for (var _ in List.filled(9, 0))
-                  Align(
-                    alignment: const Alignment(0, 0),
-                    child: Container(
-                      width: itemSize,
-                      height: itemSize,
-                    ),
-                  )
-              ]),
-              SizedBox(
-                height: sizeHeight / 20,
-              ),
-              const FittedBox(child: NextItemList()),
-            ],
+              Align(
+                  alignment: Alignment.bottomCenter,
+                  child: Container(
+                    alignment: Alignment.bottomCenter,
+                    width: myBanner.size.width.toDouble(),
+                    height: myBanner.size.height.toDouble(),
+                    child: AdWidget(ad: myBanner),
+                  )),
+            ]),
           ),
         );
       }),

@@ -26,7 +26,7 @@ class _StatusBarState extends State<StatusBar> {
     var sizeHeight = MediaQuery.of(context).size.height;
 
     return Container(
-        padding: EdgeInsets.only(top: sizeHeight / 13.33),
+        padding: EdgeInsets.only(top: sizeHeight / 21),
         height: sizeHeight / 4.71,
         width: double.infinity,
         decoration: BoxDecoration(
