@@ -9,16 +9,12 @@ import 'package:somtotetris/TetrisBlockGame/GameViews/Widgets/empty_item_preview
 class NextItemList extends StatelessWidget {
   const NextItemList({super.key});
 
-  // Offset myPointerDragAnchorStrategy(
-  //     Draggable<Object> draggable, BuildContext context, Offset position) {
-  //   return const Offset(0, 10);
-  // }
-
   @override
   Widget build(BuildContext context) {
-    var sizeHeight = MediaQuery.of(context).size.height;
+    var sizeHeight = MediaQuery.of(context).size;
     return Container(
-      height: sizeHeight / 4.10,
+      height: sizeHeight.height / 4.10,
+      width: sizeHeight.width,
       decoration: BoxDecoration(
           border:
               Border(top: BorderSide(color: Colors.yellow.shade900, width: 6)),
@@ -40,7 +36,6 @@ class NextItemList extends StatelessWidget {
                 },
                 data: DragData(piece, index),
                 childWhenDragging: const EmptyItemPreview(),
-                // dragAnchorStrategy: myPointerDragAnchorStrategy,
                 feedback: Transform.scale(
                     scale: 1.25,
                     child: BlockItemPreview(piece: piece, size: 30)),

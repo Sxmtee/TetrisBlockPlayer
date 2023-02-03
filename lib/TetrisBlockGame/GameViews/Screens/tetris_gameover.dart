@@ -1,6 +1,8 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
+import 'package:somtotetris/TetrisBlockGame/Ads/interstitial_ad.dart';
 import 'package:somtotetris/TetrisBlockGame/GameViews/Screens/play_screen.dart';
 
 class GameOver extends StatefulWidget {
@@ -17,17 +19,53 @@ class GameOver extends StatefulWidget {
 }
 
 class _GameOverState extends State<GameOver> {
+  void showAd() {
+    interstitialAd!.fullScreenContentCallback = FullScreenContentCallback(
+      onAdShowedFullScreenContent: (InterstitialAd ad) =>
+          print('%ad onAdShowedFullScreenContent.'),
+      onAdDismissedFullScreenContent: (InterstitialAd ad) {
+        print('$ad onAdDismissedFullScreenContent.');
+        ad.dispose();
+        interstitialAd = null;
+        pageAd();
+        Timer(const Duration(seconds: 4), (() {
+          var route = MaterialPageRoute(
+            builder: (context) {
+              return const PlayScreen();
+            },
+          );
+          Navigator.push(context, route);
+        }));
+      },
+      onAdFailedToShowFullScreenContent: (InterstitialAd ad, AdError error) {
+        print('$ad onAdFailedToShowFullScreenContent: $error');
+        ad.dispose();
+        pageAd();
+      },
+      onAdImpression: (InterstitialAd ad) => print('$ad impression occurred.'),
+    );
+    interstitialAd!.show();
+  }
+
   @override
   void initState() {
     super.initState();
-    Timer(const Duration(seconds: 4), (() {
-      var route = MaterialPageRoute(
-        builder: (context) {
-          return PlayScreen();
-        },
-      );
-      Navigator.push(context, route);
-    }));
+    if (interstitialAd == null) {
+      pageAd();
+    }
+    Timer.periodic(const Duration(seconds: 1), (timer) {
+      if (interstitialAd != null) {
+        timer.cancel();
+        showAd();
+      } else if (timer.tick > 3) {
+        var route = MaterialPageRoute(
+          builder: (context) {
+            return const PlayScreen();
+          },
+        );
+        Navigator.push(context, route);
+      }
+    });
   }
 
   @override
@@ -41,7 +79,7 @@ class _GameOverState extends State<GameOver> {
             const SizedBox(
               height: 100,
             ),
-            Text("GameOver",
+            Text("Game Over",
                 style: TextStyle(
                     fontSize: 50,
                     fontFamily: "Poppins",

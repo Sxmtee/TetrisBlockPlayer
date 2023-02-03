@@ -23,7 +23,7 @@ class Block extends StatelessWidget {
           decoration: BoxDecoration(
             gradient: LinearGradient(
                 colors: game.isGameOver()
-                    ? [Colors.grey.shade800, Colors.grey.shade800]
+                    ? [Colors.grey.shade800, Colors.grey.shade600]
                     : game.isCompleted(currX, currY)
                         ? [Colors.brown.shade600, Colors.brown.shade600]
                         : game.isSet(currX, currY)
