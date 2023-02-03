@@ -64,9 +64,10 @@ class _DigitalDreamsState extends State<DigitalDreams> {
                               "ICT Academy",
                               speed: const Duration(milliseconds: 200),
                               textStyle: const TextStyle(
+                                letterSpacing: 5,
                                 color: Colors.amber,
                                 fontSize: 20.0,
-                                fontWeight: FontWeight.w100,
+                                fontWeight: FontWeight.bold,
                               ),
                             )
                           ],

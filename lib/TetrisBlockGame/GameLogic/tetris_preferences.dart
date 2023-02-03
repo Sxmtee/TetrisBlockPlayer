@@ -17,7 +17,7 @@ class GamePreferences {
       await _preferences.setInt('highscore', score);
     }
 
-    //navigate to game over screen
+    // navigate to game over screen
     var route = MaterialPageRoute(
       builder: (context) {
         return GameOver(score: score, highscore: _highscore);

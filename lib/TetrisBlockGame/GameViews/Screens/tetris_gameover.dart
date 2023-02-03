@@ -2,8 +2,10 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
+import 'package:nice_buttons/nice_buttons.dart';
 import 'package:somtotetris/TetrisBlockGame/Ads/interstitial_ad.dart';
 import 'package:somtotetris/TetrisBlockGame/GameViews/Screens/play_screen.dart';
+import 'package:somtotetris/TetrisBlockGame/GameViews/Screens/tetris_main_page.dart';
 
 class GameOver extends StatefulWidget {
   final int score;
@@ -28,14 +30,6 @@ class _GameOverState extends State<GameOver> {
         ad.dispose();
         interstitialAd = null;
         pageAd();
-        Timer(const Duration(seconds: 4), (() {
-          var route = MaterialPageRoute(
-            builder: (context) {
-              return const PlayScreen();
-            },
-          );
-          Navigator.push(context, route);
-        }));
       },
       onAdFailedToShowFullScreenContent: (InterstitialAd ad, AdError error) {
         print('$ad onAdFailedToShowFullScreenContent: $error');
@@ -53,17 +47,9 @@ class _GameOverState extends State<GameOver> {
     if (interstitialAd == null) {
       pageAd();
     }
-    Timer.periodic(const Duration(seconds: 1), (timer) {
+    Timer(const Duration(seconds: 1), () {
       if (interstitialAd != null) {
-        timer.cancel();
         showAd();
-      } else if (timer.tick > 3) {
-        var route = MaterialPageRoute(
-          builder: (context) {
-            return const PlayScreen();
-          },
-        );
-        Navigator.push(context, route);
       }
     });
   }
@@ -77,7 +63,7 @@ class _GameOverState extends State<GameOver> {
         child: Column(
           children: [
             const SizedBox(
-              height: 100,
+              height: 30,
             ),
             Text("Game Over",
                 style: TextStyle(
@@ -133,7 +119,59 @@ class _GameOverState extends State<GameOver> {
                   ],
                 ),
               ],
-            )
+            ),
+            const SizedBox(
+              height: 60,
+            ),
+            Row(
+              children: [
+                NiceButtons(
+                    height: 60,
+                    width: 145,
+                    borderColor: Colors.brown.shade900,
+                    startColor: Colors.brown.shade400,
+                    endColor: Colors.brown.shade400,
+                    progressColor: Colors.brown.shade900,
+                    progressSize: 30,
+                    stretch: false,
+                    progress: true,
+                    gradientOrientation: GradientOrientation.Horizontal,
+                    onTap: (finish) {
+                      Timer(const Duration(seconds: 5), () {
+                        finish();
+                        // showAd();
+                        var route = MaterialPageRoute(
+                            builder: ((context) => const PlayScreen()));
+                        Navigator.push(context, route);
+                      });
+                    },
+                    child: const Text("Home")),
+                const SizedBox(
+                  width: 10,
+                ),
+                NiceButtons(
+                    height: 60,
+                    width: 145,
+                    borderColor: Colors.brown.shade900,
+                    startColor: Colors.brown.shade400,
+                    endColor: Colors.brown.shade400,
+                    progressColor: Colors.brown.shade900,
+                    progressSize: 30,
+                    stretch: false,
+                    progress: true,
+                    gradientOrientation: GradientOrientation.Horizontal,
+                    onTap: (finish) {
+                      Timer(const Duration(seconds: 5), () {
+                        finish();
+                        showAd();
+                        var route = MaterialPageRoute(
+                            builder: ((context) => const TetrisSudokuPage()));
+                        Navigator.push(context, route);
+                      });
+                    },
+                    child: const Text("Play Again")),
+              ],
+            ),
           ],
         ),
       ),
