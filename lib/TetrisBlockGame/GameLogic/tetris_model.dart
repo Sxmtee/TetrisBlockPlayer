@@ -205,6 +205,21 @@ class TetrisSudoku extends ChangeNotifier {
     notifyListeners();
   }
 
+  bool doesFit(List<List<bool>> occupations, int x, int y) {
+    int currY = y;
+    for (var row in occupations) {
+      int currX = x;
+      for (var element in row) {
+        if (_valueGrid.notInGrid(currX, currY) || isSet(currX, currY)) {
+          return false;
+        }
+        currX++;
+      }
+      currY++;
+    }
+    return true;
+  }
+
   bool isCompleted(int x, int y) {
     return _previewGrid.isCompleted(x, y);
   }

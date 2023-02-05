@@ -3,9 +3,9 @@ import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:provider/provider.dart';
 import 'package:somtotetris/TetrisBlockGame/Ads/banner_ad.dart';
 import 'package:somtotetris/TetrisBlockGame/GameLogic/tetris_model.dart';
-import 'package:somtotetris/TetrisBlockGame/GameViews/Widgets/main_block_grid.dart';
-import 'package:somtotetris/TetrisBlockGame/GameViews/Widgets/next_item_list.dart';
-import 'package:somtotetris/TetrisBlockGame/GameViews/Widgets/status_bar.dart';
+import 'package:somtotetris/TetrisBlockGame/GameViews/Widgets/mainpage/main_block_grid.dart';
+import 'package:somtotetris/TetrisBlockGame/GameViews/Widgets/mainpage/next_item_list.dart';
+import 'package:somtotetris/TetrisBlockGame/GameViews/Widgets/mainpage/status_bar.dart';
 
 class TetrisSudokuPage extends StatelessWidget {
   const TetrisSudokuPage({super.key});

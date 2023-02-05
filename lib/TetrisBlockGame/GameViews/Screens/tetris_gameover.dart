@@ -21,7 +21,7 @@ class GameOver extends StatefulWidget {
 }
 
 class _GameOverState extends State<GameOver> {
-  void showAd() {
+  void showAd() async {
     interstitialAd!.fullScreenContentCallback = FullScreenContentCallback(
       onAdShowedFullScreenContent: (InterstitialAd ad) =>
           print('%ad onAdShowedFullScreenContent.'),

@@ -3,7 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:somtotetris/TetrisBlockGame/GameLogic/tetris_model.dart';
 import 'package:somtotetris/TetrisBlockGame/GameLogic/tetris_preferences.dart';
 import 'package:somtotetris/TetrisBlockGame/GameViews/Screens/play_screen.dart';
-import 'package:somtotetris/TetrisBlockGame/GameViews/Widgets/settings_dialog.dart';
+import 'package:somtotetris/TetrisBlockGame/GameViews/Widgets/statusbar/settings_dialog.dart';
 
 class StatusBar extends StatefulWidget {
   const StatusBar({super.key});

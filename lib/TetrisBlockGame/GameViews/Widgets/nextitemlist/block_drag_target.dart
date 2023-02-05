@@ -5,7 +5,7 @@ import 'package:provider/provider.dart';
 import 'package:somtotetris/TetrisBlockGame/GameLogic/drag_data.dart';
 import 'package:somtotetris/TetrisBlockGame/GameLogic/tetris_model.dart';
 import 'package:somtotetris/TetrisBlockGame/GameLogic/tetris_preferences.dart';
-import 'package:somtotetris/TetrisBlockGame/GameViews/Widgets/blockpiece.dart';
+import 'package:somtotetris/TetrisBlockGame/GameViews/Widgets/nextitemlist/blockpiece.dart';
 
 class BlockDragTarget extends StatelessWidget {
   final int currX;

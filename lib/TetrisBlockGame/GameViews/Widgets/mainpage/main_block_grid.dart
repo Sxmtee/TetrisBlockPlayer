@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:somtotetris/TetrisBlockGame/GameLogic/tetris_dimensions.dart';
-import 'package:somtotetris/TetrisBlockGame/GameViews/Widgets/block_drag_target.dart';
+import 'package:somtotetris/TetrisBlockGame/GameViews/Widgets/nextitemlist/block_drag_target.dart';
 
 class BlockGrid extends StatelessWidget {
   const BlockGrid({super.key});

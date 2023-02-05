@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:somtotetris/TetrisBlockGame/GameLogic/drag_data.dart';
 import 'package:somtotetris/TetrisBlockGame/GameLogic/tetris_model.dart';
-import 'package:somtotetris/TetrisBlockGame/GameViews/Widgets/block_item_preview.dart';
-import 'package:somtotetris/TetrisBlockGame/GameViews/Widgets/empty_item_preview.dart';
+import 'package:somtotetris/TetrisBlockGame/GameViews/Widgets/nextitemlist/block_item_preview.dart';
+import 'package:somtotetris/TetrisBlockGame/GameViews/Widgets/nextitemlist/empty_item_preview.dart';
 
 class NextItemList extends StatelessWidget {
   const NextItemList({super.key});

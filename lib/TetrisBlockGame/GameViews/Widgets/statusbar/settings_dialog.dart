@@ -3,7 +3,7 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:somtotetris/TetrisBlockGame/GameLogic/tetris_model.dart';
-import 'package:somtotetris/TetrisBlockGame/GameViews/Widgets/about_dialog.dart';
+import 'package:somtotetris/TetrisBlockGame/GameViews/Widgets/statusbar/about_dialog.dart';
 
 class SettingsDialog extends StatelessWidget {
   const SettingsDialog({super.key});
