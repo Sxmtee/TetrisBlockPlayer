@@ -164,9 +164,9 @@ class _GameOverState extends State<GameOver> {
                       Timer(const Duration(seconds: 5), () {
                         finish();
                         showAd();
-                        var route = MaterialPageRoute(
+                        var newRoute = MaterialPageRoute(
                             builder: ((context) => const TetrisSudokuPage()));
-                        Navigator.push(context, route);
+                        Navigator.pushReplacement(context, newRoute);
                       });
                     },
                     child: const Text("Play Again")),

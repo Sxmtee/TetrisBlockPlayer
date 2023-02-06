@@ -5,10 +5,12 @@ import 'package:somtotetris/TetrisBlockGame/GameViews/Screens/tetris_gameover.da
 class GamePreferences {
   static late SharedPreferences _preferences;
   static int _highscore = 0;
+  static String _nickName = "";
 
   static Future init() async {
     _preferences = await SharedPreferences.getInstance();
     _highscore = _preferences.getInt('highscore') ?? 0;
+    _nickName = _preferences.getString('nickName') ?? '';
   }
 
   static Future setHighScore(BuildContext context, int score) async {
@@ -27,4 +29,11 @@ class GamePreferences {
   }
 
   static int? getHighScore() => _highscore;
+
+  static Future setNickname(String nickname) async {
+    _nickName = nickname;
+    await _preferences.setString("nickName", nickname);
+  }
+
+  static String? getNickname() => _nickName;
 }

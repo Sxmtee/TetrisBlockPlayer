@@ -1,6 +1,8 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:somtotetris/TetrisBlockGame/GameLogic/tetris_preferences.dart';
+import 'package:somtotetris/TetrisBlockGame/GameViews/Screens/authscreen.dart';
 import 'package:somtotetris/TetrisBlockGame/GameViews/Screens/play_screen.dart';
 import 'package:tbib_splash_screen/splash_screen_view.dart';
 
@@ -13,6 +15,7 @@ class DigitalDreams extends StatefulWidget {
 
 class _DigitalDreamsState extends State<DigitalDreams> {
   bool idleStateOver = false;
+  String? nickname = GamePreferences.getNickname();
   @override
   void initState() {
     super.initState();
@@ -22,8 +25,15 @@ class _DigitalDreamsState extends State<DigitalDreams> {
               idleStateOver = true;
             })));
     Timer(const Duration(seconds: 10), (() {
-      var route = MaterialPageRoute(builder: ((context) => const PlayScreen()));
-      Navigator.push(context, route);
+      if (nickname == '') {
+        var route =
+            MaterialPageRoute(builder: ((context) => const AuthScreen()));
+        Navigator.push(context, route);
+      } else {
+        var route =
+            MaterialPageRoute(builder: ((context) => const PlayScreen()));
+        Navigator.push(context, route);
+      }
     }));
   }
 

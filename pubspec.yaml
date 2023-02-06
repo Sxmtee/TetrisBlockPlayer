@@ -39,12 +39,12 @@ dependencies:
   provider: ^6.0.5
   tbib_splash_screen: ^0.0.6
   animated_text_kit: ^4.2.2
-  flutter_speed_dial: ^6.2.0
   shared_preferences: ^2.0.16
   flutter_launcher_icons: "^0.11.0"
   audioplayers: ^3.0.0
   nice_buttons: ^0.0.2
   google_mobile_ads: ^2.3.0
+  http: ^0.13.5
 
 flutter_icons:
   android: true
