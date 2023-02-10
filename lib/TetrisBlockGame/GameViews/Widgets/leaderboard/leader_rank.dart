@@ -33,15 +33,24 @@ class Ranks extends StatelessWidget {
                       child: ListTile(
                         leading: Text(
                           '${index + 1}',
-                          style: const TextStyle(fontSize: 20),
+                          style: const TextStyle(
+                            fontSize: 17,
+                            fontFamily: "Poppins",
+                          ),
                         ),
                         title: Text(
                           "${list[index]['username']}",
-                          style: const TextStyle(fontSize: 20),
+                          style: const TextStyle(
+                            fontSize: 17,
+                            fontFamily: "Poppins",
+                          ),
                         ),
                         trailing: Text(
                           "${list[index]['score']}",
-                          style: const TextStyle(fontSize: 20),
+                          style: const TextStyle(
+                            fontSize: 17,
+                            fontFamily: "Poppins",
+                          ),
                         ),
                       ),
                     ),

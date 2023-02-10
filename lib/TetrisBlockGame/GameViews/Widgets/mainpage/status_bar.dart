@@ -44,7 +44,7 @@ class _StatusBarState extends State<StatusBar> {
               onPressed: () {
                 var route = MaterialPageRoute(
                   builder: (context) {
-                    return PlayScreen();
+                    return const PlayScreen();
                   },
                 );
                 Navigator.push(context, route);

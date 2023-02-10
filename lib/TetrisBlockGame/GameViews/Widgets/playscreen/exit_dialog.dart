@@ -5,13 +5,11 @@ import 'package:somtotetris/TetrisBlockGame/GameLogic/tetris_model.dart';
 
 exitGame(BuildContext context) {
   AlertDialog alertDialog = AlertDialog(
-    title: Text(
+    backgroundColor: Colors.amber,
+    title: const Text(
       "Exit Game",
       style: TextStyle(
-          fontFamily: "Poppins",
-          color: Colors.yellow.shade700,
-          fontWeight: FontWeight.bold,
-          fontSize: 15),
+          fontFamily: "Poppins", fontWeight: FontWeight.bold, fontSize: 15),
     ),
     content: const Text("You're about to exit this game"),
     actions: [
