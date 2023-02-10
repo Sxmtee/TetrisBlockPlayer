@@ -1,11 +1,16 @@
 import 'dart:async';
+import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:nice_buttons/nice_buttons.dart';
+import 'package:http/http.dart' as http;
+import 'package:platform_device_id/platform_device_id.dart';
 import 'package:somtotetris/TetrisBlockGame/Ads/interstitial_ad.dart';
+import 'package:somtotetris/TetrisBlockGame/GameLogic/tetris_preferences.dart';
 import 'package:somtotetris/TetrisBlockGame/GameViews/Screens/play_screen.dart';
 import 'package:somtotetris/TetrisBlockGame/GameViews/Screens/tetris_main_page.dart';
+import 'dart:developer' as developer;
 
 class GameOver extends StatefulWidget {
   final int score;
@@ -21,6 +26,27 @@ class GameOver extends StatefulWidget {
 }
 
 class _GameOverState extends State<GameOver> {
+  Future<void> post() async {
+    developer.log('I\'m here', name: 'post');
+    final uri = Uri.parse("http://cbtportal.linkskool.com/api/post_score.php");
+    Map<String, dynamic> postData = {};
+    String deviceId = await PlatformDeviceId.getDeviceId ?? '';
+    postData["score"] = GamePreferences.getHighScore();
+    postData["username"] = GamePreferences.getNickname();
+    postData["avatar"] = 0;
+    postData["device_id"] = deviceId;
+    postData["mode"] = 1;
+    postData["game_type"] = "TetrisJigsaw";
+    var response = await http.post(uri, body: jsonEncode(postData));
+    if (response.statusCode == 200) {
+      debugPrint('Successful: ${response.body}');
+      developer.log('I\'m here', name: 'post success');
+    } else {
+      debugPrint('ERROR: ${response.body}');
+      developer.log('I\'m here', name: 'post error');
+    }
+  }
+
   void showAd() async {
     interstitialAd!.fullScreenContentCallback = FullScreenContentCallback(
       onAdShowedFullScreenContent: (InterstitialAd ad) =>
@@ -44,6 +70,7 @@ class _GameOverState extends State<GameOver> {
   @override
   void initState() {
     super.initState();
+    post();
     if (interstitialAd == null) {
       pageAd();
     }

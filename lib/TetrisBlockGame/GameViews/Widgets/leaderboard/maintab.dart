@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:somtotetris/TetrisBlockGame/GameViews/Widgets/leaderboard/leader_rank.dart';
 
 class MainTab extends StatefulWidget {
   const MainTab({super.key});
@@ -13,15 +14,16 @@ class MainTab extends StatefulWidget {
 class _MainTabState extends State<MainTab> {
   String filter = "null";
 
-  Future<Map<String, dynamic>> getRanking(String filter) async {
+  Future<List<dynamic>> getRanking(String filter) async {
     var uri = Uri.parse(
         "http://cbtportal.linkskool.com/api/get_leaderboard.php?game_type=TetrisJigsaw&period=$filter");
     // {daily, week, null}
-    Map<String, dynamic> results = {};
+    List<dynamic> results = [];
     var response = await http.get(uri);
     if (response.statusCode == 200) {
-      results = jsonDecode(response.body) as Map<String, dynamic>;
+      results = jsonDecode(response.body);
     }
+    debugPrint('results:$results');
     return results;
   }
 
@@ -55,7 +57,17 @@ class _MainTabState extends State<MainTab> {
             ],
           ),
         ),
-        body: TabBarView(children: []),
+        body: TabBarView(children: [
+          Center(
+            child: Ranks(ranks: getRanking("null")),
+          ),
+          Center(
+            child: Ranks(ranks: getRanking("week")),
+          ),
+          Center(
+            child: Ranks(ranks: getRanking("daily")),
+          ),
+        ]),
       ),
     );
   }

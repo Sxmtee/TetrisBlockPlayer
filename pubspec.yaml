@@ -45,6 +45,7 @@ dependencies:
   nice_buttons: ^0.0.2
   google_mobile_ads: ^2.3.0
   http: ^0.13.5
+  platform_device_id: ^1.0.1
 
 flutter_icons:
   android: true

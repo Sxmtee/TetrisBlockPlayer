@@ -36,7 +36,7 @@ class LeaderBoard extends StatelessWidget {
                         Navigator.push(context, route);
                       },
                       icon: Icon(
-                        Icons.cancel,
+                        Icons.cancel_presentation_rounded,
                         color: Colors.yellow.shade800,
                         size: 40,
                       ),
@@ -44,7 +44,10 @@ class LeaderBoard extends StatelessWidget {
                   ],
                 ),
               ),
-              Container(height: size.height / 2, child: const MainTab())
+              Expanded(
+                child: Container(
+                    color: Colors.transparent, child: const MainTab()),
+              )
             ],
           ),
         ),

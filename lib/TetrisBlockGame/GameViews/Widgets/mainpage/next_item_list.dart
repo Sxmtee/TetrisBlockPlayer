@@ -9,6 +9,11 @@ import 'package:somtotetris/TetrisBlockGame/GameViews/Widgets/nextitemlist/empty
 class NextItemList extends StatelessWidget {
   const NextItemList({super.key});
 
+  Offset childDragAnchorStrategy(
+      Draggable<Object> draggable, BuildContext context, Offset position) {
+    return const Offset(50, 200);
+  }
+
   @override
   Widget build(BuildContext context) {
     var sizeHeight = MediaQuery.of(context).size;
@@ -36,6 +41,7 @@ class NextItemList extends StatelessWidget {
                 },
                 data: DragData(piece, index),
                 childWhenDragging: const EmptyItemPreview(),
+                dragAnchorStrategy: childDragAnchorStrategy,
                 feedback: Transform.scale(
                     scale: 1.25,
                     child: BlockItemPreview(piece: piece, size: 30)),

@@ -1,12 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
 
 class Ranks extends StatelessWidget {
   Ranks({super.key, required this.ranks});
 
-  Future<Map<String, dynamic>> ranks;
+  Future<List<dynamic>> ranks;
 
   @override
   Widget build(BuildContext context) {
@@ -14,18 +12,51 @@ class Ranks extends StatelessWidget {
         future: ranks,
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
-            return CircularProgressIndicator();
+            return const CupertinoActivityIndicator(
+              color: Color(0xFFffcc00),
+              radius: 50,
+            );
           } else if (snapshot.hasData) {
-            final list = snapshot.data;
+            final list = snapshot.data!
+              ..sort((e1, e2) => e1['score'].compareTo(e2['score']));
             return ListView.builder(
-                itemCount: list?.length ?? 0,
-                itemBuilder: (context, position) {
-                  return ListTile();
+                // shrinkWrap: true,
+                itemCount: list.length,
+                itemBuilder: (context, index) {
+                  return Padding(
+                    padding:
+                        const EdgeInsets.only(top: 16, right: 10, left: 10),
+                    child: Card(
+                      color: const Color(0xFFffcc00),
+                      shape: const StadiumBorder(),
+                      elevation: 10,
+                      child: ListTile(
+                        leading: Text(
+                          '${index + 1}',
+                          style: const TextStyle(fontSize: 20),
+                        ),
+                        title: Text(
+                          "${list[index]['username']}",
+                          style: const TextStyle(fontSize: 20),
+                        ),
+                        trailing: Text(
+                          "${list[index]['score']}",
+                          style: const TextStyle(fontSize: 20),
+                        ),
+                      ),
+                    ),
+                  );
                 });
           } else if (snapshot.hasError) {
-            return Container();
+            return const Center(
+              child: Text("Error"),
+            );
+          } else if (!snapshot.hasData) {
+            return const Center(
+              child: Text("No Data"),
+            );
           } else {
-            return SizedBox.shrink();
+            return const SizedBox.shrink();
           }
         });
   }
