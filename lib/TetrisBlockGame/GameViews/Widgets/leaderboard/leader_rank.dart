@@ -12,9 +12,11 @@ class Ranks extends StatelessWidget {
         future: ranks,
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
-            return const CupertinoActivityIndicator(
-              color: Color(0xFFffcc00),
-              radius: 50,
+            return const Center(
+              child: CupertinoActivityIndicator(
+                color: Color(0xFFffcc00),
+                radius: 50,
+              ),
             );
           } else if (snapshot.hasData) {
             final list = snapshot.data!
