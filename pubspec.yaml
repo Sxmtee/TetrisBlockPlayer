@@ -46,6 +46,7 @@ dependencies:
   google_mobile_ads: ^2.3.0
   http: ^0.13.5
   platform_device_id: ^1.0.1
+  url_launcher: ^6.1.9
 
 flutter_icons:
   android: true

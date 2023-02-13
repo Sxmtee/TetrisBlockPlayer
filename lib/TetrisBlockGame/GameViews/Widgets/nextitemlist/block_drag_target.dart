@@ -34,10 +34,6 @@ class BlockDragTarget extends StatelessWidget {
         game.clearPreview();
         game.set(data.piece, currX, currY, data.index);
         if (game.isCompleted(currX, currY)) {
-          // Transform.scale(
-          //   scale: 3,
-          //   child: Block(itemSize: itemSize, currX: currX, currY: currY),
-          // );
           game.players.forEach((_, player) {
             if (player.state == PlayerState.playing) player.stop();
           });

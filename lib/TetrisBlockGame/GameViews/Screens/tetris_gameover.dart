@@ -10,7 +10,6 @@ import 'package:somtotetris/TetrisBlockGame/Ads/interstitial_ad.dart';
 import 'package:somtotetris/TetrisBlockGame/GameLogic/tetris_preferences.dart';
 import 'package:somtotetris/TetrisBlockGame/GameViews/Screens/play_screen.dart';
 import 'package:somtotetris/TetrisBlockGame/GameViews/Screens/tetris_main_page.dart';
-import 'dart:developer' as developer;
 
 class GameOver extends StatefulWidget {
   final int score;
@@ -27,7 +26,6 @@ class GameOver extends StatefulWidget {
 
 class _GameOverState extends State<GameOver> {
   Future<void> post() async {
-    developer.log('I\'m here', name: 'post');
     final uri = Uri.parse("http://cbtportal.linkskool.com/api/post_score.php");
     Map<String, dynamic> postData = {};
     String deviceId = await PlatformDeviceId.getDeviceId ?? '';
@@ -40,10 +38,8 @@ class _GameOverState extends State<GameOver> {
     var response = await http.post(uri, body: jsonEncode(postData));
     if (response.statusCode == 200) {
       debugPrint('Successful: ${response.body}');
-      developer.log('I\'m here', name: 'post success');
     } else {
       debugPrint('ERROR: ${response.body}');
-      developer.log('I\'m here', name: 'post error');
     }
   }
 

@@ -10,6 +10,7 @@ import 'package:somtotetris/TetrisBlockGame/GameLogic/tetris_model.dart';
 import 'package:somtotetris/TetrisBlockGame/GameViews/Screens/leaderboard.dart';
 import 'package:somtotetris/TetrisBlockGame/GameViews/Screens/tetris_main_page.dart';
 import 'package:somtotetris/TetrisBlockGame/GameViews/Widgets/playscreen/exit_dialog.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class PlayScreen extends StatefulWidget {
   const PlayScreen({super.key});
@@ -22,6 +23,17 @@ class _PlayScreenState extends State<PlayScreen>
     with SingleTickerProviderStateMixin {
   late AnimationController _animationController;
   late Animation<Offset> _animation;
+
+  final Uri _uri =
+      Uri.parse("https://www.youtube.com/@digitaldreamsictacademy1353");
+
+  _launchUrl() async {
+    if (await canLaunchUrl(_uri)) {
+      await launchUrl(_uri, mode: LaunchMode.externalApplication);
+    } else {
+      throw Exception('Could not launch $_uri');
+    }
+  }
 
   playMusic() {
     var game = context.read<TetrisSudoku>();
@@ -131,9 +143,8 @@ class _PlayScreenState extends State<PlayScreen>
                       onTap: (finish) {
                         Timer(const Duration(seconds: 5), () {
                           finish();
-                          // var route = MaterialPageRoute(
-                          //     builder: ((context) => const PlayScreen()));
-                          // Navigator.push(context, route);
+                          stopMusic();
+                          _launchUrl();
                         });
                       },
                       child: const Text("Learn a Skill")),
