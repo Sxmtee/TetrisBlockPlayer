@@ -1,3 +1,5 @@
+import 'dart:developer' as developer;
+
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:somtotetris/TetrisBlockGame/GameLogic/piece.dart';
@@ -11,6 +13,8 @@ class BlockItemPreview extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Consumer<TetrisSudoku>(builder: (context, game, child) {
+      final success = game.scanForFitness(piece);
+      developer.log('$success', name: 'success');
       return SizedBox(
         width: 120,
         height: 120,
@@ -29,10 +33,8 @@ class BlockItemPreview extends StatelessWidget {
                     return Container(
                         width: size,
                         height: size,
-                        decoration: piece.occupations[y][x] == true &&
-                                game.doesFit(piece.occupations, x, y)
+                        decoration: piece.occupations[y][x] == true
                             ? const BoxDecoration(
-                                //asset image for the block piece will come here
                                 gradient: LinearGradient(
                                     colors: [
                                     Color(0xFFff9900),
@@ -44,21 +46,7 @@ class BlockItemPreview extends StatelessWidget {
                                   ],
                                     begin: Alignment.topLeft,
                                     end: Alignment.bottomRight))
-                            : piece.occupations[y][x] == true &&
-                                    !game.doesFit(piece.occupations, x, y)
-                                ? BoxDecoration(
-                                    gradient: LinearGradient(
-                                        colors: [
-                                        Colors.grey.shade800,
-                                        Colors.grey.shade600
-                                      ],
-                                        stops: const [
-                                        0.5,
-                                        1
-                                      ],
-                                        begin: Alignment.topLeft,
-                                        end: Alignment.bottomRight))
-                                : const BoxDecoration());
+                            : const BoxDecoration());
                   },
                 ),
               );

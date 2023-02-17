@@ -41,7 +41,7 @@ class NextItemList extends StatelessWidget {
                 },
                 data: DragData(piece, index),
                 childWhenDragging: const EmptyItemPreview(),
-                dragAnchorStrategy: myPointerDragAnchorStrategy,
+                // dragAnchorStrategy: myPointerDragAnchorStrategy,
                 feedback: Transform.scale(
                     scale: 1.25,
                     child: BlockItemPreview(piece: piece, size: 30)),

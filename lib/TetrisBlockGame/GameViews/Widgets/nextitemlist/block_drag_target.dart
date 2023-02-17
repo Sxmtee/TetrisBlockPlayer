@@ -22,17 +22,20 @@ class BlockDragTarget extends StatelessWidget {
     return DragTarget<DragData>(
       onWillAccept: (data) {
         var game = context.read<TetrisSudoku>();
-        game.setPreview(data!.piece, currX, currY);
-        return game.canPlaceFrom(data.piece, currX, currY);
+        // game.setPreview(data!.piece, currX, currY);
+        return game.canPlaceFrom(data!.piece, currX, currY);
       },
       onLeave: (data) {
         context.read<TetrisSudoku>().clearPreview();
       },
-      onMove: (details) {},
-      onAccept: (data) {
+      onMove: (details) {
+        var game = context.read<TetrisSudoku>();
+        game.setPreview(details.data.piece, currX, currY);
+      },
+      onAccept: (data) async {
         var game = context.read<TetrisSudoku>();
         game.clearPreview();
-        game.set(data.piece, currX, currY, data.index);
+        await game.set(data.piece, currX, currY, data.index);
         if (game.isCompleted(currX, currY)) {
           game.players.forEach((_, player) {
             if (player.state == PlayerState.playing) player.stop();

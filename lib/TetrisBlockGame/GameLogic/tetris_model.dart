@@ -25,6 +25,7 @@ class TetrisSudoku extends ChangeNotifier {
   int score = 0;
   int scoreMultiplier = 1;
   bool scoredLastInteraction = false;
+  Map<String, List<int>> _setEntries = {};
 
   late List<Piece> nextPieces;
   final cache = AudioCache();
@@ -39,6 +40,9 @@ class TetrisSudoku extends ChangeNotifier {
       players[e.filename] = AudioPlayer();
     }
   }
+
+  List<int>? get col => _setEntries['col'];
+  List<int>? get row => _setEntries['row'];
 
   void dispose() {
     players.forEach((_, player) {
@@ -58,7 +62,7 @@ class TetrisSudoku extends ChangeNotifier {
   }
 
   //setting the piece and score multiplier
-  bool set(Piece piece, int x, int y, int index) {
+  Future<bool> set(Piece piece, int x, int y, int index) async {
     nextPieces[index] = const Piece([]);
     if (!nextPieces.any((elem) => elem.occupations.isNotEmpty)) {
       nextPieces = generateNextPieces();
@@ -66,9 +70,9 @@ class TetrisSudoku extends ChangeNotifier {
 
     score += Dimensions.scoreForBlockSet * scoreMultiplier;
     _valueGrid.set(piece, x, y);
-
+    notifyListeners();
     bool hasScoredLastInteraction = scoredLastInteraction;
-    scoredLastInteraction = clearIfSet();
+    scoredLastInteraction = await clearIfSet();
 
     if (hasScoredLastInteraction && scoredLastInteraction) {
       scoreMultiplier++;
@@ -106,8 +110,24 @@ class TetrisSudoku extends ChangeNotifier {
     return true;
   }
 
+  bool scanForFitness(Piece piece) {
+    final rowLen = piece.occupations.length;
+    for (int y = 0; y < rowLen; y++) {
+      final row = piece.occupations[y], colLen = row.length;
+      for (int x = 0; x < colLen; x++) {
+        final elem = row[x];
+        if (!elem) continue;
+        if (doesFit(piece.occupations, x, y)) return true;
+      }
+    }
+    return false;
+  }
+
   //To clear The Columns and Rows when they've aligned
-  bool clearIfSet({bool editValueGrid = true}) {
+  Future<bool> clearIfSet({bool editValueGrid = true}) async {
+    bool wasCleared = false;
+    Grid newValueGrid = Grid.copy(_valueGrid);
+
     bool isRowSet(int row) {
       for (int x = 0; x < Dimensions.gridSize; x++) {
         if (_valueGrid.isClear(x, row) &&
@@ -128,9 +148,6 @@ class TetrisSudoku extends ChangeNotifier {
       return true;
     }
 
-    bool wasCleared = false;
-    Grid newValueGrid = Grid.copy(_valueGrid);
-
     for (int row = 0; row < Dimensions.gridSize; row++) {
       if (isRowSet(row)) {
         wasCleared = true;
@@ -138,11 +155,15 @@ class TetrisSudoku extends ChangeNotifier {
           [true, true, true, true, true, true, true, true, true]
         ], 0, row, GridState.COMPLETED);
         if (editValueGrid) {
-          score += Dimensions.scoreForBlockCleared * scoreMultiplier;
-          for (int x = 0; x < Dimensions.gridSize; x++) {
-            newValueGrid.setValue(x, row, GridState.CLEAR);
-            // here would an animation start to show
-          }
+          if (!_setEntries.containsKey('row')) _setEntries['row'] = [];
+          _setEntries['row']!.add(row);
+          Future.delayed(const Duration(seconds: 3), () {
+            score += Dimensions.scoreForBlockCleared * scoreMultiplier;
+            for (int x = 0; x < Dimensions.gridSize; x++) {
+              newValueGrid.setValue(x, row, GridState.CLEAR);
+              // here would an animation start to show
+            }
+          });
         }
       }
     }
@@ -162,15 +183,22 @@ class TetrisSudoku extends ChangeNotifier {
           [true]
         ], col, 0, GridState.COMPLETED);
         if (editValueGrid) {
-          score += Dimensions.scoreForBlockCleared * scoreMultiplier;
-          for (int y = 0; y < Dimensions.gridSize; y++) {
-            newValueGrid.setValue(col, y, GridState.CLEAR);
-            // here would an animation start to show
-          }
+          if (!_setEntries.containsKey('col')) _setEntries['col'] = [];
+          _setEntries['col']!.add(col);
+          Future.delayed(const Duration(seconds: 3), () {
+            score += Dimensions.scoreForBlockCleared * scoreMultiplier;
+            for (int y = 0; y < Dimensions.gridSize; y++) {
+              newValueGrid.setValue(col, y, GridState.CLEAR);
+              // here would an animation start to show
+            }
+          });
         }
       }
     }
-
+    if (_setEntries.containsKey('col') || _setEntries.containsKey('row')) {
+      notifyListeners();
+      await Future.delayed(const Duration(seconds: 3));
+    }
     _valueGrid = newValueGrid;
 
     if (wasCleared && editValueGrid) {
@@ -179,6 +207,7 @@ class TetrisSudoku extends ChangeNotifier {
         clearPreview,
       );
     }
+    _setEntries = {};
     return wasCleared;
   }
 
