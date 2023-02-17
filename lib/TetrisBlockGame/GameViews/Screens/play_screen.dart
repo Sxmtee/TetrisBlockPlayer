@@ -110,7 +110,7 @@ class _PlayScreenState extends State<PlayScreen>
                     progress: true,
                     gradientOrientation: GradientOrientation.Horizontal,
                     onTap: (finish) {
-                      Timer(const Duration(seconds: 5), () {
+                      Timer(const Duration(seconds: 3), () {
                         finish();
                         stopMusic();
                         var route = MaterialPageRoute(
@@ -141,7 +141,7 @@ class _PlayScreenState extends State<PlayScreen>
                       progress: true,
                       gradientOrientation: GradientOrientation.Horizontal,
                       onTap: (finish) {
-                        Timer(const Duration(seconds: 5), () {
+                        Timer(const Duration(seconds: 1), () {
                           finish();
                           stopMusic();
                           _launchUrl();
@@ -163,7 +163,7 @@ class _PlayScreenState extends State<PlayScreen>
                       progress: true,
                       gradientOrientation: GradientOrientation.Horizontal,
                       onTap: (finish) {
-                        Timer(const Duration(seconds: 5), () {
+                        Timer(const Duration(seconds: 1), () {
                           finish();
                           var route = MaterialPageRoute(
                               builder: ((context) => const LeaderBoard()));

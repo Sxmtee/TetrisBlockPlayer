@@ -31,8 +31,8 @@ class Block extends StatelessWidget {
                           ]
                         : game.isPreview(currX, currY)
                             ? [
-                                Colors.white.withOpacity(0.2),
-                                Colors.white.withOpacity(0.2)
+                                Colors.white.withOpacity(0.1),
+                                Colors.white.withOpacity(0.1)
                               ]
                             : [Colors.transparent, Colors.transparent],
                 stops: const [0.5, 1],

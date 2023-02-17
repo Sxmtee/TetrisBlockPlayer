@@ -22,7 +22,6 @@ class BlockDragTarget extends StatelessWidget {
     return DragTarget<DragData>(
       onWillAccept: (data) {
         var game = context.read<TetrisSudoku>();
-        // game.setPreview(data!.piece, currX, currY);
         return game.canPlaceFrom(data!.piece, currX, currY);
       },
       onLeave: (data) {
