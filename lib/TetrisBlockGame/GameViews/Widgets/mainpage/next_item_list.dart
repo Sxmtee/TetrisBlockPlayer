@@ -2,6 +2,7 @@ import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:somtotetris/TetrisBlockGame/GameLogic/drag_data.dart';
+import 'package:somtotetris/TetrisBlockGame/GameLogic/tetris_dimensions.dart';
 import 'package:somtotetris/TetrisBlockGame/GameLogic/tetris_model.dart';
 import 'package:somtotetris/TetrisBlockGame/GameViews/Widgets/nextitemlist/block_item_preview.dart';
 import 'package:somtotetris/TetrisBlockGame/GameViews/Widgets/nextitemlist/empty_item_preview.dart';
@@ -9,17 +10,14 @@ import 'package:somtotetris/TetrisBlockGame/GameViews/Widgets/nextitemlist/empty
 class NextItemList extends StatelessWidget {
   const NextItemList({super.key});
 
-  Offset myPointerDragAnchorStrategy(
-      Draggable<Object> draggable, BuildContext context, Offset position) {
-    return const Offset(50, 200);
-  }
-
   @override
   Widget build(BuildContext context) {
-    var sizeHeight = MediaQuery.of(context).size;
+    var size = MediaQuery.of(context).size;
+    final itemSize = (size.width * 0.95) / Dimensions.gridSize;
+
     return Container(
-      height: sizeHeight.height / 4.10,
-      width: sizeHeight.width,
+      height: size.height / 5,
+      width: size.width,
       decoration: BoxDecoration(
           border:
               Border(top: BorderSide(color: Colors.yellow.shade900, width: 6)),
@@ -41,7 +39,10 @@ class NextItemList extends StatelessWidget {
                 },
                 data: DragData(piece, index),
                 childWhenDragging: const EmptyItemPreview(),
-                dragAnchorStrategy: myPointerDragAnchorStrategy,
+                dragAnchorStrategy: (Draggable<Object> draggable,
+                    BuildContext context, Offset position) {
+                  return Offset(50, itemSize * 4);
+                },
                 feedback: Transform.scale(
                     scale: 1.25,
                     child: BlockItemPreview(piece: piece, size: 30)),

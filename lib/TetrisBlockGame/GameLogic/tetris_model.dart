@@ -30,6 +30,7 @@ class TetrisSudoku extends ChangeNotifier {
   late List<Piece> nextPieces;
   final cache = AudioCache();
   final Map<String, AudioPlayer> players = {};
+  // static const offsetY = 2;
 
   TetrisSudoku() {
     nextPieces = generateNextPieces();
@@ -110,18 +111,18 @@ class TetrisSudoku extends ChangeNotifier {
     return true;
   }
 
-  bool scanForFitness(Piece piece) {
-    final rowLen = piece.occupations.length;
-    for (int y = 0; y < rowLen; y++) {
-      final row = piece.occupations[y], colLen = row.length;
-      for (int x = 0; x < colLen; x++) {
-        final elem = row[x];
-        if (!elem) continue;
-        if (doesFit(piece.occupations, x, y)) return true;
-      }
-    }
-    return false;
-  }
+  // bool scanForFitness(Piece piece) {
+  //   final rowLen = piece.occupations.length;
+  //   for (int y = 0; y < rowLen; y++) {
+  //     final row = piece.occupations[y], colLen = row.length;
+  //     for (int x = 0; x < colLen; x++) {
+  //       final elem = row[x];
+  //       if (!elem) continue;
+  //       if (doesFit(piece.occupations, x, y)) return true;
+  //     }
+  //   }
+  //   return false;
+  // }
 
   //To clear The Columns and Rows when they've aligned
   Future<bool> clearIfSet({bool editValueGrid = true}) async {
@@ -238,8 +239,9 @@ class TetrisSudoku extends ChangeNotifier {
     int currY = y;
     for (var row in occupations) {
       int currX = x;
-      for (var element in row) {
-        if (_valueGrid.notInGrid(currX, currY) || isSet(currX, currY)) {
+      for (var _ in row) {
+        if (_valueGrid.notInGrid(currX, currY) ||
+            _valueGrid.isSet(currX, currY)) {
           return false;
         }
         currX++;

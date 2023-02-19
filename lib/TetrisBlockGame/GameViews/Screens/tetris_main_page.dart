@@ -2,17 +2,21 @@ import 'package:flutter/material.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:provider/provider.dart';
 import 'package:somtotetris/TetrisBlockGame/Ads/banner_ad.dart';
+import 'package:somtotetris/TetrisBlockGame/GameLogic/tetris_dimensions.dart';
 import 'package:somtotetris/TetrisBlockGame/GameLogic/tetris_model.dart';
 import 'package:somtotetris/TetrisBlockGame/GameViews/Widgets/mainpage/main_block_grid.dart';
 import 'package:somtotetris/TetrisBlockGame/GameViews/Widgets/mainpage/next_item_list.dart';
 import 'package:somtotetris/TetrisBlockGame/GameViews/Widgets/mainpage/status_bar.dart';
+import 'package:somtotetris/TetrisBlockGame/GameViews/Widgets/nextitemlist/block_drag_target.dart';
 
 class TetrisSudokuPage extends StatelessWidget {
   const TetrisSudokuPage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    var sizeHeight = MediaQuery.of(context).size.height;
+    final size = MediaQuery.of(context).size;
+    var sizeHeight = size.height;
+    final itemSize = size.width * 0.9 / Dimensions.gridSize;
     final myBanner = getBanner();
     return Scaffold(
       body: Consumer<TetrisSudoku>(builder: (context, game, child) {
@@ -30,9 +34,24 @@ class TetrisSudokuPage extends StatelessWidget {
                     height: sizeHeight / 20,
                   ),
                   const BlockGrid(),
-                  SizedBox(
-                    height: sizeHeight / 20,
-                  ),
+                  Column(
+                      children: List.generate(
+                    2,
+                    (y) => Row(
+                      children: List.generate(
+                          Dimensions.gridSize,
+                          (x) => Expanded(
+                                child: SizedBox(
+                                  width: itemSize,
+                                  height: itemSize,
+                                  child: BlockDragTarget(
+                                      currX: x,
+                                      currY: Dimensions.gridSize + y,
+                                      itemSize: itemSize),
+                                ),
+                              )),
+                    ),
+                  )),
                   const FittedBox(child: NextItemList()),
                 ],
               ),

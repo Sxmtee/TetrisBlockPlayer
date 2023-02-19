@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:somtotetris/TetrisBlockGame/GameLogic/tetris_dimensions.dart';
 import 'package:somtotetris/TetrisBlockGame/GameLogic/tetris_model.dart';
 
 class Block extends StatelessWidget {
@@ -15,6 +16,9 @@ class Block extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    if (currY >= Dimensions.gridSize) {
+      return const SizedBox.expand();
+    }
     return Consumer<TetrisSudoku>(builder: (context, game, child) {
       return SizedBox(
         width: itemSize,
@@ -38,10 +42,10 @@ class Block extends StatelessWidget {
                 stops: const [0.5, 1],
                 begin: Alignment.topLeft,
                 end: Alignment.bottomRight),
-            border: Border.all(
-              color: Colors.white,
-              width: 0.1,
-            ),
+            // border: Border.all(
+            //   color: Colors.white,
+            //   width: 0.1,
+            // ),
           ),
         ),
       );

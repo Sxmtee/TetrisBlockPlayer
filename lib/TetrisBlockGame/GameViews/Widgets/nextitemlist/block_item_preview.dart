@@ -13,8 +13,6 @@ class BlockItemPreview extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Consumer<TetrisSudoku>(builder: (context, game, child) {
-      final success = game.scanForFitness(piece);
-      developer.log('$success', name: 'success');
       return SizedBox(
         width: 120,
         height: 120,
