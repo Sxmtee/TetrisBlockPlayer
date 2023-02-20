@@ -35,13 +35,6 @@ class BlockDragTarget extends StatelessWidget {
         var game = context.read<TetrisSudoku>();
         game.clearPreview();
         await game.set(data.piece, currX, currY - 2, data.index);
-        if (game.isCompleted(currX, currY - 2)) {
-          game.players.forEach((_, player) {
-            if (player.state == PlayerState.playing) player.stop();
-          });
-          final player = game.players[Sounds.scatter.filename];
-          player!.play(AssetSource(Sounds.scatter.filename), volume: 100);
-        }
         if (game.isGameOver()) {
           game.players.forEach((_, player) {
             if (player.state == PlayerState.playing) player.stop();

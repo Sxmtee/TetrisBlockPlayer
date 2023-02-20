@@ -1,5 +1,6 @@
 import 'dart:math';
 
+import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:somtotetris/TetrisBlockGame/GameLogic/tetris_dimensions.dart';
@@ -55,6 +56,12 @@ class _BlockGridState extends State<BlockGrid>
                   if ((game.col != null || game.row != null) &&
                       !_controller.isAnimating) {
                     _controller.forward();
+                    game.players.forEach((_, player) {
+                      if (player.state == PlayerState.playing) player.stop();
+                    });
+                    final player = game.players[Sounds.scatter.filename];
+                    player!.play(AssetSource(Sounds.scatter.filename),
+                        volume: 100);
                   }
                   return AnimatedBuilder(
                       animation: _anim,

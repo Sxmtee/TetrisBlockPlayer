@@ -52,7 +52,7 @@ class NextItemList extends StatelessWidget {
                     if (player.state == PlayerState.playing) player.stop();
                   });
                   final player = game.players[Sounds.drop.filename];
-                  player!.play(AssetSource(Sounds.drop.filename));
+                  player!.play(AssetSource(Sounds.drop.filename), volume: 100);
                 },
               );
             }

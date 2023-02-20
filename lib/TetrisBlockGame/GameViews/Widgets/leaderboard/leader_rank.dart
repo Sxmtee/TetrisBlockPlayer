@@ -20,7 +20,7 @@ class Ranks extends StatelessWidget {
             );
           } else if (snapshot.hasData) {
             final list = snapshot.data!
-              ..sort((e1, e2) => e1['score'].compareTo(e2['score']));
+              ..sort((e2, e1) => e1['score'].compareTo(e2['score']));
             return ListView.builder(
                 // shrinkWrap: true,
                 itemCount: list.length,
@@ -60,11 +60,24 @@ class Ranks extends StatelessWidget {
                 });
           } else if (snapshot.hasError) {
             return const Center(
-              child: Text("Error"),
+              child: Text(
+                "Error",
+                style: TextStyle(
+                  color: Color(0xFFffcc00),
+                  fontSize: 35,
+                  fontFamily: "Poppins",
+                ),
+              ),
             );
           } else if (!snapshot.hasData) {
             return const Center(
-              child: Text("No Data"),
+              child: Text(
+                "No Data",
+                style: TextStyle(
+                  fontSize: 35,
+                  fontFamily: "Poppins",
+                ),
+              ),
             );
           } else {
             return const SizedBox.shrink();
