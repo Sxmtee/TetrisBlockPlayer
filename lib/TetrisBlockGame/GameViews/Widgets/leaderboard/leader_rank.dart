@@ -27,7 +27,7 @@ class Ranks extends StatelessWidget {
                 itemBuilder: (context, index) {
                   return Padding(
                     padding:
-                        const EdgeInsets.only(top: 16, right: 10, left: 10),
+                        const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
                     child: Card(
                       color: const Color(0xFFffcc00),
                       shape: const StadiumBorder(),

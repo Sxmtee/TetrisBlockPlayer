@@ -60,7 +60,7 @@ class _AuthScreenState extends State<AuthScreen> {
                 progress: true,
                 gradientOrientation: GradientOrientation.Horizontal,
                 onTap: (finish) {
-                  Timer(const Duration(seconds: 5), () async {
+                  Timer(const Duration(seconds: 2), () async {
                     finish();
                     await GamePreferences.setNickname(nameCtrl.text.trim());
                     var route = MaterialPageRoute(

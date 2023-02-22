@@ -48,7 +48,8 @@ class Grid {
   }
 
   void set(Piece piece, int x, int y, [GridState value = GridState.SET]) {
-    Point? position = _calculateBestPosition(piece.occupations, x, y);
+    Point? position =
+        _calculateBestPosition(piece.occupations, piece.shape, x, y);
     if (position == null) return;
 
     setValues(piece.occupations, position.x.toInt(), position.y.toInt(), value);
@@ -94,21 +95,39 @@ class Grid {
     return true;
   }
 
-  Point? calculateBestPosition(Piece piece, int x, int y) {
-    return _calculateBestPosition(piece.occupations, x, y);
-  }
+  void rotatePiece(Piece piece) {}
 
-  Point? _calculateBestPosition(List<List<bool>> occupations, int x, int y) {
+  Point? calculateBestPosition(Piece piece, int x, int y) =>
+      _calculateBestPosition(piece.occupations, piece.shape, x, y);
+
+  Point? _calculateBestPosition(
+      List<List<bool>> occupations, Shape shape, int x, int y) {
     int sizeY = occupations.length;
     int sizeX = occupations[0].length;
 
     Point center = Point(x, y);
     Point? best;
+    int offset;
 
-    //-2 to +2
+    switch (shape) {
+      case Shape.one:
+        offset = 0;
+        break;
+      case Shape.two:
+        offset = 2;
+        break;
+      case Shape.three:
+        offset = 3;
+        break;
+      case Shape.four:
+        offset = 5;
+        break;
+      default:
+        offset = 0;
+    }
 
-    for (int offY = -2; offY < sizeY + 2; offY++) {
-      for (int offX = -2; offX < sizeX + 2; offX++) {
+    for (int offY = -2; offY < sizeY - offset; offY++) {
+      for (int offX = 0; offX < sizeX; offX++) {
         if (_doesFit(occupations, x + offX, y + offY)) {
           Point current = Point(x + offX, y + offY);
 
@@ -117,7 +136,6 @@ class Grid {
                   center.squaredDistanceTo(current)) {
             best = current;
 
-            // early return if a very good fit was found to save on computation time
             if (center.squaredDistanceTo(best) < 1.0) {
               return best;
             }

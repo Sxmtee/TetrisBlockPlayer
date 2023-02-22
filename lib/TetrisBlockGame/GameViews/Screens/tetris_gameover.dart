@@ -160,7 +160,7 @@ class _GameOverState extends State<GameOver> {
                     progress: true,
                     gradientOrientation: GradientOrientation.Horizontal,
                     onTap: (finish) {
-                      Timer(const Duration(seconds: 3), () {
+                      Timer(const Duration(seconds: 1), () {
                         finish();
                         // showAd();
                         var route = MaterialPageRoute(
@@ -184,7 +184,7 @@ class _GameOverState extends State<GameOver> {
                     progress: true,
                     gradientOrientation: GradientOrientation.Horizontal,
                     onTap: (finish) {
-                      Timer(const Duration(seconds: 3), () {
+                      Timer(const Duration(seconds: 1), () {
                         finish();
                         showAd();
                         var newRoute = MaterialPageRoute(

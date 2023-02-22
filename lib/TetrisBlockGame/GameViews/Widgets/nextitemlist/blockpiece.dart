@@ -42,10 +42,6 @@ class Block extends StatelessWidget {
                 stops: const [0.5, 1],
                 begin: Alignment.topLeft,
                 end: Alignment.bottomRight),
-            // border: Border.all(
-            //   color: Colors.white,
-            //   width: 0.1,
-            // ),
           ),
         ),
       );

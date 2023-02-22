@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:math';
+import 'dart:developer' as developer;
 
 import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
@@ -30,6 +31,7 @@ class TetrisSudoku extends ChangeNotifier {
   late List<Piece> nextPieces;
   final cache = AudioCache();
   final Map<String, AudioPlayer> players = {};
+  bool canPlace = true;
   // static const offsetY = 2;
 
   TetrisSudoku() {
@@ -64,7 +66,10 @@ class TetrisSudoku extends ChangeNotifier {
 
   //setting the piece and score multiplier
   Future<bool> set(Piece piece, int x, int y, int index) async {
-    nextPieces[index] = const Piece([]);
+    developer.log('$canPlace', name: 'canPlace');
+    if (!canPlace) return false;
+    canPlace = false;
+    nextPieces[index] = const Piece([], Shape.none);
     if (!nextPieces.any((elem) => elem.occupations.isNotEmpty)) {
       nextPieces = generateNextPieces();
     }
@@ -80,6 +85,7 @@ class TetrisSudoku extends ChangeNotifier {
     } else {
       scoreMultiplier = 1;
     }
+    canPlace = true;
 
     notifyListeners();
     return scoredLastInteraction;
@@ -87,6 +93,7 @@ class TetrisSudoku extends ChangeNotifier {
 
   //preview before setting block tiles
   void setPreview(Piece piece, int currX, int currY) {
+    if (!canPlace) return;
     _previewGrid.clearGrid();
     Point? position = _valueGrid.calculateBestPosition(piece, currX, currY);
     if (position == null) return;

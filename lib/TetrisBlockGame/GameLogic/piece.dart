@@ -1,142 +1,129 @@
+enum Shape { none, one, two, three, four }
+
 class Piece {
   final List<List<bool>> occupations;
+  final Shape shape;
 
-  const Piece(this.occupations);
+  const Piece(this.occupations, this.shape);
 
   static const List<Piece> pieces = [
-    // Extras
+    // ones
     Piece([
       [true],
-    ]),
-    Piece([
-      [false, true],
-      [true, true],
-    ]),
-    Piece([
-      [true, false],
-      [true, true],
-    ]),
+    ], Shape.one),
     Piece([
       [true, true],
-      [true, false],
-    ]),
-    Piece([
-      [true, true],
-      [false, true],
-    ]),
-    Piece([
-      [true, true],
-    ]),
-    Piece([
-      [true],
-      [true],
-    ]),
-    // end Extras
-
-    // Z shape
-    Piece([
-      [true, true, false],
-      [false, true, true],
-    ]),
-    Piece([
-      [false, true],
-      [true, true],
-      [true, false],
-    ]),
-    // end Z Shape
-
-    // S shape
-    Piece([
-      [false, true, true],
-      [true, true, false],
-    ]),
-    Piece([
-      [true, false],
-      [true, true],
-      [false, true],
-    ]),
-    // end S Shape
-
-    // L shape
-    Piece([
-      [true, true],
-      [false, true],
-      [false, true],
-    ]),
-    Piece([
-      [true, false],
-      [true, false],
-      [true, true],
-    ]),
-    Piece([
-      [true, true, true],
-      [true, false, false],
-    ]),
-    Piece([
-      [false, false, true],
-      [true, true, true],
-    ]),
-    // end L Shape
-
-    // J shape
-    Piece([
-      [true, true],
-      [true, false],
-      [true, false],
-    ]),
-    Piece([
-      [false, true],
-      [false, true],
-      [true, true],
-    ]),
-    Piece([
-      [true, false, false],
-      [true, true, true],
-    ]),
-    Piece([
-      [true, true, true],
-      [false, false, true],
-    ]),
-    // end J Shape
-
-    // I shape
-    Piece([
-      [true],
-      [true],
-      [true],
-      [true],
-    ]),
+    ], Shape.one),
     Piece([
       [true, true, true, true],
-    ]),
-    // end I Shape
+    ], Shape.one),
 
-    // O shape
+    // twos
+    Piece([
+      [false, true],
+      [true, true],
+    ], Shape.two),
+    Piece([
+      [true, false],
+      [true, true],
+    ], Shape.two),
+    Piece([
+      [true, true],
+      [true, false],
+    ], Shape.two),
+    Piece([
+      [true, true],
+      [false, true],
+    ], Shape.two),
+    Piece([
+      [true],
+      [true],
+    ], Shape.two),
+    Piece([
+      [false, true, false],
+      [true, true, true],
+    ], Shape.two),
+    Piece([
+      [true, true, true],
+      [false, true, false],
+    ], Shape.two),
+    Piece([
+      [true, true, false],
+      [false, true, true],
+    ], Shape.two),
+    Piece([
+      [false, true, true],
+      [true, true, false],
+    ], Shape.two),
+    Piece([
+      [true, true, true],
+      [true, false, false],
+    ], Shape.two),
+    Piece([
+      [false, false, true],
+      [true, true, true],
+    ], Shape.two),
+    Piece([
+      [true, false, false],
+      [true, true, true],
+    ], Shape.two),
+    Piece([
+      [true, true, true],
+      [false, false, true],
+    ], Shape.two),
     Piece([
       [true, true],
       [true, true],
-    ]),
-    // end O Shape
+    ], Shape.two),
 
-    // T shape
+    //threes
+    Piece([
+      [false, true],
+      [true, true],
+      [true, false],
+    ], Shape.three),
     Piece([
       [true, false],
       [true, true],
       [true, false],
-    ]),
+    ], Shape.three),
     Piece([
       [false, true],
       [true, true],
       [false, true],
-    ]),
+    ], Shape.three),
     Piece([
-      [false, true, false],
-      [true, true, true],
-    ]),
+      [true, false],
+      [true, true],
+      [false, true],
+    ], Shape.three),
     Piece([
-      [true, true, true],
-      [false, true, false],
-    ])
-    // end T Shape
+      [true, true],
+      [false, true],
+      [false, true],
+    ], Shape.three),
+    Piece([
+      [true, false],
+      [true, false],
+      [true, true],
+    ], Shape.three),
+    Piece([
+      [true, true],
+      [true, false],
+      [true, false],
+    ], Shape.three),
+    Piece([
+      [false, true],
+      [false, true],
+      [true, true],
+    ], Shape.three),
+
+    // fours
+    Piece([
+      [true],
+      [true],
+      [true],
+      [true],
+    ], Shape.four),
   ];
 }

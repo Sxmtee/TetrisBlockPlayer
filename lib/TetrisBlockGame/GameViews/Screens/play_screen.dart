@@ -110,7 +110,7 @@ class _PlayScreenState extends State<PlayScreen>
                     progress: true,
                     gradientOrientation: GradientOrientation.Horizontal,
                     onTap: (finish) {
-                      Timer(const Duration(seconds: 3), () {
+                      Timer(const Duration(seconds: 1), () {
                         finish();
                         stopMusic();
                         var route = MaterialPageRoute(
@@ -132,9 +132,9 @@ class _PlayScreenState extends State<PlayScreen>
                   NiceButtons(
                       height: 60,
                       width: 145,
-                      borderColor: Colors.brown.shade900,
-                      startColor: Colors.red.shade400,
-                      endColor: Colors.brown.shade400,
+                      borderColor: const Color(0XFF4700b3),
+                      startColor: const Color(0XFF7a2eef),
+                      endColor: const Color(0XFF7a2eef),
                       progressColor: Colors.brown.shade900,
                       progressSize: 30,
                       stretch: false,
@@ -147,16 +147,19 @@ class _PlayScreenState extends State<PlayScreen>
                           _launchUrl();
                         });
                       },
-                      child: const Text("Learn a Skill")),
+                      child: const Text(
+                        "Learn a Skill",
+                        style: TextStyle(color: Colors.white),
+                      )),
                   const SizedBox(
                     width: 10,
                   ),
                   NiceButtons(
                       height: 60,
                       width: 145,
-                      borderColor: Colors.brown.shade900,
-                      startColor: Colors.brown.shade400,
-                      endColor: Colors.red.shade400,
+                      borderColor: const Color(0XFF4700b3),
+                      startColor: const Color(0XFF7a2eef),
+                      endColor: const Color(0XFF7a2eef),
                       progressColor: Colors.brown.shade900,
                       progressSize: 30,
                       stretch: false,
@@ -170,7 +173,8 @@ class _PlayScreenState extends State<PlayScreen>
                           Navigator.push(context, route);
                         });
                       },
-                      child: const Text("LeaderBoard")),
+                      child: const Text("LeaderBoard",
+                          style: TextStyle(color: Colors.white))),
                 ],
               ),
               const Spacer(),

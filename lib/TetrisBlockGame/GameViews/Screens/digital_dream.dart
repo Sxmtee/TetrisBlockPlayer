@@ -66,23 +66,15 @@ class _DigitalDreamsState extends State<DigitalDreams> {
               ),
               Container(
                   alignment: Alignment.centerRight,
-                  child: idleStateOver
-                      ? AnimatedTextKit(
-                          isRepeatingAnimation: false,
-                          animatedTexts: [
-                            WavyAnimatedText(
-                              "ICT Academy",
-                              speed: const Duration(milliseconds: 200),
-                              textStyle: const TextStyle(
-                                letterSpacing: 5,
-                                color: Colors.amber,
-                                fontSize: 20.0,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            )
-                          ],
-                        )
-                      : const SizedBox.shrink()),
+                  child: const Text(
+                    "ICT Academy",
+                    style: TextStyle(
+                      letterSpacing: 5,
+                      color: Colors.amber,
+                      fontSize: 20.0,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  )),
               const SizedBox(
                 height: 100,
               ),
@@ -109,7 +101,7 @@ class _DigitalDreamsState extends State<DigitalDreams> {
                             backgroundColor: Colors.amber,
                             child: Icon(
                               Icons.webhook_outlined,
-                              color: Color(0xFF701ebd),
+                              color: Color(0xFF1a1a1a),
                             )),
                         const SizedBox(
                           width: 20,
@@ -122,7 +114,7 @@ class _DigitalDreamsState extends State<DigitalDreams> {
                                     "Web Development",
                                     speed: const Duration(milliseconds: 100),
                                     textStyle: const TextStyle(
-                                      color: Colors.white,
+                                      color: Color(0xFFffffff),
                                       fontSize: 20.0,
                                       fontWeight: FontWeight.w500,
                                     ),
@@ -144,7 +136,7 @@ class _DigitalDreamsState extends State<DigitalDreams> {
                             backgroundColor: Colors.amber,
                             child: Icon(
                               Icons.mobile_friendly_rounded,
-                              color: Color(0xFF701ebd),
+                              color: Color(0xFF1a1a1a),
                             )),
                         const SizedBox(
                           width: 20,
@@ -157,7 +149,7 @@ class _DigitalDreamsState extends State<DigitalDreams> {
                                     "Mobile App Development",
                                     speed: const Duration(milliseconds: 100),
                                     textStyle: const TextStyle(
-                                      color: Colors.white,
+                                      color: Color(0xFFffffff),
                                       fontSize: 20.0,
                                       fontWeight: FontWeight.w500,
                                     ),
@@ -179,7 +171,7 @@ class _DigitalDreamsState extends State<DigitalDreams> {
                             backgroundColor: Colors.amber,
                             child: Icon(
                               Icons.gamepad_rounded,
-                              color: Color(0xFF701ebd),
+                              color: Color(0xFF1a1a1a),
                             )),
                         const SizedBox(
                           width: 20,
@@ -192,7 +184,7 @@ class _DigitalDreamsState extends State<DigitalDreams> {
                                     "Game Development",
                                     speed: const Duration(milliseconds: 100),
                                     textStyle: const TextStyle(
-                                      color: Colors.white,
+                                      color: Color(0xFFffffff),
                                       fontSize: 20.0,
                                       fontWeight: FontWeight.w500,
                                     ),
@@ -214,7 +206,7 @@ class _DigitalDreamsState extends State<DigitalDreams> {
                             backgroundColor: Colors.amber,
                             child: Icon(
                               Icons.design_services_rounded,
-                              color: Color(0xFF701ebd),
+                              color: Color(0xFF1a1a1a),
                             )),
                         const SizedBox(
                           width: 20,
@@ -227,7 +219,7 @@ class _DigitalDreamsState extends State<DigitalDreams> {
                                     "Product Design",
                                     speed: const Duration(milliseconds: 100),
                                     textStyle: const TextStyle(
-                                      color: Colors.white,
+                                      color: Color(0xFFffffff),
                                       fontSize: 20.0,
                                       fontWeight: FontWeight.w500,
                                     ),
@@ -249,7 +241,7 @@ class _DigitalDreamsState extends State<DigitalDreams> {
                             backgroundColor: Colors.amber,
                             child: Icon(
                               Icons.room_service_rounded,
-                              color: Color(0xFF701ebd),
+                              color: Color(0xFF1a1a1a),
                             )),
                         const SizedBox(
                           width: 20,
@@ -262,7 +254,7 @@ class _DigitalDreamsState extends State<DigitalDreams> {
                                     "Digital Marketing",
                                     speed: const Duration(milliseconds: 100),
                                     textStyle: const TextStyle(
-                                      color: Colors.white,
+                                      color: Color(0xFFffffff),
                                       fontSize: 20.0,
                                       fontWeight: FontWeight.w500,
                                     ),
@@ -284,7 +276,7 @@ class _DigitalDreamsState extends State<DigitalDreams> {
                             backgroundColor: Colors.amber,
                             child: Icon(
                               Icons.data_exploration_rounded,
-                              color: Color(0xFF701ebd),
+                              color: Color(0xFF1a1a1a),
                             )),
                         const SizedBox(
                           width: 20,
@@ -297,7 +289,7 @@ class _DigitalDreamsState extends State<DigitalDreams> {
                                     "Data Science",
                                     speed: const Duration(milliseconds: 100),
                                     textStyle: const TextStyle(
-                                      color: Colors.white,
+                                      color: Color(0xFFffffff),
                                       fontSize: 20.0,
                                       fontWeight: FontWeight.w500,
                                     ),
