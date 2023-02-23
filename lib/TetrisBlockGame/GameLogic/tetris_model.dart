@@ -69,7 +69,7 @@ class TetrisSudoku extends ChangeNotifier {
     developer.log('$canPlace', name: 'canPlace');
     if (!canPlace) return false;
     canPlace = false;
-    nextPieces[index] = const Piece([], Shape.none);
+    nextPieces[index] = const Piece([], Shape.none, Length.none);
     if (!nextPieces.any((elem) => elem.occupations.isNotEmpty)) {
       nextPieces = generateNextPieces();
     }

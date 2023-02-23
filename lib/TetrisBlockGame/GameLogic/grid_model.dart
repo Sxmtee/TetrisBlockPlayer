@@ -48,8 +48,8 @@ class Grid {
   }
 
   void set(Piece piece, int x, int y, [GridState value = GridState.SET]) {
-    Point? position =
-        _calculateBestPosition(piece.occupations, piece.shape, x, y);
+    Point? position = _calculateBestPosition(
+        piece.occupations, piece.shape, piece.length, x, y);
     if (position == null) return;
 
     setValues(piece.occupations, position.x.toInt(), position.y.toInt(), value);
@@ -98,36 +98,56 @@ class Grid {
   void rotatePiece(Piece piece) {}
 
   Point? calculateBestPosition(Piece piece, int x, int y) =>
-      _calculateBestPosition(piece.occupations, piece.shape, x, y);
+      _calculateBestPosition(
+          piece.occupations, piece.shape, piece.length, x, y);
 
   Point? _calculateBestPosition(
-      List<List<bool>> occupations, Shape shape, int x, int y) {
+      List<List<bool>> occupations, Shape shape, Length length, int x, int y) {
     int sizeY = occupations.length;
     int sizeX = occupations[0].length;
 
     Point center = Point(x, y);
     Point? best;
-    int offset;
+    int offsetY, offsetX;
 
     switch (shape) {
       case Shape.one:
-        offset = 0;
+        offsetY = 0;
         break;
       case Shape.two:
-        offset = 2;
+        offsetY = 2;
         break;
       case Shape.three:
-        offset = 3;
+        offsetY = 3;
         break;
       case Shape.four:
-        offset = 5;
+        offsetY = 5;
         break;
       default:
-        offset = 0;
+        offsetY = 0;
     }
 
-    for (int offY = -2; offY < sizeY - offset; offY++) {
-      for (int offX = 0; offX < sizeX; offX++) {
+    switch (length) {
+      case Length.two:
+        offsetX = 1;
+        break;
+      case Length.three:
+        offsetX = 3;
+        break;
+      case Length.four:
+        offsetX = 4;
+        break;
+      default:
+        offsetX = 0;
+    }
+    int start = -offsetX + 1, end = sizeX - offsetX;
+    if (offsetX == 0) {
+      start = -1;
+      end = 1;
+    }
+
+    for (int offY = -2; offY < sizeY - offsetY; offY++) {
+      for (int offX = start; offX < end; offX++) {
         if (_doesFit(occupations, x + offX, y + offY)) {
           Point current = Point(x + offX, y + offY);
 
