@@ -1,6 +1,5 @@
 import 'dart:async';
 import 'dart:math';
-import 'dart:developer' as developer;
 
 import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
@@ -66,7 +65,6 @@ class TetrisSudoku extends ChangeNotifier {
 
   //setting the piece and score multiplier
   Future<bool> set(Piece piece, int x, int y, int index) async {
-    developer.log('$canPlace', name: 'canPlace');
     if (!canPlace) return false;
     canPlace = false;
     nextPieces[index] = const Piece([], Shape.none, Length.none);
@@ -136,6 +134,21 @@ class TetrisSudoku extends ChangeNotifier {
     bool wasCleared = false;
     Grid newValueGrid = Grid.copy(_valueGrid);
 
+    bool isBlockSet(int bx, int by) {
+      for (int y = 0; y < Dimensions.blockSize; y++) {
+        for (int x = 0; x < Dimensions.blockSize; x++) {
+          if (_valueGrid.isClear(bx * Dimensions.blockSize + x,
+                  by * Dimensions.blockSize + y) &&
+              (editValueGrid ||
+                  _previewGrid.isClear(bx * Dimensions.blockSize + x,
+                      by * Dimensions.blockSize + y))) {
+            return false;
+          }
+        }
+      }
+      return true;
+    }
+
     bool isRowSet(int row) {
       for (int x = 0; x < Dimensions.gridSize; x++) {
         if (_valueGrid.isClear(x, row) &&
@@ -156,6 +169,30 @@ class TetrisSudoku extends ChangeNotifier {
       return true;
     }
 
+    for (int by = 0; by < Dimensions.blockCount; by++) {
+      for (int bx = 0; bx < Dimensions.blockCount; bx++) {
+        if (isBlockSet(bx, by)) {
+          wasCleared = true;
+          _previewGrid.setValues([
+            [true, true, true],
+            [true, true, true],
+            [true, true, true]
+          ], bx * Dimensions.blockSize, by * Dimensions.blockSize,
+              GridState.COMPLETED);
+
+          if (editValueGrid) {
+            score += Dimensions.scoreForBlockCleared * scoreMultiplier;
+            for (int y = 0; y < Dimensions.blockSize; y++) {
+              for (int x = 0; x < Dimensions.blockSize; x++) {
+                newValueGrid.setValue(bx * Dimensions.blockSize + x,
+                    by * Dimensions.blockSize + y, GridState.CLEAR);
+              }
+            }
+          }
+        }
+      }
+    }
+
     for (int row = 0; row < Dimensions.gridSize; row++) {
       if (isRowSet(row)) {
         wasCleared = true;
@@ -169,7 +206,6 @@ class TetrisSudoku extends ChangeNotifier {
             score += Dimensions.scoreForBlockCleared * scoreMultiplier;
             for (int x = 0; x < Dimensions.gridSize; x++) {
               newValueGrid.setValue(x, row, GridState.CLEAR);
-              // here would an animation start to show
             }
           });
         }
@@ -197,7 +233,6 @@ class TetrisSudoku extends ChangeNotifier {
             score += Dimensions.scoreForBlockCleared * scoreMultiplier;
             for (int y = 0; y < Dimensions.gridSize; y++) {
               newValueGrid.setValue(col, y, GridState.CLEAR);
-              // here would an animation start to show
             }
           });
         }

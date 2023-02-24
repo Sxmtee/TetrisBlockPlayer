@@ -29,7 +29,7 @@ class _BlockGridState extends State<BlockGrid>
               _controller.reset();
             }
           });
-    _anim = CurvedAnimation(parent: _controller, curve: Curves.bounceOut);
+    _anim = CurvedAnimation(parent: _controller, curve: Curves.easeInOut);
   }
 
   @override
