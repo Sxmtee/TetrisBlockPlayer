@@ -19,6 +19,47 @@ class _BlockGridState extends State<BlockGrid>
   late AnimationController _controller;
   late Animation<double> _anim;
 
+  bool isInRange(List<int>? blockX, List<int>? blockY, int x, int y) {
+    if (blockX == null || blockY == null) return false;
+    final len = blockX.length;
+    for (int i = 0; i < len; i++) {
+      final bx = blockX[i], by = blockY[i];
+      if (x >= bx * Dimensions.blockSize &&
+          x < (bx + 1) * Dimensions.blockSize) {
+        if (y >= by * Dimensions.blockSize &&
+            y < (by + 1) * Dimensions.blockSize) {
+          return true;
+        }
+      }
+    }
+    return false;
+  }
+
+  Color getColor(String side, int x, int y) {
+    switch (side) {
+      case 'top':
+        if (y == 0) break;
+        if (y % Dimensions.blockSize == 0) return Colors.grey.shade800;
+        break;
+      case 'left':
+        if (x == 0) break;
+        if (x % Dimensions.blockSize == 0) return Colors.grey.shade800;
+        break;
+      case 'right':
+        if (x == Dimensions.gridSize - 1) break;
+        if (x % Dimensions.blockSize == Dimensions.blockSize - 1) {
+          return Colors.grey.shade800;
+        }
+        break;
+      case 'bottom':
+        if (y == Dimensions.gridSize - 1) break;
+        if (y % Dimensions.blockSize == Dimensions.blockSize - 1) {
+          return Colors.grey.shade800;
+        }
+    }
+    return Colors.black87;
+  }
+
   @override
   void initState() {
     super.initState();
@@ -53,7 +94,10 @@ class _BlockGridState extends State<BlockGrid>
               Dimensions.gridSize,
               (y) {
                 return List.generate(Dimensions.gridSize, (x) {
-                  if ((game.col != null || game.row != null) &&
+                  if ((game.col != null ||
+                          game.row != null ||
+                          game.bx != null ||
+                          game.by != null) &&
                       !_controller.isAnimating) {
                     _controller.forward();
                     game.players.forEach((_, player) {
@@ -69,28 +113,40 @@ class _BlockGridState extends State<BlockGrid>
                           top: y * itemSize +
                               ((game.col != null && game.col!.contains(x)) ||
                                       (game.row != null &&
-                                          game.row!.contains(y))
+                                          game.row!.contains(y)) ||
+                                      isInRange(game.bx, game.by, x, y)
                                   ? _anim.value * width * pow(-1, x)
                                   : 0),
                           left: x * itemSize -
                               ((game.col != null && game.col!.contains(x)) ||
                                       (game.row != null &&
-                                          game.row!.contains(y))
+                                          game.row!.contains(y)) ||
+                                      isInRange(game.bx, game.by, x, y)
                                   ? _anim.value * width * pow(-1, y)
                                   : 0),
                           child: Transform.rotate(
-                            angle: (game.col != null &&
-                                        game.col!.contains(x)) ||
-                                    (game.row != null && game.row!.contains(y))
-                                ? _anim.value * pi
-                                : 0,
+                            angle:
+                                (game.col != null && game.col!.contains(x)) ||
+                                        (game.row != null &&
+                                            game.row!.contains(y)) ||
+                                        isInRange(game.bx, game.by, x, y)
+                                    ? _anim.value * pi
+                                    : 0,
                             child: DecoratedBox(
                               position: DecorationPosition.foreground,
                               decoration: BoxDecoration(
-                                border: Border.all(
-                                  color: Colors.black87,
-                                  width: 1,
-                                ),
+                                border: Border(
+                                    top: BorderSide(
+                                        color: getColor('top', x, y), width: 1),
+                                    left: BorderSide(
+                                        color: getColor('left', x, y),
+                                        width: 1),
+                                    right: BorderSide(
+                                        color: getColor('right', x, y),
+                                        width: 1),
+                                    bottom: BorderSide(
+                                        color: getColor('bottom', x, y),
+                                        width: 1)),
                               ),
                               child: BlockDragTarget(
                                   currX: x, currY: y, itemSize: itemSize),

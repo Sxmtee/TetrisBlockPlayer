@@ -2,9 +2,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class Ranks extends StatelessWidget {
-  Ranks({super.key, required this.ranks});
+  const Ranks({super.key, required this.ranks});
 
-  Future<List<dynamic>> ranks;
+  final Future<List<dynamic>> ranks;
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +20,7 @@ class Ranks extends StatelessWidget {
             );
           } else if (snapshot.hasData) {
             final list = snapshot.data!
-              ..sort((e2, e1) => e1['score'].compareTo(e2['score']));
+              ..sort((e1, e2) => e2['score'].compareTo(e1['score']));
             return ListView.builder(
                 // shrinkWrap: true,
                 itemCount: list.length,

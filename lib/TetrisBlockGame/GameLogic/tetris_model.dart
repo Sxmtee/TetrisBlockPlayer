@@ -45,6 +45,8 @@ class TetrisSudoku extends ChangeNotifier {
 
   List<int>? get col => _setEntries['col'];
   List<int>? get row => _setEntries['row'];
+  List<int>? get by => _setEntries['by'];
+  List<int>? get bx => _setEntries['bx'];
 
   void dispose() {
     players.forEach((_, player) {
@@ -181,13 +183,23 @@ class TetrisSudoku extends ChangeNotifier {
               GridState.COMPLETED);
 
           if (editValueGrid) {
-            score += Dimensions.scoreForBlockCleared * scoreMultiplier;
-            for (int y = 0; y < Dimensions.blockSize; y++) {
-              for (int x = 0; x < Dimensions.blockSize; x++) {
-                newValueGrid.setValue(bx * Dimensions.blockSize + x,
-                    by * Dimensions.blockSize + y, GridState.CLEAR);
-              }
+            if (!_setEntries.containsKey('by') ||
+                !_setEntries.containsKey('bx')) {
+              _setEntries['by'] = [];
+              _setEntries['bx'] = [];
+              _setEntries['by']!.add(by);
+              _setEntries['bx']!.add(bx);
             }
+
+            Future.delayed(const Duration(seconds: 3), () {
+              score += Dimensions.scoreForBlockCleared * scoreMultiplier;
+              for (int y = 0; y < Dimensions.blockSize; y++) {
+                for (int x = 0; x < Dimensions.blockSize; x++) {
+                  newValueGrid.setValue(bx * Dimensions.blockSize + x,
+                      by * Dimensions.blockSize + y, GridState.CLEAR);
+                }
+              }
+            });
           }
         }
       }
@@ -238,7 +250,10 @@ class TetrisSudoku extends ChangeNotifier {
         }
       }
     }
-    if (_setEntries.containsKey('col') || _setEntries.containsKey('row')) {
+    if (_setEntries.containsKey('col') ||
+        _setEntries.containsKey('row') ||
+        _setEntries.containsKey('by') ||
+        _setEntries.containsKey('bx')) {
       notifyListeners();
       await Future.delayed(const Duration(seconds: 3));
     }
