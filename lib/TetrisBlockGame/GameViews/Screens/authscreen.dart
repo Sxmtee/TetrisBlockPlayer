@@ -78,6 +78,10 @@ class _AuthScreenState extends State<AuthScreen> {
                               builder: ((context) => const PlayScreen()));
                           Navigator.push(context, route);
                         });
+                      } else {
+                        Timer(const Duration(seconds: 2), () {
+                          finish();
+                        });
                       }
                     },
                     child: const Text("Proceed")),
