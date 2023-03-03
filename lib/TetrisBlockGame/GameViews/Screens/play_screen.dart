@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:audioplayers/audioplayers.dart';
+import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:flutter/material.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:nice_buttons/nice_buttons.dart';
@@ -12,7 +13,6 @@ import 'package:somtotetris/TetrisBlockGame/GameViews/Screens/tetris_main_page.d
 import 'package:somtotetris/TetrisBlockGame/GameViews/Widgets/global/playbutton.dart';
 import 'package:somtotetris/TetrisBlockGame/GameViews/Widgets/playscreen/exit_dialog.dart';
 import 'package:url_launcher/url_launcher.dart';
-import 'package:flutter/foundation.dart' show kIsWeb;
 
 class PlayScreen extends StatefulWidget {
   const PlayScreen({super.key});

@@ -11,7 +11,7 @@ class PlayButton extends StatelessWidget {
       {super.key,
       required this.onPressed,
       this.elevation = 10,
-      this.minWidth = 150,
+      this.minWidth = 145,
       this.color = const Color(0xFFffcc00),
       this.height = 60,
       required this.child});
@@ -21,6 +21,7 @@ class PlayButton extends StatelessWidget {
     return MaterialButton(
       onPressed: onPressed,
       elevation: elevation,
+      shape: const StadiumBorder(),
       minWidth: minWidth,
       height: height,
       color: color,
