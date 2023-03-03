@@ -48,7 +48,9 @@ class TetrisSudoku extends ChangeNotifier {
   List<int>? get by => _setEntries['by'];
   List<int>? get bx => _setEntries['bx'];
 
+  @override
   void dispose() {
+    super.dispose();
     players.forEach((_, player) {
       player.dispose();
     });

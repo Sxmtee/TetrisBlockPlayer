@@ -5,6 +5,9 @@ import 'package:nice_buttons/nice_buttons.dart';
 import 'package:somtotetris/TetrisBlockGame/GameLogic/tetris_preferences.dart';
 import 'package:somtotetris/TetrisBlockGame/GameViews/Screens/play_screen.dart';
 
+import 'package:flutter/foundation.dart' show kIsWeb;
+import 'package:somtotetris/TetrisBlockGame/GameViews/Widgets/global/playbutton.dart';
+
 class AuthScreen extends StatefulWidget {
   const AuthScreen({super.key});
 
@@ -56,35 +59,49 @@ class _AuthScreenState extends State<AuthScreen> {
                 const SizedBox(
                   height: 100,
                 ),
-                NiceButtons(
-                    height: 60,
-                    width: 150,
-                    borderColor: const Color(0xFFff751a),
-                    startColor: const Color(0xFFffcc00),
-                    endColor: const Color(0xFFffcc00),
-                    progressColor: const Color(0xFFff751a),
-                    progressSize: 30,
-                    stretch: false,
-                    progress: true,
-                    gradientOrientation: GradientOrientation.Horizontal,
-                    onTap: (finish) {
-                      if (authKey.currentState!.validate()) {
-                        authKey.currentState!.save();
-                        Timer(const Duration(seconds: 2), () async {
-                          finish();
-                          await GamePreferences.setNickname(
-                              nameCtrl.text.trim());
-                          var route = MaterialPageRoute(
-                              builder: ((context) => const PlayScreen()));
-                          Navigator.push(context, route);
-                        });
-                      } else {
-                        Timer(const Duration(seconds: 2), () {
-                          finish();
-                        });
-                      }
-                    },
-                    child: const Text("Proceed")),
+                kIsWeb
+                    ? PlayButton(
+                        onPressed: () async {
+                          if (authKey.currentState!.validate()) {
+                            authKey.currentState!.save();
+                            await GamePreferences.setNickname(
+                                nameCtrl.text.trim());
+                            var route = MaterialPageRoute(
+                                builder: ((context) => const PlayScreen()));
+                            Navigator.push(context, route);
+                          }
+                        },
+                        child: const Text("Proceed"),
+                      )
+                    : NiceButtons(
+                        height: 60,
+                        width: 150,
+                        borderColor: const Color(0xFFff751a),
+                        startColor: const Color(0xFFffcc00),
+                        endColor: const Color(0xFFffcc00),
+                        progressColor: const Color(0xFFff751a),
+                        progressSize: 30,
+                        stretch: false,
+                        progress: true,
+                        gradientOrientation: GradientOrientation.Horizontal,
+                        onTap: (finish) {
+                          if (authKey.currentState!.validate()) {
+                            authKey.currentState!.save();
+                            Timer(const Duration(seconds: 2), () async {
+                              finish();
+                              await GamePreferences.setNickname(
+                                  nameCtrl.text.trim());
+                              var route = MaterialPageRoute(
+                                  builder: ((context) => const PlayScreen()));
+                              Navigator.push(context, route);
+                            });
+                          } else {
+                            Timer(const Duration(seconds: 2), () {
+                              finish();
+                            });
+                          }
+                        },
+                        child: const Text("Proceed")),
               ],
             )),
       ),

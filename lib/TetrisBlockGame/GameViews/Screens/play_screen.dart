@@ -9,8 +9,10 @@ import 'package:somtotetris/TetrisBlockGame/Ads/banner_ad.dart';
 import 'package:somtotetris/TetrisBlockGame/GameLogic/tetris_model.dart';
 import 'package:somtotetris/TetrisBlockGame/GameViews/Screens/leaderboard.dart';
 import 'package:somtotetris/TetrisBlockGame/GameViews/Screens/tetris_main_page.dart';
+import 'package:somtotetris/TetrisBlockGame/GameViews/Widgets/global/playbutton.dart';
 import 'package:somtotetris/TetrisBlockGame/GameViews/Widgets/playscreen/exit_dialog.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:flutter/foundation.dart' show kIsWeb;
 
 class PlayScreen extends StatefulWidget {
   const PlayScreen({super.key});
@@ -96,85 +98,125 @@ class _PlayScreenState extends State<PlayScreen>
                 ),
                 child: Image.asset("assets/images/TetrisLogo.png"),
               ),
-              SlideTransition(
-                position: _animation,
-                child: NiceButtons(
-                    height: 60,
-                    width: 150,
-                    borderColor: const Color(0xFFff751a),
-                    startColor: const Color(0xFFffcc00),
-                    endColor: const Color(0xFFffcc00),
-                    progressColor: const Color(0xFFff751a),
-                    progressSize: 30,
-                    stretch: false,
-                    progress: true,
-                    gradientOrientation: GradientOrientation.Horizontal,
-                    onTap: (finish) {
-                      Timer(const Duration(seconds: 1), () {
-                        finish();
-                        stopMusic();
-                        var route = MaterialPageRoute(
-                            builder: ((context) => const TetrisSudokuPage()));
-                        Navigator.push(context, route);
-                      });
-                    },
-                    child: const Icon(
-                      Icons.play_circle_fill_outlined,
-                      size: 30,
-                    )),
-              ),
+              kIsWeb
+                  ? SlideTransition(
+                      position: _animation,
+                      child: PlayButton(
+                          onPressed: () {
+                            stopMusic();
+                            var route = MaterialPageRoute(
+                                builder: ((context) =>
+                                    const TetrisSudokuPage()));
+                            Navigator.push(context, route);
+                          },
+                          child: const Icon(
+                            Icons.play_circle_fill_outlined,
+                            size: 30,
+                          )),
+                    )
+                  : SlideTransition(
+                      position: _animation,
+                      child: NiceButtons(
+                          height: 60,
+                          width: 150,
+                          borderColor: const Color(0xFFff751a),
+                          startColor: const Color(0xFFffcc00),
+                          endColor: const Color(0xFFffcc00),
+                          progressColor: const Color(0xFFff751a),
+                          progressSize: 30,
+                          stretch: false,
+                          progress: true,
+                          gradientOrientation: GradientOrientation.Horizontal,
+                          onTap: (finish) {
+                            Timer(const Duration(seconds: 1), () {
+                              finish();
+                              stopMusic();
+                              var route = MaterialPageRoute(
+                                  builder: ((context) =>
+                                      const TetrisSudokuPage()));
+                              Navigator.push(context, route);
+                            });
+                          },
+                          child: const Icon(
+                            Icons.play_circle_fill_outlined,
+                            size: 30,
+                          )),
+                    ),
               const SizedBox(
                 height: 20,
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  NiceButtons(
-                      height: 60,
-                      width: 145,
-                      borderColor: const Color(0XFF4700b3),
-                      startColor: const Color(0XFF7a2eef),
-                      endColor: const Color(0XFF7a2eef),
-                      progressColor: Colors.brown.shade900,
-                      progressSize: 30,
-                      stretch: false,
-                      progress: true,
-                      gradientOrientation: GradientOrientation.Horizontal,
-                      onTap: (finish) {
-                        Timer(const Duration(seconds: 1), () {
-                          finish();
-                          stopMusic();
-                          _launchUrl();
-                        });
-                      },
-                      child: const Text(
-                        "Learn a Skill",
-                        style: TextStyle(color: Colors.white),
-                      )),
+                  kIsWeb
+                      ? PlayButton(
+                          onPressed: () {
+                            stopMusic();
+                            _launchUrl();
+                          },
+                          color: const Color(0XFF7a2eef),
+                          child: const Text(
+                            "Learn a Skill",
+                            style: TextStyle(color: Colors.white),
+                          ))
+                      : NiceButtons(
+                          height: 60,
+                          width: 145,
+                          borderColor: const Color(0XFF4700b3),
+                          startColor: const Color(0XFF7a2eef),
+                          endColor: const Color(0XFF7a2eef),
+                          progressColor: Colors.brown.shade900,
+                          progressSize: 30,
+                          stretch: false,
+                          progress: true,
+                          gradientOrientation: GradientOrientation.Horizontal,
+                          onTap: (finish) {
+                            Timer(const Duration(seconds: 1), () {
+                              finish();
+                              stopMusic();
+                              _launchUrl();
+                            });
+                          },
+                          child: const Text(
+                            "Learn a Skill",
+                            style: TextStyle(color: Colors.white),
+                          )),
                   const SizedBox(
                     width: 10,
                   ),
-                  NiceButtons(
-                      height: 60,
-                      width: 145,
-                      borderColor: const Color(0XFF4700b3),
-                      startColor: const Color(0XFF7a2eef),
-                      endColor: const Color(0XFF7a2eef),
-                      progressColor: Colors.brown.shade900,
-                      progressSize: 30,
-                      stretch: false,
-                      progress: true,
-                      gradientOrientation: GradientOrientation.Horizontal,
-                      onTap: (finish) {
-                        Timer(const Duration(seconds: 1), () {
-                          finish();
-                          var route = MaterialPageRoute(
-                              builder: ((context) => const LeaderBoard()));
-                          Navigator.push(context, route);
-                        });
-                      },
-                      child: const Text("LeaderBoard",
-                          style: TextStyle(color: Colors.white))),
+                  kIsWeb
+                      ? PlayButton(
+                          onPressed: () {
+                            var route = MaterialPageRoute(
+                                builder: ((context) => const LeaderBoard()));
+                            Navigator.push(context, route);
+                          },
+                          color: const Color(0XFF7a2eef),
+                          child: const Text(
+                            "LeaderBoard",
+                            style: TextStyle(color: Colors.white),
+                          ))
+                      : NiceButtons(
+                          height: 60,
+                          width: 145,
+                          borderColor: const Color(0XFF4700b3),
+                          startColor: const Color(0XFF7a2eef),
+                          endColor: const Color(0XFF7a2eef),
+                          progressColor: Colors.brown.shade900,
+                          progressSize: 30,
+                          stretch: false,
+                          progress: true,
+                          gradientOrientation: GradientOrientation.Horizontal,
+                          onTap: (finish) {
+                            Timer(const Duration(seconds: 1), () {
+                              finish();
+                              var route = MaterialPageRoute(
+                                  builder: ((context) => const LeaderBoard()));
+                              Navigator.push(context, route);
+                            });
+                          },
+                          child: const Text("LeaderBoard",
+                              style: TextStyle(color: Colors.white))),
                 ],
               ),
               const Spacer(),
