@@ -34,24 +34,57 @@ class TetrisSudokuPage extends StatelessWidget {
                     height: sizeHeight / 20,
                   ),
                   const BlockGrid(),
-                  Column(
-                      children: List.generate(
-                    2,
-                    (y) => Row(
-                      children: List.generate(
-                          Dimensions.gridSize,
-                          (x) => Expanded(
-                                child: SizedBox(
-                                  width: itemSize,
-                                  height: itemSize,
-                                  child: BlockDragTarget(
-                                      currX: x,
-                                      currY: Dimensions.gridSize + y,
-                                      itemSize: itemSize),
-                                ),
-                              )),
-                    ),
-                  )),
+                  Stack(
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.only(top: 10),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          children: [
+                            CircleAvatar(
+                              backgroundColor: Colors.amber,
+                              child: Icon(
+                                Icons.rotate_90_degrees_ccw,
+                                color: Colors.brown.shade500,
+                              ),
+                            ),
+                            CircleAvatar(
+                              backgroundColor: Colors.amber,
+                              child: Icon(
+                                Icons.thunderstorm,
+                                color: Colors.brown.shade500,
+                              ),
+                            ),
+                            CircleAvatar(
+                              backgroundColor: Colors.amber,
+                              child: Icon(
+                                Icons.scatter_plot,
+                                color: Colors.brown.shade500,
+                              ),
+                            )
+                          ],
+                        ),
+                      ),
+                      Column(
+                          children: List.generate(
+                        2,
+                        (y) => Row(
+                          children: List.generate(
+                              Dimensions.gridSize,
+                              (x) => Expanded(
+                                    child: SizedBox(
+                                      width: itemSize,
+                                      height: itemSize,
+                                      child: BlockDragTarget(
+                                          currX: x,
+                                          currY: Dimensions.gridSize + y,
+                                          itemSize: itemSize),
+                                    ),
+                                  )),
+                        ),
+                      ))
+                    ],
+                  ),
                   const FittedBox(child: NextItemList()),
                 ],
               ),
