@@ -20,9 +20,10 @@ class Ranks extends StatelessWidget {
             );
           } else if (snapshot.hasData) {
             final list = snapshot.data!
-              ..sort((e1, e2) => e2['score'].compareTo(e1['score']));
+              ..sort((e1, e2) =>
+                  int.parse(e2['score']).compareTo(int.parse(e1['score'])));
             return ListView.builder(
-                // shrinkWrap: true,
+                shrinkWrap: true,
                 itemCount: list.length,
                 itemBuilder: (context, index) {
                   return Padding(

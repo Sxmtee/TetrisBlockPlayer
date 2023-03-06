@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:provider/provider.dart';
+import 'package:somtotetris/TetrisBlockGame/Ads/adOpen.dart';
+import 'package:somtotetris/TetrisBlockGame/Ads/app_cycle.dart';
 import 'package:somtotetris/TetrisBlockGame/Ads/banner_ad.dart';
 import 'package:somtotetris/TetrisBlockGame/GameLogic/tetris_dimensions.dart';
 import 'package:somtotetris/TetrisBlockGame/GameLogic/tetris_model.dart';
@@ -9,8 +11,23 @@ import 'package:somtotetris/TetrisBlockGame/GameViews/Widgets/mainpage/next_item
 import 'package:somtotetris/TetrisBlockGame/GameViews/Widgets/mainpage/status_bar.dart';
 import 'package:somtotetris/TetrisBlockGame/GameViews/Widgets/nextitemlist/block_drag_target.dart';
 
-class TetrisSudokuPage extends StatelessWidget {
+class TetrisSudokuPage extends StatefulWidget {
   const TetrisSudokuPage({super.key});
+
+  @override
+  State<TetrisSudokuPage> createState() => _TetrisSudokuPageState();
+}
+
+class _TetrisSudokuPageState extends State<TetrisSudokuPage> {
+  late AppLifecycleReactor appLifecycleReactor;
+
+  @override
+  void initState() {
+    super.initState();
+    AppOpenAdManager appOpenAdManager = AppOpenAdManager()..loadAd();
+    appLifecycleReactor =
+        AppLifecycleReactor(appOpenAdManager: appOpenAdManager);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -36,35 +53,35 @@ class TetrisSudokuPage extends StatelessWidget {
                   const BlockGrid(),
                   Stack(
                     children: [
-                      Padding(
-                        padding: const EdgeInsets.only(top: 10),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
-                          children: [
-                            CircleAvatar(
-                              backgroundColor: Colors.amber,
-                              child: Icon(
-                                Icons.rotate_90_degrees_ccw,
-                                color: Colors.brown.shade500,
-                              ),
-                            ),
-                            CircleAvatar(
-                              backgroundColor: Colors.amber,
-                              child: Icon(
-                                Icons.thunderstorm,
-                                color: Colors.brown.shade500,
-                              ),
-                            ),
-                            CircleAvatar(
-                              backgroundColor: Colors.amber,
-                              child: Icon(
-                                Icons.scatter_plot,
-                                color: Colors.brown.shade500,
-                              ),
-                            )
-                          ],
-                        ),
-                      ),
+                      // Padding(
+                      //   padding: const EdgeInsets.only(top: 10),
+                      //   child: Row(
+                      //     mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      //     children: [
+                      //       CircleAvatar(
+                      //         backgroundColor: Colors.amber,
+                      //         child: Icon(
+                      //           Icons.rotate_90_degrees_ccw,
+                      //           color: Colors.brown.shade500,
+                      //         ),
+                      //       ),
+                      //       CircleAvatar(
+                      //         backgroundColor: Colors.amber,
+                      //         child: Icon(
+                      //           Icons.thunderstorm,
+                      //           color: Colors.brown.shade500,
+                      //         ),
+                      //       ),
+                      //       CircleAvatar(
+                      //         backgroundColor: Colors.amber,
+                      //         child: Icon(
+                      //           Icons.scatter_plot,
+                      //           color: Colors.brown.shade500,
+                      //         ),
+                      //       )
+                      //     ],
+                      //   ),
+                      // ),
                       Column(
                           children: List.generate(
                         2,

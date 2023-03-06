@@ -1,6 +1,8 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:somtotetris/TetrisBlockGame/Ads/adOpen.dart';
+import 'package:somtotetris/TetrisBlockGame/Ads/app_cycle.dart';
 import 'package:somtotetris/TetrisBlockGame/GameLogic/tetris_preferences.dart';
 import 'package:somtotetris/TetrisBlockGame/GameViews/Screens/authscreen.dart';
 import 'package:somtotetris/TetrisBlockGame/GameViews/Screens/play_screen.dart';
@@ -14,6 +16,8 @@ class SplashView extends StatefulWidget {
 
 class _SplashViewState extends State<SplashView> {
   String? nickname = GamePreferences.getNickname();
+  late AppLifecycleReactor appLifecycleReactor;
+
   @override
   void initState() {
     super.initState();
@@ -28,6 +32,9 @@ class _SplashViewState extends State<SplashView> {
         Navigator.push(context, route);
       }
     });
+    AppOpenAdManager appOpenAdManager = AppOpenAdManager()..loadAd();
+    appLifecycleReactor =
+        AppLifecycleReactor(appOpenAdManager: appOpenAdManager);
   }
 
   @override

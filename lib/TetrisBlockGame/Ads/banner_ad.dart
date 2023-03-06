@@ -1,7 +1,7 @@
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 
 BannerAd getBanner() => BannerAd(
-    adUnitId: 'ca-app-pub-4696224049420135/7360388140',
+    adUnitId: 'ca-app-pub-4696224049420135/3278787888',
     size: AdSize.banner,
     request: const AdRequest(),
     listener: BannerAdListener(

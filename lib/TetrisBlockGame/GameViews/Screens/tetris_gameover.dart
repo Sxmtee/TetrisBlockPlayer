@@ -1,17 +1,17 @@
 import 'dart:async';
 import 'dart:convert';
 
-import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:flutter/material.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:nice_buttons/nice_buttons.dart';
 import 'package:http/http.dart' as http;
 import 'package:platform_device_id/platform_device_id.dart';
+import 'package:somtotetris/TetrisBlockGame/Ads/adOpen.dart';
+import 'package:somtotetris/TetrisBlockGame/Ads/app_cycle.dart';
 import 'package:somtotetris/TetrisBlockGame/Ads/interstitial_ad.dart';
 import 'package:somtotetris/TetrisBlockGame/GameLogic/tetris_preferences.dart';
 import 'package:somtotetris/TetrisBlockGame/GameViews/Screens/play_screen.dart';
 import 'package:somtotetris/TetrisBlockGame/GameViews/Screens/tetris_main_page.dart';
-import 'package:somtotetris/TetrisBlockGame/GameViews/Widgets/global/playbutton.dart';
 
 class GameOver extends StatefulWidget {
   final int score;
@@ -65,6 +65,8 @@ class _GameOverState extends State<GameOver> {
     interstitialAd!.show();
   }
 
+  late AppLifecycleReactor appLifecycleReactor;
+
   @override
   void initState() {
     super.initState();
@@ -77,6 +79,9 @@ class _GameOverState extends State<GameOver> {
         showAd();
       }
     });
+    AppOpenAdManager appOpenAdManager = AppOpenAdManager()..loadAd();
+    appLifecycleReactor =
+        AppLifecycleReactor(appOpenAdManager: appOpenAdManager);
   }
 
   @override
@@ -150,71 +155,49 @@ class _GameOverState extends State<GameOver> {
             ),
             Row(
               children: [
-                kIsWeb
-                    ? PlayButton(
-                        onPressed: () {
-                          var route = MaterialPageRoute(
-                              builder: ((context) => const PlayScreen()));
-                          Navigator.push(context, route);
-                        },
-                        color: Colors.brown.shade400,
-                        child: const Text("Home"))
-                    : NiceButtons(
-                        height: 60,
-                        width: 145,
-                        borderColor: Colors.brown.shade900,
-                        startColor: Colors.brown.shade400,
-                        endColor: Colors.brown.shade400,
-                        progressColor: Colors.brown.shade900,
-                        progressSize: 30,
-                        stretch: false,
-                        progress: true,
-                        gradientOrientation: GradientOrientation.Horizontal,
-                        onTap: (finish) {
-                          Timer(const Duration(seconds: 1), () {
-                            finish();
-                            // showAd();
-                            var route = MaterialPageRoute(
-                                builder: ((context) => const PlayScreen()));
-                            Navigator.push(context, route);
-                          });
-                        },
-                        child: const Text("Home")),
+                NiceButtons(
+                    height: 60,
+                    width: 145,
+                    borderColor: Colors.brown.shade900,
+                    startColor: Colors.brown.shade400,
+                    endColor: Colors.brown.shade400,
+                    progressColor: Colors.brown.shade900,
+                    progressSize: 30,
+                    stretch: false,
+                    progress: true,
+                    gradientOrientation: GradientOrientation.Horizontal,
+                    onTap: (finish) {
+                      Timer(const Duration(seconds: 1), () {
+                        finish();
+                        var route = MaterialPageRoute(
+                            builder: ((context) => const PlayScreen()));
+                        Navigator.push(context, route);
+                      });
+                    },
+                    child: const Text("Home")),
                 const SizedBox(
                   width: 10,
                 ),
-                kIsWeb
-                    ? PlayButton(
-                        onPressed: () {
-                          showAd();
-                          var newRoute = MaterialPageRoute(
-                              builder: ((context) => const TetrisSudokuPage()));
-                          Navigator.pushReplacement(context, newRoute);
-                        },
-                        color: Colors.brown.shade400,
-                        child: const Text("Play Again"))
-                    : NiceButtons(
-                        height: 60,
-                        width: 145,
-                        borderColor: Colors.brown.shade900,
-                        startColor: Colors.brown.shade400,
-                        endColor: Colors.brown.shade400,
-                        progressColor: Colors.brown.shade900,
-                        progressSize: 30,
-                        stretch: false,
-                        progress: true,
-                        gradientOrientation: GradientOrientation.Horizontal,
-                        onTap: (finish) {
-                          Timer(const Duration(seconds: 1), () {
-                            finish();
-                            showAd();
-                            var newRoute = MaterialPageRoute(
-                                builder: ((context) =>
-                                    const TetrisSudokuPage()));
-                            Navigator.pushReplacement(context, newRoute);
-                          });
-                        },
-                        child: const Text("Play Again")),
+                NiceButtons(
+                    height: 60,
+                    width: 145,
+                    borderColor: Colors.brown.shade900,
+                    startColor: Colors.brown.shade400,
+                    endColor: Colors.brown.shade400,
+                    progressColor: Colors.brown.shade900,
+                    progressSize: 30,
+                    stretch: false,
+                    progress: true,
+                    gradientOrientation: GradientOrientation.Horizontal,
+                    onTap: (finish) {
+                      Timer(const Duration(seconds: 1), () {
+                        finish();
+                        var newRoute = MaterialPageRoute(
+                            builder: ((context) => const TetrisSudokuPage()));
+                        Navigator.pushReplacement(context, newRoute);
+                      });
+                    },
+                    child: const Text("Play Again")),
               ],
             ),
           ],
