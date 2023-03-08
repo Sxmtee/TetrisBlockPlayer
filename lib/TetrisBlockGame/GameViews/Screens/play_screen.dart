@@ -166,7 +166,6 @@ class _PlayScreenState extends State<PlayScreen>
                       onTap: (finish) {
                         Timer(const Duration(seconds: 1), () {
                           finish();
-                          stopMusic();
                           _launchUrl();
                         });
                       },

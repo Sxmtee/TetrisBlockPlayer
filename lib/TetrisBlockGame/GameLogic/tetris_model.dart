@@ -31,7 +31,13 @@ class TetrisSudoku extends ChangeNotifier {
   final cache = AudioCache();
   final Map<String, AudioPlayer> players = {};
   bool canPlace = true;
+  bool onRotation = false;
   // static const offsetY = 2;
+
+  List<int>? get col => _setEntries['col'];
+  List<int>? get row => _setEntries['row'];
+  List<int>? get by => _setEntries['by'];
+  List<int>? get bx => _setEntries['bx'];
 
   TetrisSudoku() {
     nextPieces = generateNextPieces();
@@ -42,12 +48,7 @@ class TetrisSudoku extends ChangeNotifier {
       players[e.filename] = AudioPlayer();
     }
   }
-
-  List<int>? get col => _setEntries['col'];
-  List<int>? get row => _setEntries['row'];
-  List<int>? get by => _setEntries['by'];
-  List<int>? get bx => _setEntries['bx'];
-
+  
   @override
   void dispose() {
     super.dispose();
@@ -56,13 +57,29 @@ class TetrisSudoku extends ChangeNotifier {
     });
   }
 
+  //rotate piece
+  void changePieceState(int index) {
+    final piece = nextPieces[index];
+    piece.changeState();
+    notifyListeners();
+  }
+
+  //toggle the rotation of the pieces
+  void toggleRotation() {
+    onRotation = !onRotation;
+    notifyListeners();
+  }
+
   //random piece generator
   List<Piece> generateNextPieces() {
     List<Piece> elements = [];
 
     Random random = Random();
-    for (int i = 0; i < 3; i++) {
-      elements.add(Piece.pieces[random.nextInt(Piece.pieces.length)]);
+    for (int i = 0; i < 3;) {
+      final piece = Piece.pieces[random.nextInt(Piece.pieces.length)];
+      if (elements.contains(piece)) continue;
+      elements.add(piece);
+      i++;
     }
     return elements;
   }
@@ -71,7 +88,7 @@ class TetrisSudoku extends ChangeNotifier {
   Future<bool> set(Piece piece, int x, int y, int index) async {
     if (!canPlace) return false;
     canPlace = false;
-    nextPieces[index] = const Piece([], Shape.none, Length.none);
+    nextPieces[index] = Piece([], Shape.none, Length.none);
     if (!nextPieces.any((elem) => elem.occupations.isNotEmpty)) {
       nextPieces = generateNextPieces();
     }

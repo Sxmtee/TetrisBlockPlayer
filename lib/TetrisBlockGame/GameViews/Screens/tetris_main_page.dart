@@ -8,6 +8,7 @@ import 'package:somtotetris/TetrisBlockGame/GameLogic/tetris_dimensions.dart';
 import 'package:somtotetris/TetrisBlockGame/GameLogic/tetris_model.dart';
 import 'package:somtotetris/TetrisBlockGame/GameViews/Widgets/mainpage/main_block_grid.dart';
 import 'package:somtotetris/TetrisBlockGame/GameViews/Widgets/mainpage/next_item_list.dart';
+import 'package:somtotetris/TetrisBlockGame/GameViews/Widgets/mainpage/ad_dialog.dart';
 import 'package:somtotetris/TetrisBlockGame/GameViews/Widgets/mainpage/status_bar.dart';
 import 'package:somtotetris/TetrisBlockGame/GameViews/Widgets/nextitemlist/block_drag_target.dart';
 
@@ -53,35 +54,50 @@ class _TetrisSudokuPageState extends State<TetrisSudokuPage> {
                   const BlockGrid(),
                   Stack(
                     children: [
-                      // Padding(
-                      //   padding: const EdgeInsets.only(top: 10),
-                      //   child: Row(
-                      //     mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      //     children: [
-                      //       CircleAvatar(
-                      //         backgroundColor: Colors.amber,
-                      //         child: Icon(
-                      //           Icons.rotate_90_degrees_ccw,
-                      //           color: Colors.brown.shade500,
-                      //         ),
-                      //       ),
-                      //       CircleAvatar(
-                      //         backgroundColor: Colors.amber,
-                      //         child: Icon(
-                      //           Icons.thunderstorm,
-                      //           color: Colors.brown.shade500,
-                      //         ),
-                      //       ),
-                      //       CircleAvatar(
-                      //         backgroundColor: Colors.amber,
-                      //         child: Icon(
-                      //           Icons.scatter_plot,
-                      //           color: Colors.brown.shade500,
-                      //         ),
-                      //       )
-                      //     ],
-                      //   ),
-                      // ),
+                      Padding(
+                        padding: const EdgeInsets.only(top: 10),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          children: [
+                            GestureDetector(
+                              onTap: () {
+                                if (!game.onRotation) {
+                                  adDialog(context);
+                                } else {
+                                  game.toggleRotation();
+                                }
+                              },
+                              child: CircleAvatar(
+                                backgroundColor: Colors.amber,
+                                child: Icon(
+                                  Icons.rotate_90_degrees_ccw,
+                                  color: Colors.brown.shade500,
+                                ),
+                              ),
+                            ),
+                            GestureDetector(
+                              onTap: () {},
+                              child: CircleAvatar(
+                                backgroundColor: Colors.amber,
+                                child: Icon(
+                                  Icons.thunderstorm,
+                                  color: Colors.brown.shade500,
+                                ),
+                              ),
+                            ),
+                            GestureDetector(
+                              onTap: () {},
+                              child: CircleAvatar(
+                                backgroundColor: Colors.amber,
+                                child: Icon(
+                                  Icons.scatter_plot,
+                                  color: Colors.brown.shade500,
+                                ),
+                              ),
+                            )
+                          ],
+                        ),
+                      ),
                       Column(
                           children: List.generate(
                         2,

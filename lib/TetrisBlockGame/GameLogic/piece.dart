@@ -1,15 +1,88 @@
+import 'dart:math';
+
 enum Shape { none, one, two, three, four }
 
 enum Length { none, one, two, three, four }
 
+enum PieceState {
+  normal(1),
+  one(2),
+  two(3),
+  three(0);
+
+  const PieceState(this.nextIndex);
+  final int nextIndex;
+}
+
 class Piece {
-  final List<List<bool>> occupations;
-  final Shape shape;
-  final Length length;
+  List<List<bool>> occupations;
+  Shape shape;
+  Length length;
+  PieceState state;
+  final List<List<bool>> _occupations;
 
-  const Piece(this.occupations, this.shape, this.length);
+  Piece(this.occupations, this.shape, this.length)
+      : state = PieceState.normal,
+        _occupations = List.from(occupations);
 
-  static const List<Piece> pieces = [
+  void _generateFromState() {
+    if (state == PieceState.normal) {
+      occupations = _occupations;
+      return;
+    }
+    var longest = _occupations
+        .reduce((val, elem) => val.length > elem.length ? val : elem)
+        .length;
+    longest = max(longest, _occupations.length);
+
+    var rot = List.generate(longest, (i) => List.filled(longest, false));
+
+    for (int i = 0; i < _occupations.length; i++) {
+      for (int j = 0; j < _occupations[i].length; j++) {
+        if (_occupations[i][j]) rot[j][i] = _occupations[i][j];
+      }
+    }
+
+    switch (state) {
+      case PieceState.one:
+        rot = rot.map((e) => e.reversed.toList()).toList();
+        break;
+      case PieceState.two:
+        rot = _occupations
+            .map((e) => e.reversed.toList())
+            .toList()
+            .reversed
+            .toList();
+        break;
+      case PieceState.three:
+        rot = rot.reversed.toList();
+        break;
+      default:
+    }
+    occupations = rot;
+    changeEnums();
+  }
+
+  void changeEnums() {
+    final w = occupations.reduce(compare);
+  }
+
+  List<bool> compare(List<bool> val, List<bool> elem) {
+    var index = val.indexOf(true), valIndex = -1, elemIndex = -1;
+    while (index != -1) {
+      valIndex = index;
+      index = val.indexOf(true, index + 1);
+    }
+    return val;
+  }
+
+  void changeState() {
+    final nextState = PieceState.values[state.nextIndex];
+    state = nextState;
+    _generateFromState();
+  }
+
+  static List<Piece> pieces = [
     // ones
     Piece([
       [true],
