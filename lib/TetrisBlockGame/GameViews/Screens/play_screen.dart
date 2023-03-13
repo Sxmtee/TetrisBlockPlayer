@@ -5,8 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:nice_buttons/nice_buttons.dart';
 import 'package:provider/provider.dart';
-import 'package:somtotetris/TetrisBlockGame/Ads/adOpen.dart';
-import 'package:somtotetris/TetrisBlockGame/Ads/app_cycle.dart';
 import 'package:somtotetris/TetrisBlockGame/Ads/banner_ad.dart';
 import 'package:somtotetris/TetrisBlockGame/GameLogic/tetris_model.dart';
 import 'package:somtotetris/TetrisBlockGame/GameViews/Screens/leaderboard.dart';
@@ -25,7 +23,6 @@ class _PlayScreenState extends State<PlayScreen>
     with SingleTickerProviderStateMixin, WidgetsBindingObserver {
   late AnimationController _animationController;
   late Animation<Offset> _animation;
-  late AppLifecycleReactor appLifecycleReactor;
 
   final Uri _uri =
       Uri.parse("https://www.youtube.com/@digitaldreamsictacademy1353");
@@ -83,9 +80,6 @@ class _PlayScreenState extends State<PlayScreen>
       parent: _animationController,
       curve: Curves.easeOut,
     ));
-    AppOpenAdManager appOpenAdManager = AppOpenAdManager()..loadAd();
-    appLifecycleReactor =
-        AppLifecycleReactor(appOpenAdManager: appOpenAdManager);
   }
 
   @override

@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:provider/provider.dart';
-import 'package:somtotetris/TetrisBlockGame/Ads/adOpen.dart';
-import 'package:somtotetris/TetrisBlockGame/Ads/app_cycle.dart';
 import 'package:somtotetris/TetrisBlockGame/Ads/banner_ad.dart';
+import 'package:somtotetris/TetrisBlockGame/Ads/rewarded.dart';
 import 'package:somtotetris/TetrisBlockGame/GameLogic/tetris_dimensions.dart';
 import 'package:somtotetris/TetrisBlockGame/GameLogic/tetris_model.dart';
 import 'package:somtotetris/TetrisBlockGame/GameViews/Widgets/mainpage/main_block_grid.dart';
@@ -20,14 +19,12 @@ class TetrisSudokuPage extends StatefulWidget {
 }
 
 class _TetrisSudokuPageState extends State<TetrisSudokuPage> {
-  late AppLifecycleReactor appLifecycleReactor;
+  late RewardedState rewardedState;
 
   @override
   void initState() {
     super.initState();
-    AppOpenAdManager appOpenAdManager = AppOpenAdManager()..loadAd();
-    appLifecycleReactor =
-        AppLifecycleReactor(appOpenAdManager: appOpenAdManager);
+    rewardedState = RewardedState()..loadAd(context);
   }
 
   @override

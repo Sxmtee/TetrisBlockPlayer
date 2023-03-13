@@ -59,12 +59,73 @@ class Piece {
         break;
       default:
     }
+
+    // for (int l = 0; l < Shape.values.length; l++) {
+    //   final s = Shape.values[l];
+    //   if (shape == s) {
+    //     if (l < longest) {
+
+    //     }
+    //     break;
+    //   }
+    // }
+    rot = rot.where((e) => e.isNotEmpty).toList();
+    List<int> emptyCols = [];
+
+    for (int k = 0; k < rot[0].length; k++) {
+      var isEmpty = true;
+      for (int l = 0; l < rot.length; l++) {
+        if (rot[l][k]) {
+          isEmpty = false;
+          break;
+        }
+      }
+      if (isEmpty) {
+        emptyCols.add(k);
+      }
+    }
+
+    for (int m = 0; m < emptyCols.length; m++) {
+      for (int n = 0; n < rot.length; n++) {
+        rot[n].removeAt(m);
+      }
+    }
     occupations = rot;
     changeEnums();
   }
 
   void changeEnums() {
-    final w = occupations.reduce(compare);
+    switch (occupations.length) {
+      case 1:
+        shape = Shape.one;
+        break;
+      case 2:
+        shape = Shape.two;
+        break;
+      case 3:
+        shape = Shape.three;
+        break;
+      case 4:
+        shape = Shape.four;
+        break;
+      default:
+    }
+
+    switch (occupations[0].length) {
+      case 1:
+        length = Length.one;
+        break;
+      case 2:
+        length = Length.two;
+        break;
+      case 3:
+        length = Length.three;
+        break;
+      case 4:
+        length = Length.four;
+        break;
+      default:
+    }
   }
 
   List<bool> compare(List<bool> val, List<bool> elem) {

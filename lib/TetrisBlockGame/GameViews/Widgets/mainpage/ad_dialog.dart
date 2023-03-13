@@ -17,16 +17,17 @@ adDialog(BuildContext context) {
     actions: [
       MaterialButton(
         onPressed: () {
-          rewardedState.loadAd(context);
-          Navigator.pop(context);
-        },
-        child: const Text("Watch Ad"),
-      ),
-      MaterialButton(
-        onPressed: () {
           Navigator.pop(context);
         },
         child: const Text("Cancel"),
+      ),
+      MaterialButton(
+        onPressed: () {
+          rewardedState.loadAd(context);
+          Navigator.pop(context);
+        },
+        color: Colors.amber,
+        child: const Text("Watch Ad"),
       ),
     ],
   );

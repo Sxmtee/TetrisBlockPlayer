@@ -6,8 +6,6 @@ import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:nice_buttons/nice_buttons.dart';
 import 'package:http/http.dart' as http;
 import 'package:platform_device_id/platform_device_id.dart';
-import 'package:somtotetris/TetrisBlockGame/Ads/adOpen.dart';
-import 'package:somtotetris/TetrisBlockGame/Ads/app_cycle.dart';
 import 'package:somtotetris/TetrisBlockGame/Ads/interstitial_ad.dart';
 import 'package:somtotetris/TetrisBlockGame/GameLogic/tetris_preferences.dart';
 import 'package:somtotetris/TetrisBlockGame/GameViews/Screens/play_screen.dart';
@@ -65,8 +63,6 @@ class _GameOverState extends State<GameOver> {
     interstitialAd!.show();
   }
 
-  late AppLifecycleReactor appLifecycleReactor;
-
   @override
   void initState() {
     super.initState();
@@ -79,9 +75,6 @@ class _GameOverState extends State<GameOver> {
         showAd();
       }
     });
-    AppOpenAdManager appOpenAdManager = AppOpenAdManager()..loadAd();
-    appLifecycleReactor =
-        AppLifecycleReactor(appOpenAdManager: appOpenAdManager);
   }
 
   @override

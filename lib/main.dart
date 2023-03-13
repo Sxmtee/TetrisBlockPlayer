@@ -5,6 +5,7 @@ import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:somtotetris/TetrisBlockGame/GameLogic/tetris_model.dart';
 import 'package:somtotetris/TetrisBlockGame/GameLogic/tetris_preferences.dart';
 import 'package:somtotetris/TetrisBlockGame/GameViews/Screens/digital_dream.dart';
+import 'package:somtotetris/TetrisBlockGame/GameViews/Widgets/mainpage/app_lifecycle.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -20,17 +21,16 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider<TetrisSudoku>(
-      create: (_) => TetrisSudoku(),
-      lazy: false,
-      builder: (context, child) {
-        return MaterialApp(
-          debugShowCheckedModeBanner: false,
-          theme: ThemeData(
-            primarySwatch: Colors.green,
+        create: (_) => TetrisSudoku(),
+        lazy: false,
+        child: AppLifecycle(
+          child: MaterialApp(
+            debugShowCheckedModeBanner: false,
+            theme: ThemeData(
+              primarySwatch: Colors.green,
+            ),
+            home: const DigitalDreams(),
           ),
-          home: const DigitalDreams(),
-        );
-      },
-    );
+        ));
   }
 }

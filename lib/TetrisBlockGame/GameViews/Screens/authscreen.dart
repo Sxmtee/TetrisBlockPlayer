@@ -18,14 +18,14 @@ class AuthScreen extends StatefulWidget {
 class _AuthScreenState extends State<AuthScreen> {
   TextEditingController nameCtrl = TextEditingController();
   GlobalKey<FormState> authKey = GlobalKey<FormState>();
-  late AppLifecycleReactor appLifecycleReactor;
+  // late AppLifecycleReactor appLifecycleReactor;
 
   @override
   void initState() {
     super.initState();
-    AppOpenAdManager appOpenAdManager = AppOpenAdManager()..loadAd();
-    appLifecycleReactor =
-        AppLifecycleReactor(appOpenAdManager: appOpenAdManager);
+    // AppOpenAdManager appOpenAdManager = AppOpenAdManager()..loadAd();
+    // appLifecycleReactor =
+    //     AppLifecycleReactor(appOpenAdManager: appOpenAdManager);
   }
 
   @override

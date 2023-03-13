@@ -47,8 +47,8 @@ class RewardedState {
       ),
     );
 
-    _rewardedAd!.setImmersiveMode(true);
-    _rewardedAd!.show(onUserEarnedReward: (ad, reward) {
+    _rewardedAd?.setImmersiveMode(true);
+    _rewardedAd?.show(onUserEarnedReward: (ad, reward) {
       print("${reward.amount} ${reward.type}");
     });
   }
