@@ -30,8 +30,8 @@ class RewardedState {
               onAdDismissedFullScreenContent: (ad) {
                 // Dispose the ad here to free resources.
                 ad.dispose();
-                var game = context.read<TetrisSudoku>();
-                game.toggleRotation();
+                // var game = context.read<TetrisSudoku>();
+                // game.toggleRotation();
               },
               // Called when a click is recorded for an ad.
               onAdClicked: (ad) {});

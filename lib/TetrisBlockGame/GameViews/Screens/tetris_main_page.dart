@@ -58,11 +58,11 @@ class _TetrisSudokuPageState extends State<TetrisSudokuPage> {
                           children: [
                             GestureDetector(
                               onTap: () {
-                                if (!game.onRotation) {
-                                  adDialog(context);
-                                } else {
-                                  game.toggleRotation();
-                                }
+                                // if (!game.onRotation) {
+                                //   adDialog(context);
+                                // } else {
+                                game.toggleRotation();
+                                // }
                               },
                               child: CircleAvatar(
                                 backgroundColor: Colors.amber,

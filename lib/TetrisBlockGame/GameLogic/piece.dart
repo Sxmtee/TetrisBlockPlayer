@@ -1,5 +1,7 @@
 import 'dart:math';
 
+import 'package:flutter/material.dart';
+
 enum Shape { none, one, two, three, four }
 
 enum Length { none, one, two, three, four }
@@ -87,9 +89,10 @@ class Piece {
 
     for (int m = 0; m < emptyCols.length; m++) {
       for (int n = 0; n < rot.length; n++) {
-        rot[n].removeAt(m);
+        rot[n].removeAt(emptyCols[m]);
       }
     }
+    debugPrint('emptyCols: ${emptyCols.length} ');
     occupations = rot;
     changeEnums();
   }
@@ -126,15 +129,6 @@ class Piece {
         break;
       default:
     }
-  }
-
-  List<bool> compare(List<bool> val, List<bool> elem) {
-    var index = val.indexOf(true), valIndex = -1, elemIndex = -1;
-    while (index != -1) {
-      valIndex = index;
-      index = val.indexOf(true, index + 1);
-    }
-    return val;
   }
 
   void changeState() {

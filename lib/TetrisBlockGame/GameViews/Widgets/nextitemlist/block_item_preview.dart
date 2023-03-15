@@ -13,6 +13,7 @@ class BlockItemPreview extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Consumer<TetrisSudoku>(builder: (context, game, child) {
+      debugPrint("ROTATION: ${game.onRotation}");
       return SizedBox(
         width: 120,
         height: 120,
@@ -31,20 +32,28 @@ class BlockItemPreview extends StatelessWidget {
                     return Container(
                         width: size,
                         height: size,
-                        decoration: piece.occupations[y][x] == true
-                            ? const BoxDecoration(
-                                gradient: LinearGradient(
-                                    colors: [
-                                    Color(0xFFff9900),
-                                    Color(0xFFffcc00),
-                                  ],
-                                    stops: [
-                                    0.5,
-                                    1
-                                  ],
-                                    begin: Alignment.topLeft,
-                                    end: Alignment.bottomRight))
-                            : const BoxDecoration());
+                        decoration:
+                            piece.occupations[y][x] == true && game.onRotation
+                                ? const BoxDecoration(
+                                    gradient: LinearGradient(
+                                        colors: [Colors.blue, Colors.blue],
+                                        stops: [0.5, 1],
+                                        begin: Alignment.topLeft,
+                                        end: Alignment.bottomRight))
+                                : piece.occupations[y][x] == true
+                                    ? const BoxDecoration(
+                                        gradient: LinearGradient(
+                                            colors: [
+                                            Color(0xFFff9900),
+                                            Color(0xFFffcc00),
+                                          ],
+                                            stops: [
+                                            0.5,
+                                            1
+                                          ],
+                                            begin: Alignment.topLeft,
+                                            end: Alignment.bottomRight))
+                                    : const BoxDecoration());
                   },
                 ),
               );
