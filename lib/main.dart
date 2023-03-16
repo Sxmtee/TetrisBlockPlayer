@@ -5,7 +5,7 @@ import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:somtotetris/TetrisBlockGame/GameLogic/tetris_model.dart';
 import 'package:somtotetris/TetrisBlockGame/GameLogic/tetris_preferences.dart';
 import 'package:somtotetris/TetrisBlockGame/GameViews/Screens/digital_dream.dart';
-import 'package:somtotetris/TetrisBlockGame/GameViews/Widgets/mainpage/app_lifecycle.dart';
+import 'package:somtotetris/TetrisBlockGame/GameViews/Widgets/ad/app_lifecycle.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();

@@ -4,7 +4,6 @@
 
 list(APPEND FLUTTER_PLUGIN_LIST
   audioplayers_linux
-  desktop_window
   platform_device_id_linux
   url_launcher_linux
 )

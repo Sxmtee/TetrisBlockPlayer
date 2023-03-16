@@ -3,8 +3,6 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:nice_buttons/nice_buttons.dart';
-import 'package:somtotetris/TetrisBlockGame/Ads/adOpen.dart';
-import 'package:somtotetris/TetrisBlockGame/Ads/app_cycle.dart';
 import 'package:somtotetris/TetrisBlockGame/GameLogic/tetris_preferences.dart';
 import 'package:somtotetris/TetrisBlockGame/GameViews/Screens/play_screen.dart';
 
@@ -18,7 +16,6 @@ class AuthScreen extends StatefulWidget {
 class _AuthScreenState extends State<AuthScreen> {
   TextEditingController nameCtrl = TextEditingController();
   GlobalKey<FormState> authKey = GlobalKey<FormState>();
-  // late AppLifecycleReactor appLifecycleReactor;
 
   @override
   void initState() {
