@@ -83,7 +83,9 @@ class _TetrisSudokuPageState extends State<TetrisSudokuPage> {
                               ),
                             ),
                             GestureDetector(
-                              onTap: () {},
+                              onTap: () {
+                                game.setBomb(true);
+                              },
                               child: CircleAvatar(
                                 backgroundColor: Colors.amber,
                                 child: Icon(

@@ -32,6 +32,7 @@ class TetrisSudoku extends ChangeNotifier {
   final Map<String, AudioPlayer> players = {};
   bool canPlace = true;
   bool onRotation = false;
+  bool isBomb = false;
   // static const offsetY = 2;
 
   List<int>? get col => _setEntries['col'];
@@ -62,6 +63,33 @@ class TetrisSudoku extends ChangeNotifier {
     final piece = nextPieces[index];
     piece.changeState();
     notifyListeners();
+  }
+
+  //setting the bomb
+  void setBomb(bool value) {
+    if (isBomb != value) {
+      isBomb = value;
+      notifyListeners();
+    }
+  }
+
+  //explode bomb
+  void explodeAt(double x, double y, double width) async {
+    final bx = (x / width).floor() % 3, by = (y / width).floor() % 3;
+    _setEntries['bx'] = [];
+    _setEntries['bx']!.add(bx);
+    _setEntries['by'] = [];
+    _setEntries['by']!.add(by);
+    notifyListeners();
+    await Future.delayed(const Duration(seconds: 3));
+    _setEntries = {};
+    for (int y = 0; y < Dimensions.blockSize; y++) {
+      for (int x = 0; x < Dimensions.blockSize; x++) {
+        _valueGrid.setValue(bx * Dimensions.blockSize + x,
+            by * Dimensions.blockSize + y, GridState.CLEAR);
+      }
+    }
+    setBomb(false);
   }
 
   //toggle the rotation of the pieces

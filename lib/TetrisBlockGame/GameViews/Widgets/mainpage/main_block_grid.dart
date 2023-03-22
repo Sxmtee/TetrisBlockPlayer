@@ -89,71 +89,81 @@ class _BlockGridState extends State<BlockGrid>
                     fit: BoxFit.fill,
                     image: AssetImage("assets/images/tetris plate_2.jpg"))),
             height: screenSize.width / 1.01,
-            child: Stack(
-                children: List.generate(
-              Dimensions.gridSize,
-              (y) {
-                return List.generate(Dimensions.gridSize, (x) {
-                  if ((game.col != null ||
-                          game.row != null ||
-                          game.bx != null ||
-                          game.by != null) &&
-                      !_controller.isAnimating) {
-                    _controller.forward();
-                    game.players.forEach((_, player) {
-                      if (player.state == PlayerState.playing) player.stop();
-                    });
-                    final player = game.players[Sounds.scatter.filename];
-                    player!.play(AssetSource(Sounds.scatter.filename),
-                        volume: 100);
-                  }
-                  return AnimatedBuilder(
-                      animation: _anim,
-                      builder: (context, child) => Positioned(
-                          top: y * itemSize +
-                              ((game.col != null && game.col!.contains(x)) ||
-                                      (game.row != null &&
-                                          game.row!.contains(y)) ||
-                                      isInRange(game.bx, game.by, x, y)
-                                  ? _anim.value * width * pow(-1, x)
-                                  : 0),
-                          left: x * itemSize -
-                              ((game.col != null && game.col!.contains(x)) ||
-                                      (game.row != null &&
-                                          game.row!.contains(y)) ||
-                                      isInRange(game.bx, game.by, x, y)
-                                  ? _anim.value * width * pow(-1, y)
-                                  : 0),
-                          child: Transform.rotate(
-                            angle:
-                                (game.col != null && game.col!.contains(x)) ||
+            child: GestureDetector(
+              onTapUp: (details) {
+                if (game.isBomb) {
+                  final box = context.findRenderObject() as RenderBox;
+                  final pos = box.globalToLocal(details.globalPosition);
+                  game.explodeAt(pos.dx, pos.dy, itemSize);
+                }
+              },
+              child: Stack(
+                  children: List.generate(
+                Dimensions.gridSize,
+                (y) {
+                  return List.generate(Dimensions.gridSize, (x) {
+                    if ((game.col != null ||
+                            game.row != null ||
+                            game.bx != null ||
+                            game.by != null) &&
+                        !_controller.isAnimating) {
+                      _controller.forward();
+                      game.players.forEach((_, player) {
+                        if (player.state == PlayerState.playing) player.stop();
+                      });
+                      final player = game.players[Sounds.scatter.filename];
+                      player!.play(AssetSource(Sounds.scatter.filename),
+                          volume: 100);
+                    }
+                    return AnimatedBuilder(
+                        animation: _anim,
+                        builder: (context, child) => Positioned(
+                            top: y * itemSize +
+                                ((game.col != null && game.col!.contains(x)) ||
                                         (game.row != null &&
                                             game.row!.contains(y)) ||
                                         isInRange(game.bx, game.by, x, y)
-                                    ? _anim.value * pi
-                                    : 0,
-                            child: DecoratedBox(
-                              position: DecorationPosition.foreground,
-                              decoration: BoxDecoration(
-                                border: Border(
-                                    top: BorderSide(
-                                        color: getColor('top', x, y), width: 1),
-                                    left: BorderSide(
-                                        color: getColor('left', x, y),
-                                        width: 1),
-                                    right: BorderSide(
-                                        color: getColor('right', x, y),
-                                        width: 1),
-                                    bottom: BorderSide(
-                                        color: getColor('bottom', x, y),
-                                        width: 1)),
+                                    ? _anim.value * width * pow(-1, x)
+                                    : 0),
+                            left: x * itemSize -
+                                ((game.col != null && game.col!.contains(x)) ||
+                                        (game.row != null &&
+                                            game.row!.contains(y)) ||
+                                        isInRange(game.bx, game.by, x, y)
+                                    ? _anim.value * width * pow(-1, y)
+                                    : 0),
+                            child: Transform.rotate(
+                              angle:
+                                  (game.col != null && game.col!.contains(x)) ||
+                                          (game.row != null &&
+                                              game.row!.contains(y)) ||
+                                          isInRange(game.bx, game.by, x, y)
+                                      ? _anim.value * pi
+                                      : 0,
+                              child: DecoratedBox(
+                                position: DecorationPosition.foreground,
+                                decoration: BoxDecoration(
+                                  border: Border(
+                                      top: BorderSide(
+                                          color: getColor('top', x, y),
+                                          width: 1),
+                                      left: BorderSide(
+                                          color: getColor('left', x, y),
+                                          width: 1),
+                                      right: BorderSide(
+                                          color: getColor('right', x, y),
+                                          width: 1),
+                                      bottom: BorderSide(
+                                          color: getColor('bottom', x, y),
+                                          width: 1)),
+                                ),
+                                child: BlockDragTarget(
+                                    currX: x, currY: y, itemSize: itemSize),
                               ),
-                              child: BlockDragTarget(
-                                  currX: x, currY: y, itemSize: itemSize),
-                            ),
-                          )));
-                });
-              },
-            ).expand((elem) => elem).toList())));
+                            )));
+                  });
+                },
+              ).expand((elem) => elem).toList()),
+            )));
   }
 }

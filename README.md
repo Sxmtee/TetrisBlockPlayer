@@ -11,4 +11,5 @@ Clearing multiple Blocks with one Piece gives extra points.
 Reach the highest Score and beat your own Highscore by completing as many blocks as possible.
 
 ## Features
-* State Management = Provider
+
+- State Management = Provider
