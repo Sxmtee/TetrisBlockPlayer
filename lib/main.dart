@@ -21,16 +21,15 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider<TetrisSudoku>(
-        create: (_) => TetrisSudoku(),
-        lazy: false,
-        child: AppLifecycle(
-          child: MaterialApp(
-            debugShowCheckedModeBanner: false,
-            theme: ThemeData(
-              primarySwatch: Colors.green,
-            ),
-            home: const DigitalDreams(),
-          ),
-        ));
+      create: (_) => TetrisSudoku(),
+      lazy: false,
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        theme: ThemeData(
+          primarySwatch: Colors.green,
+        ),
+        home: const DigitalDreams(),
+      ),
+    );
   }
 }

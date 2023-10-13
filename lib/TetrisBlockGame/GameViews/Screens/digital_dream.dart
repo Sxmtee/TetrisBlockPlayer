@@ -17,12 +17,13 @@ class _DigitalDreamsState extends State<DigitalDreams> {
   void initState() {
     super.initState();
     Timer(
-        const Duration(seconds: 1),
-        (() => setState(() {
-              idleStateOver = true;
-            })));
+      const Duration(seconds: 1),
+      (() => setState(() {
+            idleStateOver = true;
+          })),
+    );
     Timer(const Duration(seconds: 10), (() {
-      var route = MaterialPageRoute(builder: ((context) => const SplashView()));
+      var route = MaterialPageRoute(builder: (context) => const SplashView());
       Navigator.push(context, route);
     }));
   }
@@ -33,17 +34,18 @@ class _DigitalDreamsState extends State<DigitalDreams> {
       body: Container(
         padding: const EdgeInsets.symmetric(horizontal: 35, vertical: 20),
         decoration: const BoxDecoration(
-            gradient: LinearGradient(colors: [
-          Color(0xFF701ebd),
-          Color(0xFF873bcc),
-          Color(0xFFfe4a97),
-          Color(0xFFe17763),
-        ], stops: [
-          0.1,
-          0.4,
-          0.8,
-          1
-        ], begin: Alignment.topRight, end: Alignment.bottomLeft)),
+          gradient: LinearGradient(
+            colors: [
+              Color(0xFF701ebd),
+              Color(0xFF873bcc),
+              Color(0xFFfe4a97),
+              Color(0xFFe17763),
+            ],
+            stops: [0.1, 0.4, 0.8, 1],
+            begin: Alignment.topRight,
+            end: Alignment.bottomLeft,
+          ),
+        ),
         child: SafeArea(
           child: Column(
             children: [

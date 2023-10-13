@@ -1,26 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:somtotetris/TetrisBlockGame/Ads/adOpen.dart';
-import 'package:somtotetris/TetrisBlockGame/Ads/app_cycle.dart';
 import 'package:somtotetris/TetrisBlockGame/GameViews/Screens/play_screen.dart';
 import 'package:somtotetris/TetrisBlockGame/GameViews/Widgets/leaderboard/maintab.dart';
 
-class LeaderBoard extends StatefulWidget {
+class LeaderBoard extends StatelessWidget {
   const LeaderBoard({super.key});
-
-  @override
-  State<LeaderBoard> createState() => _LeaderBoardState();
-}
-
-class _LeaderBoardState extends State<LeaderBoard> {
-  late AppLifecycleReactor appLifecycleReactor;
-
-  @override
-  void initState() {
-    super.initState();
-    AppOpenAdManager appOpenAdManager = AppOpenAdManager()..loadAd();
-    appLifecycleReactor =
-        AppLifecycleReactor(appOpenAdManager: appOpenAdManager);
-  }
 
   @override
   Widget build(BuildContext context) {
